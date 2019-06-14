@@ -1,4 +1,4 @@
-# TravelPlann
+# TravelPlanner
 This is a design document for laioffer FLAG camp
 contributor: Jie Ma
 Last update: 

@@ -13,3 +13,4 @@ modified by: Bixiong Xiang
 
 modified by: Brokl again
 
+Test added by the requester EllenJie.

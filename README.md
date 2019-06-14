@@ -56,4 +56,25 @@ Display as the diagram shows
 
 ## Milestones
 
+<<<<<<< HEAD
 
+=======
+web service
+patch-1
+
+
+test
+=======
+changegg
+
+This is a test by JieM
+modified by: Bixiong Xiang
+
+modified by: Brokl again
+
+Test added by the requester EllenJie.
+text added for test by requester EllenJie.
+
+
+   
+>>>>>>> 06c288ef2501fd3685bdf9d9b7f168b3912d03ff

@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 # Travel Plan Pegasus 
 This is a design document for laioffer FLAG camp.<br\>
 Contributor: Jie Ma<br\>
 Last update: <br\>
+=======
+# TravelPlanner
+This is a design document for laioffer FLAG camp
+contributor: Jie Ma
+Last update: 
+>>>>>>> 72b38061b317c10af980ea8f13b5b19a89139b3a
 
 *This document follow the UC Berkeley CS 162 design document guide line*
 [Documentation guideline] 
@@ -22,7 +29,7 @@ All the bolded words refers one location on the website.
 
 
 *Definition of key words*
-- interest points(景点): alll the provided points regradless of the categories. 
+- interest points(景点): all the provided points regradless of the categories. 
 - liked points:all the points user selected regardless of the categories.
 - function: describe the function of the button/icon
 - vistor: anyone visit the website without an account. 

@@ -20,7 +20,7 @@ The website can also autogenerate travel plans by day based on the selection set
 
 
 *Definition of key words*
-- interest points(景点): alll the provided points regradless of the categories. 
+- interest points(景点): all the provided points regradless of the categories. 
 - liked points:all the points user selected regardless of the categories.
 - function: describe the function of the button/icon
 - vistor: anyone visit the website without an account. 

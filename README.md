@@ -1,7 +1,7 @@
-# TravelPlann
-This is a design document for laioffer FLAG camp
-contributor: Jie Ma
-Last update: 
+# Travel Plan Pegasus 
+This is a design document for laioffer FLAG camp.<br\>
+Contributor: Jie Ma<br\>
+Last update: <br\>
 
 *This document follow the UC Berkeley CS 162 design document guide line*
 [Documentation guideline] 
@@ -11,12 +11,14 @@ Last update:
 
 ### Part 0. Overview 
 *Objective*
-This website provides 15 alpha cities travel plans.
-Users can create one city to make a day by day travel plans upto 15 days. 
-Users can select interest points for each city for different categories. 
-Users can order, delect the selected interest points. The website can generate travel plans by day based on the order of the selection. 
-The website can also autogenerate travel plans by day based on the selection set. 
+- This website provides 15 alpha cities travel plans.
+- Users can create one city to make a day by day travel plans upto 15 days. 
+- Users can select interest points for each city for different categories. 
+- Users can order, delect the selected interest points. The website can generate travel plans by day based on the order of the selection. 
+- The website can also autogenerate travel plans by day based on the selection set. 
 
+*note*
+All the bolded words refers one location on the website. 
 
 
 *Definition of key words*
@@ -43,10 +45,22 @@ the Home Page serves three purposes:
 5. Sign out: 
 
 ### Part 2. Login/Logout Register 
+1. Backend: 
+2. Frontend:
 
 ### Part 3. Display interest points by category
 Display as the diagram shows
 ![alt text](https://github.com/flagcamp-pegasus/TravelPlanner/blob/master/TravelPlannCity1.png)
+
+Supported type: 
+https://developers.google.com/places/supported_types 
+1. Default popular spot
+
+2. hotel 
+
+3. shopping
+
+4. restaurants
 
 ### Part 4. Select interest points  
 

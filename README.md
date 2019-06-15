@@ -72,11 +72,11 @@ https://developers.google.com/places/supported_types
 ### Part 4. Select interest points  
 
 ### Part 5. Generate routes based on user's selection 
-Purpose:
-  Generate a visual route on GoogleMap according to saved spots list.
-Widget :
+- Purpose:
+Generate a visual route on GoogleMap according to saved spots list.
+- Widget :
   Generate routes (user-defined)
-Scenario :
+- Scenario :
   1. Get ordered favorites from saved spots list
   2. Use Google Map API (frontend) to pin spots in order and draw a route on Google Map
   3. Send saved spots list to backend for storing if invoking saved routes

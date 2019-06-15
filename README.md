@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 # Travel Plan Pegasus 
 This is a design document for laioffer FLAG camp.<br\>
-Contributor: Jie Ma<br\>
-Last update: <br\>
-=======
-# TravelPlanner
-This is a design document for laioffer FLAG camp
-contributor: Jie Ma
-Last update: 
->>>>>>> 72b38061b317c10af980ea8f13b5b19a89139b3a
+Contributor: Jie Ma
+
 
 *This document follow the UC Berkeley CS 162 design document guide line*
 [Documentation guideline] 
@@ -36,7 +29,7 @@ All the bolded words refers one location on the website.
 
 ### Part 1. Home Page 
 Display as the diagram shows:
-![alt text](https://github.com/flagcamp-pegasus/TravelPlanner/blob/master/TravelPlannerHome.png)
+![alt text](TravelPlannerHome.png)
 
 the Home Page serves three purposes: 
 1. Allow visitor to select a city from the search bar and the website will jump to the login page 
@@ -57,7 +50,7 @@ the Home Page serves three purposes:
 
 ### Part 3. Display interest points by category
 Display as the diagram shows
-![alt text](https://github.com/flagcamp-pegasus/TravelPlanner/blob/master/TravelPlannCity1.png)
+![alt text](TravelPlannCity1.png)
 
 Supported type: 
 https://developers.google.com/places/supported_types 
@@ -86,25 +79,5 @@ https://developers.google.com/places/supported_types
 
 ## Milestones
 
-<<<<<<< HEAD
-
-=======
-web service
-patch-1
 
 
-test
-=======
-changegg
-
-This is a test by JieM
-modified by: Bixiong Xiang
-
-modified by: Brokl again
-
-Test added by the requester EllenJie.
-text added for test by requester EllenJie.
-
-
-   
->>>>>>> 06c288ef2501fd3685bdf9d9b7f168b3912d03ff

@@ -72,7 +72,16 @@ https://developers.google.com/places/supported_types
 ### Part 4. Select interest points  
 
 ### Part 5. Generate routes based on user's selection 
-
+- Purpose:
+  Generate a visual route on GoogleMap according to liked points list.
+- Function :
+  Generate routes (user-defined)
+- Scenario :
+  1. Get ordered liked points from liked points list
+  2. Use Google Map API (frontend) to pin liked points in order and draw a route on Google Map
+  3. Send liked points list to backend for storing if invoking save route function 
+  4. Update liked points list
+	
 ### Part 6. Recommend routes based on user's selection 
 
 ## Milestones

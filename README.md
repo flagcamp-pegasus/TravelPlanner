@@ -63,7 +63,7 @@ https://developers.google.com/places/supported_types
 4. restaurants
 
 ### Part 4. Select interest points
-Each spot has a "save" button. On clicking the "save" button, the spot will be added to the "saved spots" list. This list contains the travel plan for one day, the user needs to use the drop-down list to switch to another day. Each entry in the "saved spots" list should contains a "delete" button to remove it from the list.
+Each spot has a "save" button. On clicking the "save" button, the spot will be added to the "saved spots" list. This list contains the travel plan for one day, the user needs to use the drop-down list to switch to another day. Each entry in the "saved spots" list should contain a "delete" button to remove it from the list. One entry must be selected as the starting point for the travel.
 
 requirements:
 

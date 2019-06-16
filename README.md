@@ -63,6 +63,15 @@ https://developers.google.com/places/supported_types
 4. restaurants
 
 ### Part 4. Select interest points (Jieyu's working on it) 
+Each spot has a "save" button. On clicking the "save" button, the spot will be added to the "saved spots" list. This list contains the travel plan for one day, the user needs to use the drop-down list to switch to another day. Each entry in the "saved spots" list should contains a "delete" button to remove it from the list.
+
+requirements:
+
+1. The "save spots" list for different day should be independent.
+2. The order of spots in "saved spots" list should be the order of their addition.
+3. A spot appear multiple times even on one day's list.
+4. The list is saved only when "save routes" button is clicked.
+
 
 ### Part 5. Generate routes based on user's selection 
 - Purpose:

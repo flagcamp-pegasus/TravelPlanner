@@ -62,7 +62,7 @@ https://developers.google.com/places/supported_types
 
 4. restaurants
 
-### Part 4. Select interest points  
+### Part 4. Select interest points (Jieyu's working on it) 
 
 ### Part 5. Generate routes based on user's selection 
 - Purpose:

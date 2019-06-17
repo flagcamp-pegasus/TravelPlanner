@@ -64,7 +64,7 @@ https://developers.google.com/places/supported_types
 
 4. restaurants
 
-### Part 4. Select interest points
+### Part 4. Select interest points (Jieyu You)
 Each spot has a "save" button. On clicking the "save" button, the spot will be added to the "saved spots" list. This list contains the travel plan for one day, the user needs to use the drop-down list to switch to another day. Each entry in the "saved spots" list should contain a "delete" button to remove it from the list. One entry must be selected as the starting point for the travel.
 
 requirements:
@@ -93,6 +93,10 @@ requirements:
 
 
 ## Milestones
-
-
+phase 1: finish an available webapp demo
+6.16-6.23   
+6.24-6.30   
+phase 2: advanced features like recommendation based on interests, frontend components
+7.1-7.8    
+7.9-7.15   
 

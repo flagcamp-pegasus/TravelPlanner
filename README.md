@@ -30,7 +30,7 @@ All the bolded words refers one location on the website.
 - function: describe the function of the button/icon
 - vistor: anyone visit the website without an account. 
 
-### Part 1. Home Page 
+### Part 1. Home Page （Jie Ma) 
 Display as the diagram shows:
 ![alt text](TravelPlannerHome.png)
 
@@ -47,7 +47,7 @@ the Home Page serves three purposes:
 4. Sign up:
 5. Sign out: 
 
-### Part 2. Login/Logout Register 
+### Part 2. Login/Logout Register (Jie Ma)  
 1. Backend: 
 2. Frontend:
 

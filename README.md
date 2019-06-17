@@ -89,7 +89,7 @@ requirements:
   4. Update liked points list
   5. 
 	
-### Part 6. Recommend routes based on user's selection 
+### Part 6. Recommend routes based on user's selection (Jiahui Yang)
 
 
 ## Milestones

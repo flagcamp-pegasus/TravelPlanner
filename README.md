@@ -9,6 +9,7 @@ Contributor: Jie Ma
 
 JSON format for communication:
 json for spots should be consistent with googlemapAPI
+json for register/login should be consistent with Jupiter
 
 
 ### Part 0. Overview 

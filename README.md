@@ -94,9 +94,11 @@ requirements:
 
 ## Milestones
 phase 1: finish an available webapp demo
+
 6.16-6.23   
 6.24-6.30   
 phase 2: advanced features like recommendation based on interests, frontend components
+
 7.1-7.8    
 7.9-7.15   
 

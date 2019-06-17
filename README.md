@@ -1,5 +1,5 @@
 # Travel Plan Pegasus 
-This is a design document for laioffer FLAG camp.<br\>
+This is a design document for laioffer FLAG camp.
 Contributor: Jie Ma
 
 
@@ -7,6 +7,8 @@ Contributor: Jie Ma
 [Documentation guideline] 
 (https://people.eecs.berkeley.edu/~kubitron/courses/cs162-F06/design.html) 
 
+JSON format for communication:
+json for spots should be consistent with googlemapAPI
 
 
 ### Part 0. Overview 
@@ -85,8 +87,10 @@ requirements:
   2. Use Google Map API (frontend) to pin liked points in order and draw a route on Google Map
   3. Send liked points list to backend for storing if invoking save route function 
   4. Update liked points list
+  5. 
 	
 ### Part 6. Recommend routes based on user's selection 
+
 
 ## Milestones
 

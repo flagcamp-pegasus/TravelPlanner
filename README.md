@@ -92,9 +92,11 @@ requirements:
 ### Part 6. Recommend routes based on user's selection (Jiahui Yang)
 - Basic Version:
   show a shortest / random path of user's selection, connected with straight line.
+  Input is an Array of JSON object (assign the start point) and commuting tools, backend extract the lat, lon of each point and use Distance Matrix API to get every two points distance, find the shortest distance among these locations.
+  Output is one JSON object, a field 'rows' value is a JSON array, every row is from the same origial point to different destinations.
 - Advanced Version:  
   generate the route by several features:
-  1. traffic: avoid traffic for some route
+  1. traffic: avoid traffic for some route (Distance Matrix API has 'avoid' parameter)
   2. time and seasonal visiting frequency
   3. category: do not put the same category in the same day
   4. add more similarly recommended visiting places into the route.

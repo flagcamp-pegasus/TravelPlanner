@@ -91,13 +91,21 @@ requirements:
   5. 
 	
 ### Part 6. Recommend routes based on user's selection (Jiahui Yang)
-
+- Basic Version:
+  show a shortest / random path of user's selection, connected with straight line.
+- Advanced Version:
+  generate the route by several features:
+  1. traffic: avoid traffic for some route
+  2. time and seasonal visiting frequency
+  3. category: do not put the same category in the same day
+  4. more features to be continued ...
 
 ## Milestones
 phase 1: finish an available webapp demo
 
 6.16-6.23   
-6.24-6.30   
+6.24-6.30  
+
 phase 2: advanced features like recommendation based on interests, frontend components
 
 7.1-7.8    

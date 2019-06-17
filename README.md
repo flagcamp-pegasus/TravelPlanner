@@ -66,7 +66,7 @@ https://developers.google.com/places/supported_types
 4. restaurants
 
 ### Part 4. Select interest points (Jieyu You)
-Each spot has a "save" button. On clicking the "save" button, the spot will be added to the "saved spots" list. This list contains the travel plan for one day, the user needs to use the drop-down list to switch to another day. Each entry in the "saved spots" list should contain a "delete" button to remove it from the list. One entry must be selected as the starting point for the travel.
+Each spot has a "save" button. On clicking the "save" button, the spot will be added to the "saved spots" list. This list contains the travel plan for one day, the user needs to use the drop-down list to switch to another day. Each entry in the "saved spots" list should contain a "delete" button to remove it from the list. *One entry must be selected as the starting point for the travel.*
 
 requirements:
 
@@ -88,17 +88,17 @@ requirements:
   2. Use Google Map API (frontend) to pin liked points in order and draw a route on Google Map
   3. Send liked points list to backend for storing if invoking save route function 
   4. Update liked points list
-  5. 
 	
 ### Part 6. Recommend routes based on user's selection (Jiahui Yang)
 - Basic Version:
   show a shortest / random path of user's selection, connected with straight line.
-- Advanced Version:
+- Advanced Version:  
   generate the route by several features:
   1. traffic: avoid traffic for some route
   2. time and seasonal visiting frequency
   3. category: do not put the same category in the same day
-  4. more features to be continued ...
+  4. add more similarly recommended visiting places into the route.
+  5. more features to be continued ...
 
 ## Milestones
 phase 1: finish an available webapp demo

@@ -8,16 +8,18 @@ Contributor: Jie Ma
 (https://people.eecs.berkeley.edu/~kubitron/courses/cs162-F06/design.html) 
 
 JSON format for communication:
+
 json for spots should be consistent with googlemapAPI
+
 json for register/login should be consistent with Jupiter
 
 
 ### Part 0. Overview 
 *Objective*
-- This website provides 15 alpha cities travel plans.
+- This website provides 15 alpha cities travel plans.(phase 1: hardcode the city information)
 - Users can create one city to make a day by day travel plans upto 15 days. 
-- Users can select interest points for each city for different categories. 
-- Users can order, delect the selected interest points. The website can generate travel plans by day based on the order of the selection. 
+- Users can select spots of interest from different categories for each city. 
+- Users can order, delete the selected spots of interest. The website can generate travel plans by day based on the order of the selection. 
 - The website can also autogenerate travel plans by day based on the selection set. 
 
 *note*
@@ -25,7 +27,7 @@ All the bolded words refers one location on the website.
 
 
 *Definition of key words*
-- interest points(景点): all the provided points regradless of the categories. 
+- spots of interest(景点): all the provided points regradless of the categories. 
 - liked points:all the points user selected regardless of the categories.
 - function: describe the function of the button/icon
 - vistor: anyone visit the website without an account. 
@@ -51,7 +53,7 @@ the Home Page serves three purposes:
 1. Backend: 
 2. Frontend:
 
-### Part 3. Display interest points by category
+### Part 3. Display spots of interest by category
 Display as the diagram shows
 ![alt text](TravelPlannCity1.png)
 
@@ -65,7 +67,7 @@ https://developers.google.com/places/supported_types
 
 4. restaurants
 
-### Part 4. Select interest points (Jieyu You)
+### Part 4. Select spots (Jieyu You)
 Each spot has a "save" button. On clicking the "save" button, the spot will be added to the "saved spots" list. This list contains the travel plan for one day, the user needs to use the drop-down list to switch to another day. Each entry in the "saved spots" list should contain a "delete" button to remove it from the list. *One entry must be selected as the starting point for the travel.*
 
 requirements:

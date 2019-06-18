@@ -32,26 +32,36 @@ All the bolded words refers one location on the website.
 
 
 
+
+### Part 1. Overview 
+*Objective*
+- This website provides 15 alpha cities travel plans.
+- Users can create one city to make a day by day travel plans upto 15 days. 
+- Users can select interest points for each city for different categories. 
+- Users can order, delect the selected interest points. The website can generate travel plans by day based on the order of the selection. 
+- The website can also autogenerate travel plans by day based on the selection set. 
+
+*note*
+All the bolded words refers one location on the website. 
+
+
+*Definition of key words*
+- interest points(景点): all the provided points regradless of the categories. 
+- liked points:all the points user selected regardless of the categories.
+- function: describe the function of the button/icon
+
+
 ### Part 1. Home Page （Jie Ma) 
-Display as the diagram shows:
+
+1. Anyone who wants to use this website has to be login. 
+2. User cannot view city pictures without login. 
+3. User login uses username and password
+4. The authentication uses session (same us Jupiter) 
+5. Vistor can sign up in this page : First Name, Last Name, Username, and Password
+
+After login in, user will see a page like the following. 
 ![alt text](TravelPlannerHome.png)
-
-the Home Page serves three purposes: 
-1. Allow visitor to select a city from the search bar and the website will jump to the login page 
-2. Allow visitor to select a city from the image1, and the website will jump the login page 
-3. Allow user who want to sign up to create an account. 
-4. Allow users who have already signed up to log on. 
-
-*TODO list the function, UI design ..... *
-1. Search bar: 
-2. image1:
-3. Sign in: 
-4. Sign up:
-5. Sign out: 
-
-### Part 2. Login/Logout Register (Jie Ma)  
-1. Backend: 
-2. Frontend:
+User can start make travel plan for a city by  click a picture of the city(stage 2 can use search function) . User will jump to the TravelPlannCity image 
 
 ### Part 3. Display interest points by category
 Display as the diagram shows

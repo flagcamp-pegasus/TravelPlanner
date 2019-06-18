@@ -100,6 +100,9 @@ requirements:
   4. add more similarly recommended visiting places into the route.
   5. more features to be continued ...
 
+### Part 6. Save routes:
+
+
 ## Milestones
 phase 1: finish an available webapp demo
 

@@ -27,8 +27,6 @@ json for register/login should be consistent with Jupiter
 - Users can order, delect the selected interest points. The website can generate travel plans by day based on the order of the selection. 
 - The website can also autogenerate travel plans by day based on the selection set. 
 
-*note*
-All the bolded words refers one location on the website. 
 
 
 *Definition of key words*
@@ -44,6 +42,7 @@ All the bolded words refers one location on the website.
 3. User login uses username and password
 4. The authentication uses session (same us Jupiter) 
 5. Vistor can sign up in this page : First Name, Last Name, Username, and Password
+![alt text](TravelPlanerLogin.png)
 
 After login in, user will see a page like the following. 
 ![alt text](TravelPlannerHome.png)

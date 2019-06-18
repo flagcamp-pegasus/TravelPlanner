@@ -19,20 +19,6 @@ json for interest points should be consistent with googlemapAPI
 json for register/login should be consistent with Jupiter
 
 
-### Part 0. Overview 
-*Objective*
-- This website provides 15 alpha cities travel plans.(phase 1: hardcode the city information)
-- Users can create one city to make a day by day travel plans upto 15 days. 
-- Users can select interest points from different categories for each city. 
-- Users can order, delete the selected interest points. The website can generate travel plans by day based on the order of the selection. 
-- The website can also autogenerate travel plans by day based on the selected interest points. 
-
-*note*
-All the bolded words refers one location on the website. 
-
-
-
-
 ### Part 1. Overview 
 *Objective*
 - This website provides 15 alpha cities travel plans.

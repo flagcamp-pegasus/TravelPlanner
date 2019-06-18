@@ -107,8 +107,15 @@ requirements:
   4. add more similarly recommended visiting places into the route.
   5. more features to be continued ...
 
-### Part 6. Save routes:
+### Part 6. Save routes (Luchen Liu)
+After deside which route to pick (user-selection one or recommended one), by clicking on "save routes" button, the picked route will be saved to database (which is also the one that is rendering on the Map) and shuffle the left-hand-side list by using the selected order.
 
+requirements:
+1. the route list won't be saved until the "save route" button is clicked.
+2. therefore, the firt step should be get the route which is rendering on the Map and save it to database when the button is OnClick.
+3. second thing this button trigured is to change the order in the list. Here exist two conditions: 
+   - if the user choose to adapt his own route, then the list won't change, it keeps the order as the user input it.
+   - if the user choose to adapt the recommanded route, then the list will change order according to the recommandation route.
 
 ## Milestones
 phase 1: finish an available webapp demo

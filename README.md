@@ -2,6 +2,11 @@
 This is a design document for laioffer FLAG camp.
 Contributor: Jie Ma
 
+*Definition of key words*
+- interest point(景点): all the provided spots regradless of the categories. 
+- liked spots:all the points user selected regardless of the categories.
+- function: describe the function of the button/icon
+- visitor: anyone visit the website without an account. 
 
 *This document follow the UC Berkeley CS 162 design document guide line*
 [Documentation guideline] 
@@ -9,7 +14,7 @@ Contributor: Jie Ma
 
 JSON format for communication:
 
-json for spots should be consistent with googlemapAPI
+json for interest points should be consistent with googlemapAPI
 
 json for register/login should be consistent with Jupiter
 
@@ -18,19 +23,14 @@ json for register/login should be consistent with Jupiter
 *Objective*
 - This website provides 15 alpha cities travel plans.(phase 1: hardcode the city information)
 - Users can create one city to make a day by day travel plans upto 15 days. 
-- Users can select spots of interest from different categories for each city. 
-- Users can order, delete the selected spots of interest. The website can generate travel plans by day based on the order of the selection. 
-- The website can also autogenerate travel plans by day based on the selection set. 
+- Users can select interest points from different categories for each city. 
+- Users can order, delete the selected interest points. The website can generate travel plans by day based on the order of the selection. 
+- The website can also autogenerate travel plans by day based on the selected interest points. 
 
 *note*
 All the bolded words refers one location on the website. 
 
 
-*Definition of key words*
-- spots of interest(景点): all the provided points regradless of the categories. 
-- liked points:all the points user selected regardless of the categories.
-- function: describe the function of the button/icon
-- vistor: anyone visit the website without an account. 
 
 ### Part 1. Home Page （Jie Ma) 
 Display as the diagram shows:
@@ -53,7 +53,7 @@ the Home Page serves three purposes:
 1. Backend: 
 2. Frontend:
 
-### Part 3. Display spots of interest by category
+### Part 3. Display interest points by category
 Display as the diagram shows
 ![alt text](TravelPlannCity1.png)
 

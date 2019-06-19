@@ -35,7 +35,7 @@ json for register/login should be consistent with Jupiter
 - function: describe the function of the button/icon
 
 
-### Part 1. Home Page （Jie Ma) 
+### Part 2. Home Page （Jie Ma) 
 
 1. Anyone who wants to use this website has to be login. 
 2. User cannot view city pictures without login. 
@@ -62,7 +62,8 @@ https://developers.google.com/places/supported_types
 
 4. restaurants
 
-*Outstanding issues:
+*Outstanding issues: (Fan Chi Liu)
+
 When user search a spot, how should we handle with this spot?
 - Use another floating page, or
 - Display on top of current category and keep other spots, or
@@ -83,7 +84,7 @@ requirements:
   - if "generate routes(recommended)" is selected, spots will be saved according to the recommended order.
 5. save routes only save the route of the current day.
 
-### Part 5. Generate routes based on user's selection 
+### Part 5. Generate routes based on user's selection (Fan Chi Liu) 
 - Purpose:
   Generate a visual route on GoogleMap according to liked points list.
 - Function :

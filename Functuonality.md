@@ -18,12 +18,8 @@ Return a json array of lat&lon to frontend based on user's:
 
 ## Potential Solution: 
 
-We first segament the places into each day, and then return the path for each day.
+We first segament the places into each day, and then connect the path within each bucket, return the global_min solution.
 
-
-*Time Complexity:*
-
-O(Elog V)
 
 
 #### *Terms:*
@@ -37,6 +33,13 @@ edgeweight = travel time when arrive the places,
 nodeweight = visit duration for each places,
 
 bmax = total time for each day, we can manually set it to 10 hours.
+
+
+*Time Complexity:*
+
+worst case: k^n * 4! 
+
+(say we would have at most 4 places to visit each day.
 
 
 #### *Algorithm*

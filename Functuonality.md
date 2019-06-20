@@ -43,7 +43,7 @@ worst case: k^n * 4!
 
 
 #### *Algorithm*
-1. build a map with user's selection, node weight is visit duration for each places, edge weight is travel time when arrive the places
+1. build a graph with user's selection, node weight is visit duration for each places, edge weight is travel time when arrive the places
 
 2. segment them into k buckets:
     

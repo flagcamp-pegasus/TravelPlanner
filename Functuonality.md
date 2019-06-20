@@ -44,9 +44,13 @@ worst case: k^n * 4!
 
 #### *Algorithm*
 1. build a map with user's selection, segment them into k buckets:
+    
     say we want to know where should we put the cur node, t = today's current total visit time, t = edgeweight + nodeweight
+    
     i. if t > bmax, we will put it to the bucket[i+1] if bucket[i+1] != null, else, return false for this solution;
+    
     ii. if t <= bmax, put node to bucket[i] and move to next node
+    
 2. connect nodes in each bucket, return the golbal_min spend time solution. 
     Since it would not be too much nodes in each bucket (estimate max is 4), we would do it in a brute force way.
 

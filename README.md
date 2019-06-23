@@ -133,6 +133,6 @@ phase 2: advanced features like recommendation based on interests, frontend comp
 
 back end:
 Lin Lingzhi, Yang Yi, Jiahui Yang
-front end:
-others:
+
+front end(others):
 https://docs.google.com/presentation/d/1UDRo6CPn3_8RZ0SdCnYxCgmBj_74D6t-nGSucmTrnxk/edit#slide=id.g59928f68e9_0_873

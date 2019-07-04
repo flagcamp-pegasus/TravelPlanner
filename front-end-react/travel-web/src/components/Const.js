@@ -1,1 +1,0 @@
-export const KEY="AIzaSyC6H9bJcyRzUYM3rc1DVGUu80ASLnoUkCc"

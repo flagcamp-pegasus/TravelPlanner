@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+    <link rel="stylesheet" href="googlemap.css">
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    class LineDrawer extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        render(){
+            return (
+                <div>
+                    <button>draw line</button>
+                    <DrawLine route={this.props.route} />
+                </div>
+            )
+        }
+    }
+    class DrawLine extends React.Component{
+        constructor(props){
+            super(props);
+            this.Draw=this.Draw.bind(this);
+        }
+        Draw(){
+            let route=this.props.route
+            function DrawLine_in() {
+                // route: [place1, place2...], where placei = {lat:xx, lng: xx}
+
+                let map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 3,
+                    center: {lat: 0, lng: -180},
+                    mapTypeId: 'terrain'
+                });
+
+                let flightPlanCoordinates = route;
+                let flightPath = new google.maps.Polyline({
+                    path: flightPlanCoordinates,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+
+                flightPath.setMap(map);
+            }
+            return DrawLine_in;
+        }
+        render(){
+            const map = <div id="map">sgdf</div>
+            this.Draw()
+            return(
+                map
+            )
+        }
+    }
+    const route = [
+        {lat: 37.772, lng: -122.214},
+        {lat: 21.291, lng: -157.821},
+        {lat: -18.142, lng: 178.431},
+        {lat: -27.467, lng: 153.027}
+    ];
+    ReactDOM.render(<LineDrawer route={route}/>, document.getElementById("root"));
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATCnFR7a7y_JZ34RWdcxZTAqTcIQfzcQ4&callback=Draw">
+</script>
+</body>

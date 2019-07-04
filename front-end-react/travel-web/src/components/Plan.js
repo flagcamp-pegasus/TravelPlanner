@@ -21,7 +21,7 @@ export class Plan extends React.Component{
     render(){
         return(
             <div>
-                <button onClick={this.zoomToCity}>Locate City</button>
+                <button onClick={this.generateRoute}>Generate Route</button>
                 <DrawPath path={this.state.path}/>
                 <Spots/>
             </div>

@@ -4,10 +4,15 @@ import { Link, withRouter  } from 'react-router-dom'
 
 let city={lat:47.608013, lng:-122.335167}
 
-export class ChooseCity extends React.Component{
+class City extends React.Component{
     state={path:[], latlng:{lat:0, lng:0}}
+
     zoomToCity = ()=>{
         this.setState({latlng: city})
+    }
+
+    plan = ()=>{
+        this.props.history.push('/plan')
     }
 
     render(){
@@ -16,8 +21,10 @@ export class ChooseCity extends React.Component{
                 <button onClick={this.zoomToCity}>Locate City</button>
                 <LocateCity latlng={this.state.latlng}/>
                 {/*<NavLink to="/plan">Contact</NavLink>*/}
-                {/*<button onClick={this.plan}>Plan now!</button>*/}
+                <button onClick={this.plan}>Plan now!</button>
             </div>
         )
     }
 }
+
+export const ChooseCity = withRouter(City)

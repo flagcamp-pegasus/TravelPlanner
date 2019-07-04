@@ -15,7 +15,7 @@ export class ChooseCity extends React.Component{
             <div>
                 <button onClick={this.zoomToCity}>Locate City</button>
                 <LocateCity latlng={this.state.latlng}/>
-                <NavLink to="/plan">Contact</NavLink>
+                {/*<NavLink to="/plan">Contact</NavLink>*/}
                 {/*<button onClick={this.plan}>Plan now!</button>*/}
             </div>
         )

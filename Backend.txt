@@ -116,9 +116,9 @@ Name : routes
 Route_id:
 Transportation:
 Start_date: new Date();
+ith_day: 0,1,2
 Places: [
-	第一站：hotel(place id)
-			第二站：xxx(place id)
+	第一站：hotel(place id), 第二站：xxx(place id)
 ]	
 }
 
@@ -137,4 +137,73 @@ Places: [
 Question：
 如果前端call google api, what kind of data we need? 
 Distance Matrix api request data and response data
+
+
+
+recommend
+{
+ith_day: xxx,
+routes: {
+		{
+			lat:xxx
+			lng:xxx
+		}
+		{
+			lat:xxx
+			lng:xxx
+		}
+		{
+			lat:xxx
+			lng:xxx
+		}
+	}
+}
+
+
+history
+{	
+	{
+		{
+		lat:xxx
+		lng:xxx
+		}
+		{
+		lat:xxx
+		lng:xxx
+		}
+		{
+		lat:xxx
+		lng:xxx
+		}
+	},
+	
+	{
+		{
+		lat:xxx
+		lng:xxx
+		}
+		{
+		lat:xxx
+		lng:xxx
+		}
+		{
+		lat:xxx
+		lng:xxx
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -40,14 +40,14 @@ public class Place {
 	private double lon;
 	private String place_id; // can be used for place detail search
 	private String name;
-	private Set<String> types; //[ "travel_agency", "restaurant", "food", "establishment" ],
+	//private Set<String> types; //[ "travel_agency", "restaurant", "food", "establishment" ],
 	
 	private Place(PlaceBuilder p) {
 		this.lat = p.lat;
 		this.lon = p.lon;
 		this.place_id = p.place_id;
 		this.name = p.name;
-		this.types = p.types;
+		//this.types = p.types;
 	}
 	
 	public double getLat() {
@@ -62,9 +62,9 @@ public class Place {
 	public String getName() {
 		return name;
 	}
-	public Set<String> getTypes() {
-		return types;
-	}
+//	public Set<String> getTypes() {
+//		return types;
+//	}
 	
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
@@ -74,7 +74,7 @@ public class Place {
 			obj.put("location", location);
 			obj.put("place_id", place_id);
 			obj.put("name", name);
-			obj.put("types", new JSONArray(types));
+			//obj.put("types", new JSONArray(types));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,7 +88,7 @@ public class Place {
 		private double lon;
 		private String place_id; 
 		private String name;
-		private Set<String> types;
+		//private Set<String> types;
 		public void setLat(double lat) {
 			this.lat = lat;
 		}
@@ -101,9 +101,9 @@ public class Place {
 		public void setName(String name) {
 			this.name = name;
 		}
-		public void setTypes(Set<String> types) {
-			this.types = types;
-		} 
+//		public void setTypes(Set<String> types) {
+//			this.types = types;
+//		} 
 		
 		public Place build() {
 			return new Place(this);

@@ -98,7 +98,7 @@ public class PlacesAPI {
 					builder.setLon(location.getDouble("lng"));
 				}
 			}
-			builder.setTypes(getTypes(result));
+			//builder.setTypes(getTypes(result));
 			placeList.add(builder.build());
 		}
 		

@@ -18,6 +18,7 @@ class City extends React.Component{
     render(){
         return(
             <div>
+
                 <button onClick={this.zoomToCity}>Locate City</button>
                 <LocateCity latlng={this.state.latlng}/>
                 {/*<NavLink to="/plan">Contact</NavLink>*/}

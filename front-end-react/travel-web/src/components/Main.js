@@ -8,8 +8,14 @@ import {Plan} from './Plan'
 
 export class Main extends React.Component {
 
+    state = {history: []}
+
+    getHistory = (history)=>{
+        this.state.setState({history:history})
+    }
+
     getLogin = () => {
-        return this.props.isLoggedIn ? <Redirect to="/city"/> : <Login handleLogin={this.props.handleLogin} />;
+        return this.props.isLoggedIn ? <Redirect to="/city"/> : <Login handleLogin={this.props.handleLogin} getHistory ={this.getHistory}/>;
     }
     getPlan = () => {
        return this.props.isLoggedIn ? <Plan/> : <Redirect to="/login" />;

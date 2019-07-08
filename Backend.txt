@@ -92,13 +92,11 @@ name: user
 	Last_name:
 	Password:
 	Routes_array: [route_id, route_id, ….](index is the nth  day)
-	Time_array: [new Date(), new Date(), ] (2019/6/22)
-	// concern about day rest
 }
 
-save routes: 
+/*JAVA Class:*/
 
-Name : places
+Name : Place
 {
 	{
 	place_id: abc
@@ -110,35 +108,31 @@ Name : places
 	}
 }
 
-Name : routes 
+Name : Routes 
 {
 	{
-Route_id:
-Transportation:
-Start_date: new Date();
-ith_day: 0,1,2
-Places: [
-	第一站：hotel(place id), 第二站：xxx(place id)
-]	
+	Route_id:
+	Start_date: new Date();
+	ith_day: 0,1,2
+	Places: [
+		第一站：hotel(place id), 
+		第二站：xxx(place id)
+		]	
+	},
+
+	{
+	Route_id:
+	Start_date: new Date();
+	Places: [
+		第一站：hotel(place id)
+		]	
+	},
+	
+	...
 }
 
-{//represent rest in hotel, go nowhere
-Route_id:
-Start_date: new Date();
-Transportation:
-Places: [
-	第一站：hotel(place id)
-]	
-}
-}
 
-
-
-Question：
-如果前端call google api, what kind of data we need? 
-Distance Matrix api request data and response data
-
-
+/*rpc Endpoint:*/
 
 recommend
 {

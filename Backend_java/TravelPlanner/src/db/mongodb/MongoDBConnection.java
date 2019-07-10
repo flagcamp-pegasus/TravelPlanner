@@ -1,8 +1,10 @@
 package db.mongodb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
@@ -51,19 +53,42 @@ public class MongoDBConnection implements DBConnection {
 		}
 		return false;
 	}
-
+	
 	@Override
-	public void saveRoutes(List<Place> places, String userId) {
+	public List<String> savePlaces(List<Place> places) {
 		// TODO Auto-generated method stub
-		
+		List<String> places_id = new ArrayList<String>();
+		for(Place p : places) {
+			db.getCollection("places").insertOne(new Document().append("lat", p.getLat())
+					.append("lon", p.getLon()).append("place_id", p.getPlace_id())
+					.append("name", p.getName()));
+			places_id.add(p.getPlace_id());
+		}
+		return places_id;
 	}
 
 	@Override
-	public void unsaveRoutes(String userId, String routeId) {
+	public void saveRoutes(List<Place> places, String userId, int ith) {
+		// TODO Auto-generated method stub
+		List<String> places_id = savePlaces(places);
+		ObjectId id = new ObjectId();
+		db.getCollection("routes").insertOne(new Document().append("routeId", id)
+				.append("ithDay", ith).append("routes", places_id)
+				);
+		db.getCollection("users").updateOne(new Document("user_id", userId),
+				new Document("$addToSet", new Document("routes_array", id))
+				);
+	}
+	
+	
+
+	@Override
+	public void unsaveRoutes(String userId, ObjectId routeId) {
 		// TODO Auto-generated method stub
 		// find user delete routes id in its routes list
 		// find route collection delete routesid == routesId
 		db.getCollection("routes").deleteOne(eq("route_id", routeId));
+		db.getCollection("users").updateOne(new Document("user_id",  userId), new Document("$pull", new Document("routes_array", routeId)) );
 		
 		
 	}
@@ -73,5 +98,13 @@ public class MongoDBConnection implements DBConnection {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean registerUser(String userId, String password, String firstname, String lastname) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 
 }

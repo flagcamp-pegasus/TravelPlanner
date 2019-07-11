@@ -2,7 +2,7 @@ package entity;
 
 import java.util.List;
 
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,12 +11,21 @@ public class Routes {
 	private int ithDay;
 	private int startDate;
 	private List<Place> places;
+	private List<String> places_id;
+//	{
+//		routeId: xxxx;
+//		ithDay: xxxx;
+//		startDate:xxxx;
+//		places_id: [1111,2222,3333];
+//	}
+//	thins in mongoDB
 	
 	public Routes(RoutesBuilder r) {
 		this.routeId = r.routeId;
 		this.ithDay = r.ithDay;
 		this.startDate = r.startDate;
 		this.places = r.places;
+		this.places_id = r.places_id;
 	}
 	
 	public String getRouteId() {
@@ -30,6 +39,9 @@ public class Routes {
 	}
 	public List<Place> getPlaces() {
 		return places;
+	}
+	public List<String> getPlacesID(){
+		return places_id;
 	}
 	
 	public JSONObject toJSONObject() {		
@@ -61,6 +73,7 @@ public class Routes {
 		private int ithDay;
 		private int startDate;
 		private List<Place> places;
+		private List<String> places_id;
 		
 		public void setRouteId(String routeId) {
 			this.routeId = routeId;
@@ -73,6 +86,9 @@ public class Routes {
 		}
 		public void setPlaces(List<Place> places) {
 			this.places = places;
+		}
+		public void setPlacesID(List<String> places_id) {
+			this.places_id = places_id;
 		}
 		
 		public Routes builde() {

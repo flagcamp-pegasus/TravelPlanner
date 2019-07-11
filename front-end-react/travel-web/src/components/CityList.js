@@ -7,7 +7,7 @@ const cityList = [
     {name: "London", latlng: {lat: 51.506155, lng: -0.127824}},
     {name: "Paris",  latlng: {lat: 48.854429, lng: 2.352198}},
     {name: "Milano", latlng: {lat: 45.461719, lng: 9.190091}},
-    {name: "Munich", latlng: {lat: 48.133679, lng: 11.580960}}
+    {name: "New York", latlng: {lat: 40.712921, lng: -74.006063}}
 ];
 
 export class CityList extends React.Component {
@@ -30,7 +30,7 @@ export class CityList extends React.Component {
                         <h1>Milano</h1>
                     </div>
                     <div>
-                        <h1>Munich</h1>
+                        <h1>New York</h1>
                     </div>
                 </Carousel>
             </div>

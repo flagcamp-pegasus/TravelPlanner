@@ -85,46 +85,46 @@ saveRoutesToRoutes(String routes_id);
 
 Data Structure: MongoDB
 login/ logout/ register/
-name: user
+name: users
 {	
 	user_id:
-	First_name: 
-	Last_name:
-	Password:
-	Routes_array: [route_id, route_id, ….](index is the nth  day)
+	first_name: 
+	last_name:
+	password:
+	routes_array: [route_id, route_id, ….](index is the nth  day)
 }
 
 /*JAVA Class:*/
 
-Name : Place
+Name : places
 {
 	{
-	place_id: abc
-           	url:
-	image:
-	time：
-	Location: [lat, lon]
-
+	place_id: 
+	lat:
+	lon:
+	name:
 	}
 }
 
-Name : Routes 
+Name : routes 
 {
 	{
-	Route_id:
-	Start_date: new Date();
-	ith_day: 0,1,2
-	Places: [
-		第一站：hotel(place id), 
-		第二站：xxx(place id)
+	routeId:
+	startDate: 
+	ithDay: 0,1,2
+	routes: [
+		place id, 
+		place id,
 		]	
 	},
 
 	{
-	Route_id:
-	Start_date: new Date();
-	Places: [
-		第一站：hotel(place id)
+	routeId:
+	startDate: 
+	ithDay: 0,1,2
+	routes: [
+		place id, 
+		place id,
 		]	
 	},
 	

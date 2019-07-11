@@ -20,28 +20,33 @@ export const DrawPath = compose(
     }),
     withScriptjs,
     withGoogleMap
-)(props =>(
-    <GoogleMapPath
-        defaultZoom={3}
-        defaultCenter={new window.google.maps.LatLng(-34.397, 150.644)}
-        // center = {new window.google.maps.LatLng(props.path[0].lat, props.path[0].lng)}
-    >
-        <Polyline
-            path={props.path}
-            defaultOptions={{
-                geodesic: true,
-                strokeColor: '#FF0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2,
-                icons: [{
-                    icon: {
-                        path: window.google.maps.SymbolPath.FORWARD_CLOSED_ARROW
-                    },
-                    offset: '100%'
-                }],
-            }}
-        />
-    </GoogleMapPath>
+)(props =>{
+    let {lat, lon, name}=props.city
+    console.log(lat, lon, name)
+    return (
+        <GoogleMapPath
+            defaultZoom={3}
+            defaultCenter={new window.google.maps.LatLng(-34.397, 150.644)}
+            // center = {new window.google.maps.LatLng(props.path[0].lat, props.path[0].lng)}
+
+        >
+            <Polyline
+                path={props.path}
+                defaultOptions={{
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2,
+                    icons: [{
+                        icon: {
+                            path: window.google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+                        },
+                        offset: '100%'
+                    }],
+                }}
+            />
+        </GoogleMapPath>
     )
+}
 
 );

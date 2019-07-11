@@ -10,6 +10,7 @@ import {Test} from './GoogleMapTest'
 
 export class Main extends React.Component {
 
+    city = {lat: 0, lng: 0, name: ""}
     state = {history: []}
 
     getHistory = (history)=>{
@@ -19,8 +20,9 @@ export class Main extends React.Component {
     getLogin = () => {
         return this.props.isLoggedIn ? <Redirect to="/city"/> : <Login handleLogin={this.props.handleLogin} getHistory ={this.getHistory}/>;
     }
-    getPlan = () => {
-       return this.props.isLoggedIn ? <Plan/> : <Redirect to="/login" />;
+    getPlan = (props) => {
+        console.log(props)
+       return this.props.isLoggedIn ? <Plan city={props?this.city:props}/> : <Redirect to="/login" />;
     }
 
     getCity = () => {
@@ -36,6 +38,7 @@ export class Main extends React.Component {
          <Route path="/register" component={Register}/>
            <Route path="/city" render={this.getCity}/>
          <Route path="/plan" render={this.getPlan}/>
+           {/*<Route path="/plan" component={Plan}/>*/}
            <Route path="/test" component={Test}/>
        </Switch>
      </div>

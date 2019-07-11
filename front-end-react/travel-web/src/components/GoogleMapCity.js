@@ -79,13 +79,13 @@ const Map = compose(
     withGoogleMap
 )(
     (props) =>{
-        console.log(props.center)
     return(
     <GoogleMap
         ref={props.onMapMounted}
-        defaultZoom={8}
+        defaultZoom={2}
         onBoundsChanged={props.onBoundsChanged}
         center={props.center}
+        // defaultCenter={props.center}
     >
         <SearchBox
             ref={props.onSearchBoxMounted}
@@ -122,18 +122,15 @@ const Map = compose(
         {/*)}*/}
         <Marker
             position={props.latlng}
-            // onClick={props.onToggleOpen}
+            onClick={props.onToggleOpen}
         >
-            {props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
-
-            </InfoWindow>}
-        </Marker>
-        <Marker
-            position={{lat: 41.9, lng: -87.624}}
-            // onClick={props.onToggleOpen}
-        >
-            {props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
-
+            {props.isOpen && <InfoWindow
+                onCloseClick={props.onToggleOpen}>
+                <div style={{ backgroundColor: `white`, opacity: 0.75, padding: `12px` }}>
+                    <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+                        {props.name}
+                    </div>
+                </div>
             </InfoWindow>}
         </Marker>
     </GoogleMap>
@@ -142,13 +139,15 @@ const Map = compose(
 
 export class LocateCity extends React.Component{
     render() {
-        return (
+        return(
             <Map
                 latlng = {this.props.latlng}
                 center = {this.props.latlng}
+                name = {this.props.name}
                 // isMarkerShown={this.state.isMarkerShown}
                 // onMarkerClick={this.handleMarkerClick}
             />
         )
     }
+
 }

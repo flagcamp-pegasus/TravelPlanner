@@ -54,28 +54,28 @@ export class Spots extends React.Component {
     getMuseumPlaces = () => {
         return (
         <ul id="place-list">
-        <li class="place">
+        <li className="place">
           <img alt="place image" src="https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg" />
           <div>
-            <a class="place-name" href="#">Museum1</a>
-            <p class="item-category">park</p>
+            <a className="place-name" href="#">Museum1</a>
+            <p className="item-category">park</p>
             
           </div>
-          <p class="place-address">699 Calderon Ave<br/>Mountain View<br/> CA</p>
-          <div class="fav-link">
-            <i class="fa fa-heart"></i>
+          <p className="place-address">699 Calderon Ave<br/>Mountain View<br/> CA</p>
+          <div className="fav-link">
+            <i className="fa fa-heart"></i>
           </div>
         </li>
-        <li class="place">
+        <li className="place">
           <img alt="place image" src="https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg" />
           <div>
-            <a class="place-name" href="#">Museum2</a>
-            <p class="item-category">park</p>
+            <a className="place-name" href="#">Museum2</a>
+            <p className="item-category">park</p>
             
           </div>
-          <p class="place-address">699 Calderon Ave<br/>Mountain View<br/> CA</p>
-          <div class="fav-link">
-            <i class="fa fa-heart"></i>
+          <p className="place-address">699 Calderon Ave<br/>Mountain View<br/> CA</p>
+          <div className="fav-link">
+            <i className="fa fa-heart"></i>
           </div>
         </li>
       </ul>
@@ -85,28 +85,28 @@ export class Spots extends React.Component {
     getParkPlaces = () => {
         return (
         <ul id="place-list">
-        <li class="place">
+        <li className="place">
           <img alt="place image" src="https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg" />
           <div>
-            <a class="place-name" href="#">Park1</a>
-            <p class="item-category">park</p>
+            <a className="place-name" href="#">Park1</a>
+            <p className="item-category">park</p>
             
           </div>
-          <p class="place-address">699 Calderon Ave<br/>Mountain View<br/> CA</p>
-          <div class="fav-link">
-            <i class="fa fa-heart"></i>
+          <p className="place-address">699 Calderon Ave<br/>Mountain View<br/> CA</p>
+          <div className="fav-link">
+            <i className="fa fa-heart"></i>
           </div>
         </li>
-        <li class="place">
+        <li className="place">
           <img alt="place image" src="https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg" />
           <div>
-            <a class="place-name" href="#">Park2</a>
-            <p class="item-category">park</p>
+            <a className="place-name" href="#">Park2</a>
+            <p className="item-category">park</p>
             
           </div>
-          <p class="place-address">699 Calderon Ave<br/>Mountain View<br/> CA</p>
-          <div class="fav-link">
-            <i class="fa fa-heart"></i>
+          <p className="place-address">699 Calderon Ave<br/>Mountain View<br/> CA</p>
+          <div className="fav-link">
+            <i className="fa fa-heart"></i>
           </div>
         </li>
       </ul>

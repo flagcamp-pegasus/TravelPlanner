@@ -19,7 +19,7 @@ public interface DBConnection {
 	// unsave route is for the show routes page
 	public void unsaveRoutes(String userId, ObjectId routesId);
 	
-	public List<Routes> getRoutes(String userId);
+	public List<String> getRoutes(String userId);
 	
 	public List<String> savePlaces(List<Place> places);
 	

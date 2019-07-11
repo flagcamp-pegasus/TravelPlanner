@@ -8,7 +8,7 @@ const {
     GoogleMap: GoogleMapPath,
 } = require("react-google-maps");
 const {DrawingManager} = require("react-google-maps/lib/components/drawing/DrawingManager");
-
+const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
 
 export const DrawPath = compose(

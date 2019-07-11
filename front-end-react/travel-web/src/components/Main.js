@@ -2,9 +2,11 @@ import React from 'react';
 import { Register } from './Register';
 import { Login } from './Login';
 
+
 import { Switch, Route, Redirect } from 'react-router-dom'
 import {ChooseCity} from './ChooseCity'
 import {Plan} from './Plan'
+import {Test} from './GoogleMapTest'
 
 export class Main extends React.Component {
 
@@ -34,7 +36,7 @@ export class Main extends React.Component {
          <Route path="/register" component={Register}/>
            <Route path="/city" render={this.getCity}/>
          <Route path="/plan" render={this.getPlan}/>
-         <Route render={this.getLogin}/>
+           <Route path="/test" component={Test}/>
        </Switch>
      </div>
    );

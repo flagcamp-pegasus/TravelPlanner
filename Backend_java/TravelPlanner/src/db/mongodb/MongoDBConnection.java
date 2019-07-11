@@ -95,7 +95,7 @@ public class MongoDBConnection implements DBConnection {
 	}
 
 	@Override
-	public List<Routes> getRoutes(String userId) {
+	public List<String> getRoutes(String userId) {
 		return null;
 		// TODO Auto-generated method stub
 		

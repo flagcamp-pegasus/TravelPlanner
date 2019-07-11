@@ -5,6 +5,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 import entity.Place;
+import entity.Routes;
 
 public interface DBConnection {
 	public void close();
@@ -18,7 +19,7 @@ public interface DBConnection {
 	// unsave route is for the show routes page
 	public void unsaveRoutes(String userId, ObjectId routesId);
 	
-	public void getRoutes(String userId);
+	public List<Routes> getRoutes(String userId);
 	
 	public List<String> savePlaces(List<Place> places);
 	

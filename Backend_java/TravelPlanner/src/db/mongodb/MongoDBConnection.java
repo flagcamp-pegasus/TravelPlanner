@@ -13,6 +13,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 import db.DBConnection;
 import entity.Place;
+import entity.Routes;
 
 public class MongoDBConnection implements DBConnection {
 	private MongoClient mongoClient;
@@ -94,7 +95,8 @@ public class MongoDBConnection implements DBConnection {
 	}
 
 	@Override
-	public void getRoutes(String userId) {
+	public List<Routes> getRoutes(String userId) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

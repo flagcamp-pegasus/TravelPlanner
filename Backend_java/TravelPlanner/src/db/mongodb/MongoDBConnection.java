@@ -96,9 +96,16 @@ public class MongoDBConnection implements DBConnection {
 
 	@Override
 	public List<String> getRoutes(String userId) {
-		return null;
-		// TODO Auto-generated method stub
+		List<String> routes = new ArrayList<>();
+		FindIterable<Document> iterable = db.getCollection("users").find(eq("user_id", userId));
 		
+		if (iterable.first() != null && iterable.first().containsKey("routes_array")) {
+			@SuppressWarnings("unchecked")
+			List<String> list = (List<String>) iterable.first().get("routes_array");	
+			routes = list;
+		}
+
+		return routes;
 	}
 
 	@Override

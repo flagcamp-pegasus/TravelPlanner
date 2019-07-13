@@ -32,6 +32,7 @@ class City extends React.Component{
     }
 
     render(){
+        // console.log(this.props.city)
         return(
             <div>
                 <CityList getPage={this.getPage}/>

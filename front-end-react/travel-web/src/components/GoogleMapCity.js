@@ -69,7 +69,9 @@ const Map = compose(
 
                     this.setState({
                         center: nextCenter,
+                        markers: nextMarkers,
                     });
+                    // state.center is center of map by searchbox
                     refs.map.fitBounds(bounds);
                 },
             })
@@ -84,7 +86,9 @@ const Map = compose(
         ref={props.onMapMounted}
         defaultZoom={2}
         onBoundsChanged={props.onBoundsChanged}
+        // center={{lat:0, lng:0}}
         center={props.center}
+        // center from selecting city
         // defaultCenter={props.center}
     >
         <SearchBox
@@ -111,15 +115,11 @@ const Map = compose(
                 }}
             />
         </SearchBox>
-        {/*{props.markers.map((marker, index) =>*/}
-            {/*<Marker key={index}*/}
-                    {/*position={props.latlng ? props.latlng : marker.position}*/}
-                    {/*onClick={props.onToggleOpen}*/}
-            {/*>*/}
-                {/*{props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>*/}
-                {/*</InfoWindow>}*/}
-            {/*</Marker>*/}
-        {/*)}*/}
+        {/*marker from searchbox*/}
+        {props.markers.map((marker, index) =>
+            <Marker key={index} position={marker.position} options={{icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'}}/>
+        )}
+        {/*marker from city*/}
         <Marker
             position={props.latlng}
             onClick={props.onToggleOpen}
@@ -131,7 +131,8 @@ const Map = compose(
                         {props.name}
                     </div>
                 </div>
-            </InfoWindow>}
+            </InfoWindow>
+            }
         </Marker>
     </GoogleMap>
     )}

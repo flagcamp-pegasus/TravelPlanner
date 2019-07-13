@@ -32,7 +32,7 @@ export class Spots extends React.Component {
     }
 
     onSuccessLoadGeoLocation = (position) => {
-        console.log(position);
+        // console.log(position);
         const { latitude, longitude } = position.coords;
         localStorage.setItem(POS_KEY, JSON.stringify({
             lon: longitude,

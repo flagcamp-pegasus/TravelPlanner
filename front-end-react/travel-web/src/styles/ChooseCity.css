@@ -1,3 +1,30 @@
 .container {
     display: flex; /* or inline-flex */
+    width: 750px;
+}
+
+.citylist{
+    width: 300px;
+    margin: 50px;
+}
+
+.citymap{
+    width: 800px;
+    margin: 50px;
+}
+
+.input{
+    box-sizing: border-box;
+    border-width: 1px ;
+    border-style: solid;
+    border-color: transparent;
+    width: 240px;
+    height: 32px;
+    margin: 15px;
+    padding: 0 12px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    outline: none;
+    text-overflow: ellipsis;
 }

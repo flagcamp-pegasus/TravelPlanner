@@ -62,6 +62,7 @@ class MyMap extends React.Component{
 
     render(){
         return(
+            <div  className="citymap" >
             <GoogleMap
                 ref={this.state.onMapMounted}
                 defaultZoom={this.props.zoom}
@@ -76,20 +77,8 @@ class MyMap extends React.Component{
                 >
                     <input
                         type="text"
-                        placeholder="Customized your placeholder"
-                        style={{
-                            boxSizing: `border-box`,
-                            border: `1px solid transparent`,
-                            width: `240px`,
-                            height: `32px`,
-                            marginTop: `27px`,
-                            padding: `0 12px`,
-                            borderRadius: `3px`,
-                            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                            fontSize: `14px`,
-                            outline: `none`,
-                            textOverflow: `ellipses`,
-                        }}
+                        placeholder="search"
+                        className="input"
                     />
                 </SearchBox>
                 {/*marker from searchbox*/}
@@ -98,6 +87,7 @@ class MyMap extends React.Component{
                 )}
                 <MyMarker coor = {this.props.latlng} name = {this.props.name}/>
             </GoogleMap>
+            </div>
         )
     }
 }

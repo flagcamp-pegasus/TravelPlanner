@@ -3,6 +3,7 @@ import { Spots } from './Spots';
 import {DrawPath} from './GoogleMapPath.js'
 import { Link } from 'react-router-dom';
 import {PATH_ZOOM} from "../constants.js"
+import {Button} from "antd"
 
 let spotsPlan = [
     {latlng: {lat:34.0195, lng:-118.4912}, name: "Santa Monica", place_id:0},
@@ -15,6 +16,7 @@ let spotsPlan = [
 export class Plan extends React.Component{
     state={path:[]}
 
+
     generateRoute = ()=>{
         this.setState((state)=>({path: spotsPlan}))
     }
@@ -26,10 +28,14 @@ export class Plan extends React.Component{
     render(){
         // console.log(this.props.city)
         return(
-            <div>
-                <button onClick={this.generateRoute}>Generate Route</button>
-                <button onClick={this.removeRoute}>Remove Route</button>
-                <DrawPath path={this.state.path} city = {this.props.city} zoom={PATH_ZOOM}/>
+            <div className="container">
+                <div className="path">
+                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className = "btn">Generate Route</Button>
+                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className = "btn">Remove Route</Button>
+                    {/*<button onClick={this.generateRoute}>Generate Route</button>*/}
+                    {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
+                    <DrawPath path={this.state.path} city = {this.props.city? this.props.city: this.state.path[0]} zoom={PATH_ZOOM}/>
+                </div>
                 <Spots/>
             </div>
         )

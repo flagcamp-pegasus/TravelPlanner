@@ -18,7 +18,7 @@ export class CityList extends React.Component {
 
     render() {
         return(
-            <div className = "image">
+            <div className="citylist">
                 <Carousel dotPosition="left" afterChange={this.onChange} autoplay={false}>
                     <div>
                         <h1>London</h1>

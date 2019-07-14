@@ -9,8 +9,7 @@ import {Plan} from './Plan'
 import {Test} from './GoogleMapTest'
 
 export class Main extends React.Component {
-
-    city = {lat: 0, lng: 0, name: ""}
+    city = {name: "Los Angeles ", latlng: {lat: 34.0522, lng: -118.2437}}
     state = {history: []}
 
     getHistory = (history)=>{
@@ -21,7 +20,7 @@ export class Main extends React.Component {
         return this.props.isLoggedIn ? <Redirect to="/city"/> : <Login handleLogin={this.props.handleLogin} getHistory ={this.getHistory}/>;
     }
     getPlan = (props) => {
-       return this.props.isLoggedIn ? <Plan city={props?props.location.state.city:this.city}/> : <Redirect to="/login" />;
+       return this.props.isLoggedIn ? <Plan city={props.location.state ? props.location.state.city : this.city}/> : <Redirect to="/login" />;
     }
 
     getCity = () => {

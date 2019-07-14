@@ -6,6 +6,7 @@
 @import 'styles/TopBar.css';
 @import 'styles/Home.css';
 @import 'styles/ChooseCity.css';
+@import 'styles/Plan.css';
 
 body {
  margin: 0;

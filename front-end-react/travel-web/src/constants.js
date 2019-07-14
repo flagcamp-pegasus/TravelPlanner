@@ -12,3 +12,5 @@ export const API_KEY="AIzaSyC6H9bJcyRzUYM3rc1DVGUu80ASLnoUkCc"
 export const HISTORY_ENDPOINT = '/history'
 export const RECOM_ENDPOINT = '/recommendroute'
 export const SAVE_ENDPOINT= '/saveroute'
+export const CITY_ZOOM = 2
+export const PATH_ZOOM = 9

@@ -11,7 +11,55 @@ const {
 const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
 
 
-const Map = compose(
+class MyMap extends React.Component{
+    state = {
+        isOpen: false,
+    }
+
+    onToggleOpen=()=>{
+        this.setState({
+            isOpen: !this.state.isOpen
+        })
+    }
+
+    render(){
+        return(
+            <GoogleMap
+                defaultZoom={5}
+                defaultCenter={this.props.center}
+            >
+                <InfoBox
+                    defaultPosition={new window.google.maps.LatLng(this.props.center.lat, this.props.center.lng)}
+                    options={{ closeBoxURL: ``, enableEventPropagation: true }}
+                >
+                    <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
+                        <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+                            Hello, Taipei!
+                        </div>
+                    </div>
+                </InfoBox>
+                <Marker
+                    position={{ lat: 22.6273, lng: 120.3014 }}
+                    onClick={this.onToggleOpen}
+                >
+                    {this.state.isOpen && <InfoBox
+                        onCloseClick={this.onToggleOpen}
+                        options={{ closeBoxURL: ``, enableEventPropagation: true }}
+                    >
+                        <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
+                            <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+                                Hello, Kaohsiung!
+                            </div>
+                        </div>
+                    </InfoBox>}
+                </Marker>
+            </GoogleMap>
+        )
+    }
+}
+
+
+export const Test =  compose(
     withProps({
         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: `100%` }} />,
@@ -21,80 +69,5 @@ const Map = compose(
     }),
     withScriptjs,
     withGoogleMap
-)(
-    class markers extends React.Component{
-
-    }
-    // props =>
-    // <GoogleMap
-    //     defaultZoom={5}
-    //     defaultCenter={props.center}
-    // >
-    //     {props.markers.map((marker)=>{
-    //         // const onClick = props.onClick.bind(this, 0)
-    //         // const handleClick = ()=> props.handleClick(0)
-    //         return(
-    //             <Marker
-    //                 key={0}
-    //                 position={marker}
-    //                 // onClick={props.onToggleOpen}
-    //                 onClick={()=>{
-    //                     console.log("marker")
-    //                     props.handleClick(0)}}
-    //             >
-    //                 {console.log("123")
-    //                     || props.activebox.has(0)
-    //                     &&  <InfoBox
-    //                         onCloseClick={()=>{
-    //                             console.log("info")
-    //                             props.handleClick(0)}}
-    //                         options={{ closeBoxURL: ``, enableEventPropagation: true }}
-    //                     >
-    //                         <div style={{ backgroundColor: `white`, opacity: 0.75, padding: `12px` }}>
-    //                             <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
-    //                                 Hello, Kaohsiung!
-    //                             </div>
-    //                         </div>
-    //                     </InfoBox>}
-    //             </Marker>
-    //         )
-    //     })}
-    //
-    // </GoogleMap>
+)(MyMap
 );
-
-export class Test extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            activebox: new Set(),
-            // activebox : [false],
-            markers: [{ lat: 22.6273, lng: 120.3014 }]
-        }
-    }
-
-    handleClick = (key) => {
-        // console.log({ marker })
-        this.setState(({activebox})=>{
-            console.log(this.state.activebox)
-            if(activebox.has(key)){
-                activebox.delete(key)
-            }else{
-                activebox.add(key)
-            }
-            return {
-                activebox: activebox
-            }
-        })
-    }
-    render(){
-        // console.log(this.state.activebox)
-        return(
-            <Map
-                handleClick={this.handleClick}
-                activebox = {this.state.activebox}
-                markers = {this.state.markers}
-            />
-        )
-    }
-}

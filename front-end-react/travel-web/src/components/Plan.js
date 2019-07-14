@@ -2,6 +2,7 @@ import React from 'react';
 import { Spots } from './Spots';
 import {DrawPath} from './GoogleMapPath.js'
 import { Link } from 'react-router-dom';
+import {PATH_ZOOM} from "../constants.js"
 
 let spotsPlan = [
     {latlng: {lat:34.0195, lng:-118.4912}, name: "Santa Monica", place_id:0},
@@ -15,11 +16,11 @@ export class Plan extends React.Component{
     state={path:[]}
 
     generateRoute = ()=>{
-        this.setState({path: spotsPlan})
+        this.setState((state)=>({path: spotsPlan}))
     }
 
     removeRoute = ()=>{
-        this.setState({path:[]})
+        this.setState((state)=>({path:[]}))
     }
 
     render(){
@@ -28,7 +29,7 @@ export class Plan extends React.Component{
             <div>
                 <button onClick={this.generateRoute}>Generate Route</button>
                 <button onClick={this.removeRoute}>Remove Route</button>
-                <DrawPath path={this.state.path} city = {this.props.city}/>
+                <DrawPath path={this.state.path} city = {this.props.city} zoom={PATH_ZOOM}/>
                 <Spots/>
             </div>
         )

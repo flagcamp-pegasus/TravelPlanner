@@ -2,7 +2,7 @@ import React from 'react';
 import {LocateCity} from './GoogleMapCity'
 import {CityList} from "./CityList"
 import { Link, withRouter  } from 'react-router-dom'
-
+import {CITY_ZOOM} from "../constants.js"
 // let city={lat:47.608013, lng:-122.335167}
 // chicago for test
 
@@ -37,7 +37,7 @@ class City extends React.Component{
             <div>
                 <CityList getPage={this.getPage}/>
                 {/*<button onClick={this.zoomToCity}>Locate City</button>*/}
-                <LocateCity latlng={this.state.latlng} name = {this.state.name}/>
+                <LocateCity latlng={this.state.latlng} name = {this.state.name} zoom={CITY_ZOOM}/>
                 {/*<NavLink to="/plan">Contact</NavLink>*/}
                 <button onClick={this.plan}>Plan now!</button>
                 {/*<Link to={{*/}

@@ -91,10 +91,8 @@ name: users
 	first_name: 
 	last_name:
 	password:
-	routes_array: [route_id, route_id, ….](index is the nth  day)
 }
 
-/*JAVA Class:*/
 
 Name : places
 {
@@ -109,7 +107,7 @@ Name : places
 Name : routes 
 {
 	{
-	routeId:
+	routeId: (= userId)
 	startDate: 
 	ithDay: 0,1,2
 	routes: [

@@ -1,0 +1,203 @@
+Question for frontend:
+	Manually or recommend 2 xuan 1 ?
+	前端是否需要显示history page ?
+	Save routes,  我们需要包含路线各个地点完整信息的JSON？
+	前端发送的JSON Array 中包含旅游的时间？(for each route)
+	
+
+
+我们细看：
+Google Distance Matrix api:
+
+6/22/2019 Meeting:
+目标：梳理后端架构，明确推荐算法，分配每个人负责模块。
+Update this part if you have time:
+https://github.com/flagcamp-pegasus/TravelPlanner/blob/master/Functuonality.md
+
+
+
+Support HTTP method: POST,  GET, (DELETE 是否显示history page）
+
+目前后端有的部分：
+POST login/logout/register : save users info 
+	1:String getFullname(String userId)
+	2.boolean verifyLogin(String userId, String password)
+	3.boolean registerUser(String userId, String password, String firstname, String lastname)
+POST(if is a button ) : recommend (build & test): BFS2 
+
+
+backend input: List<Places> place
+step:
+parse JSON array => List<Places> place
+call function to get recommend routes => List<Places> place
+(matrix in parent method, call Google API to fill in matrix)
+parse  List<Places> place to JSON Array to frontend 
+
+POST: save routes: save routes (看前端传什么)
+Input: userId, list<Places>places
+1: 前端发给我们JSON array(前端给时间)
+Step:
+	1: parse JSON array (Place class)
+	2: place_id, the first place, save place(put to database)
+	3: routes: places[], put place_id put into places[]
+	4: generate routes_id, save route_id, places[] to routes table
+	5: save routes_id to user table based on userId
+	
+
+class:
+class Place{
+	long lat;
+	long lon;
+	….
+}
+
+
+method:
+getFullname(String userId)
+boolean verifyLogin(String userId, String password)
+boolean registerUser(String userId, String password, String firstname, String lastname)
+parseToPlace()
+recommendRoutes(List<Place> place)
+getDistance(Place p1, Place p2)
+generateDistanceMatrix(String listofplace)
+compare with TicketMaster API
+writeJsonArray(HttpServletResponse response, JSONArray array)
+writeJsonObject(HttpServletResponse response, JSONObject obj)
+JSONObject readJSONObject(HttpServletRequest request)
+generatePlaceId();
+generateRoutesId();
+generateUserId();
+savePlaceToRoutes();
+saveRoutesToUser(String userID, String routes_id);
+saveRoutesToRoutes(String routes_id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data Structure: MongoDB
+login/ logout/ register/
+name: users
+{	
+	user_id:
+	first_name: 
+	last_name:
+	password:
+	routes_array: [route_id, route_id, ….](index is the nth  day)
+}
+
+/*JAVA Class:*/
+
+Name : places
+{
+	{
+	place_id: 
+	lat:
+	lon:
+	name:
+	}
+}
+
+Name : routes 
+{
+	{
+	routeId:
+	startDate: 
+	ithDay: 0,1,2
+	routes: [
+		place id, 
+		place id,
+		]	
+	},
+
+	{
+	routeId:
+	startDate: 
+	ithDay: 0,1,2
+	routes: [
+		place id, 
+		place id,
+		]	
+	},
+	
+	...
+}
+
+
+/*rpc Endpoint:*/
+
+recommend
+{
+ith_day: xxx,
+routes: {
+		{
+			lat:xxx
+			lng:xxx
+		}
+		{
+			lat:xxx
+			lng:xxx
+		}
+		{
+			lat:xxx
+			lng:xxx
+		}
+	}
+}
+
+
+history
+{	
+	{
+		{
+		lat:xxx
+		lng:xxx
+		}
+		{
+		lat:xxx
+		lng:xxx
+		}
+		{
+		lat:xxx
+		lng:xxx
+		}
+	},
+	
+	{
+		{
+		lat:xxx
+		lng:xxx
+		}
+		{
+		lat:xxx
+		lng:xxx
+		}
+		{
+		lat:xxx
+		lng:xxx
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,3 +14,5 @@ export const RECOM_ENDPOINT = '/recommendroute'
 export const SAVE_ENDPOINT= '/saveroute'
 export const CITY_ZOOM = 2
 export const PATH_ZOOM = 9
+export const LAT_SAMPLE = '-33.8665433';
+export const LON_SAMPLE = '151.1956316';

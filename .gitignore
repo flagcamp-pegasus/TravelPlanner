@@ -2,3 +2,4 @@
 /Servers/
 !.gitignore
 **/.idea
+**/charge.js

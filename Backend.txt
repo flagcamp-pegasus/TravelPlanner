@@ -98,8 +98,12 @@ Name : places
 {
 	{
 	place_id: 
-	lat:
-	lon:
+	location:{
+		lat:
+		lng:
+	}
+
+
 	name:
 	}
 }

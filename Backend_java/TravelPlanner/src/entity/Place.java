@@ -42,7 +42,7 @@ public class Place {
 	private String name;
 	//private Set<String> types; //[ "travel_agency", "restaurant", "food", "establishment" ],
 	
-	private Place(PlaceBuilder p) {
+	public Place(PlaceBuilder p) {
 		this.lat = p.lat;
 		this.lon = p.lon;
 		this.place_id = p.place_id;

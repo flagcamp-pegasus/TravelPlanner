@@ -13,6 +13,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 import db.DBConnection;
 import entity.Place;
+import entity.Place.PlaceBuilder;
 import entity.Routes;
 
 public class MongoDBConnection implements DBConnection {
@@ -95,17 +96,40 @@ public class MongoDBConnection implements DBConnection {
 	}
 
 	@Override
-	public List<String> getRoutes(String userId) {
-		List<String> routes = new ArrayList<>();
-		FindIterable<Document> iterable = db.getCollection("users").find(eq("user_id", userId));
+	public List<Place> getRoutes(String userId) {
+		List<Place> routes = new ArrayList<>();
+		FindIterable<Document> iterable = db.getCollection("routes").find(eq("routes_id", userId));
 		
 		if (iterable.first() != null && iterable.first().containsKey("routes_array")) {
 			@SuppressWarnings("unchecked")
-			List<String> list = (List<String>) iterable.first().get("routes_array");	
-			routes = list;
+			List<String> list = (List<String>) iterable.first().get("routes_array");
+			Integer ith = (Integer)iterable.first().get("ithDay");
+			for (String s : list) {
+				Place p = getPlaces(s);
+				routes.set(ith, p);
+			}			
 		}
-
 		return routes;
+	}
+	
+//	@Override
+	public Place getPlaces(String place_id) {
+		// convert place_id to Place object
+		Place place = new Place(null);
+		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
+		if (iterable.first() != null) {
+			Document doc = iterable.first();
+			
+			PlaceBuilder builder = new PlaceBuilder();
+			builder.setLat(doc.getDouble("lat"));
+			builder.setLon(doc.getDouble("lon"));
+			builder.setPlace_id(doc.getString("place_id"));
+			builder.setName(doc.getString("name"));
+			
+			place = builder.build();			
+		}
+		
+		return place; 
 	}
 
 	@Override

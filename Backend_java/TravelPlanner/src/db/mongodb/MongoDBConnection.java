@@ -81,11 +81,10 @@ public class MongoDBConnection implements DBConnection {
 		PlaceBuilder b = new PlaceBuilder();
 		Place place = b.build();
 		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
-		System.out.println(iterable);
 		
 		if (iterable.first() != null) {
 			Document doc = iterable.first();
-			System.out.println(doc);
+			// System.out.println(doc);
 			
 			PlaceBuilder builder = new PlaceBuilder();
 			builder.setLat(doc.getDouble("lat"));
@@ -95,7 +94,7 @@ public class MongoDBConnection implements DBConnection {
 			
 			place = builder.build();			
 			
-			System.out.println("test place create: "+place.getName());
+			// System.out.println("test place create: "+place.getName());
 		}
 		
 		return place; 
@@ -154,29 +153,6 @@ public class MongoDBConnection implements DBConnection {
 		return routes;
 	}
 	
-	private Place getPlaces(String place_id) {
-		// convert place_id to Place object
-		PlaceBuilder b = new PlaceBuilder();
-		Place place = b.build();
-		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
-		
-		if (iterable.first() != null) {
-			Document doc = iterable.first();
-//			System.out.println(doc);
-			
-			PlaceBuilder builder = new PlaceBuilder();
-			builder.setLat(doc.getDouble("lat"));
-			builder.setLon(doc.getDouble("lon"));
-			builder.setPlace_id(doc.getString("place_id"));
-			builder.setName(doc.getString("name"));
-			
-			place = builder.build();			
-			
-//			System.out.println("test place create: "+place.getName());
-		}
-		
-		return place; 
-	}
 	@Override
 	public boolean registerUser(String userId, String password, String firstname, String lastname) {
 		// TODO Auto-generated method stub

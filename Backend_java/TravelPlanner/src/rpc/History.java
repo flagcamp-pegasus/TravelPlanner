@@ -41,9 +41,9 @@ public class History extends HttpServlet {
 		System.out.println("userId: "+userId);
 		JSONArray array = new JSONArray();
 		
-		DBConnection conn = DBConnectionFactory.getConnection();
+		DBConnection connection = DBConnectionFactory.getConnection();
 		try {
-			List<List<Place>> routes = conn.getRoutes(userId);
+			List<List<Place>> routes = connection.getRoutes(userId);
 			System.out.println("routes_arr: "+routes.toString());
 //			if (routes == null) return;
 			for (List<Place> ithDay : routes) {
@@ -61,7 +61,7 @@ public class History extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			connection.close();
 		}
 	}
 }

@@ -42,7 +42,7 @@ public class Place {
 	private String name;
 	//private Set<String> types; //[ "travel_agency", "restaurant", "food", "establishment" ],
 	
-	public Place(PlaceBuilder p) {
+	private Place(PlaceBuilder p) {
 		this.lat = p.lat;
 		this.lon = p.lon;
 		this.place_id = p.place_id;
@@ -70,7 +70,7 @@ public class Place {
 		JSONObject obj = new JSONObject();
 		JSONObject location = new JSONObject();
 		try {
-			location.put("lng", lon).put("lat", lat);
+			location.put("lat", lat).put("lng", lon);
 			obj.put("location", location);
 			obj.put("place_id", place_id);
 			obj.put("name", name);

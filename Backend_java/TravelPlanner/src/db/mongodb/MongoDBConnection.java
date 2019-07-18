@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -17,7 +16,6 @@ import static com.mongodb.client.model.Filters.eq;
 import db.DBConnection;
 import entity.Place;
 import entity.Place.PlaceBuilder;
-import entity.Routes;
 
 public class MongoDBConnection implements DBConnection {
 	private MongoClient mongoClient;
@@ -27,6 +25,11 @@ public class MongoDBConnection implements DBConnection {
 		mongoClient = new MongoClient();
 		db = mongoClient.getDatabase(MongoDBUtil.DB_NAME);
 	}
+	
+//	public void testConnection() {
+//		  long num = db.getCollection("users").count();
+//		  System.out.println(num);
+//	}
 
 	@Override
 	public void close() {
@@ -52,9 +55,10 @@ public class MongoDBConnection implements DBConnection {
 	public boolean verifyLogin(String userId, String password) {
 		// TODO Auto-generated method stub
 		FindIterable<Document> iterable = db.getCollection("users").find(eq("user_id", userId));
+		System.out.println("find result"+iterable.first());
 		if(iterable.first()!= null) {
 			Document doc = iterable.first();
-			return doc.getString("password").contentEquals("password");
+			return doc.getString("password").contentEquals(password);
 		}
 		return false;
 	}
@@ -72,6 +76,30 @@ public class MongoDBConnection implements DBConnection {
 		return places_id;
 	}
 
+	public Place getPlaces(String place_id) {
+		// convert place_id to Place object
+		PlaceBuilder b = new PlaceBuilder();
+		Place place = b.build();
+		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
+		System.out.println(iterable);
+		
+		if (iterable.first() != null) {
+			Document doc = iterable.first();
+			System.out.println(doc);
+			
+			PlaceBuilder builder = new PlaceBuilder();
+			builder.setLat(doc.getDouble("lat"));
+			builder.setLon(doc.getDouble("lon"));
+			builder.setPlace_id(doc.getString("place_id"));
+			builder.setName(doc.getString("name"));
+			
+			place = builder.build();			
+			
+			System.out.println("test place create: "+place.getName());
+		}
+		
+		return place; 
+	}
 	@Override
 	public void saveRoutes(List<Place> places, String userId, int ith) {
 		// TODO Auto-generated method stub
@@ -125,36 +153,23 @@ public class MongoDBConnection implements DBConnection {
 		
 		return routes;
 	}
-	
-	private Place getPlaces(String place_id) {
-		// convert place_id to Place object
-		PlaceBuilder b = new PlaceBuilder();
-		Place place = b.build();
-		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
-		System.out.println(iterable);
-		
-		if (iterable.first() != null) {
-			Document doc = iterable.first();
-			System.out.println(doc);
-			
-			PlaceBuilder builder = new PlaceBuilder();
-			builder.setLat(doc.getDouble("lat"));
-			builder.setLon(doc.getDouble("lon"));
-			builder.setPlace_id(doc.getString("place_id"));
-			builder.setName(doc.getString("name"));
-			
-			place = builder.build();			
-			
-			System.out.println("test place create: "+place.getName());
-		}
-		
-		return place; 
-	}
 
 	@Override
 	public boolean registerUser(String userId, String password, String firstname, String lastname) {
 		// TODO Auto-generated method stub
-		return false;
+		FindIterable<Document> iterable =null;
+		try {
+			db.getCollection("users").insertOne(new Document().append("user_id", userId)
+					.append("first_name", firstname).append("last_name", lastname).append("password", password)
+					);
+			iterable = db.getCollection("users").find(eq("user_id", userId));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+
+		}
+		return iterable!=null;
 	}
 
 

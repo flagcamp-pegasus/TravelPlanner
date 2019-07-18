@@ -21,8 +21,8 @@ public class MongoDBTableCreation {
 		 db.getCollection("users").drop();
 		 db.getCollection("items").drop();
 		 
-//		 IndexOptions options = new IndexOptions().unique(true);
-//		 db.getCollection("users").createIndex(new Document("user_id", 1), options);
+		 IndexOptions options = new IndexOptions().unique(true);
+		 db.getCollection("users").createIndex(new Document("user_id", 1), options);
 
 		 List<Integer> list = new ArrayList<>();
 		 list.add(1);
@@ -30,7 +30,7 @@ public class MongoDBTableCreation {
 		 list.add(3);
 		 
 		 ObjectId o = new ObjectId();
-		 db.getCollection("users").insertOne(new Document().append("user_id", 1111)
+		 db.getCollection("users").insertOne(new Document().append("user_id", "1111")
 				 .append("password", "3229c1097c00d497a0fd282d586be050").append("first_name", "John")
 				 .append("last_name", "Smith").append("index_id", o).append("num", list)
 				 //.append("$push", new Document("num",new Document("$each", list)))
@@ -38,10 +38,14 @@ public class MongoDBTableCreation {
 //		 db.getCollection("users").updateOne(new Document("user_id", 1111),
 //				 new Document("$push", new Document("num", new Document("$each", list))));
 		 
-		 db.getCollection("users").insertOne(new Document().append("user_id", 2222)
+		 db.getCollection("users").insertOne(new Document().append("user_id", "2222")
 				 .append("password", "3229c1097c00d497a0fd282d586be050").append("first_name", "taylor")
 				 .append("last_name", "Swift").append("index_id", new ObjectId()));
-//		 
+
+		 FindIterable<Document> iterable = db.getCollection("users").find(eq("user_id", 1111));
+//		 List<String> result = (List<String>) iterable.first().get("num");
+//		 System.out.println(result.toString());
+		 
 		 
 		 
 //		 db.getCollection("users").insertOne(new Document().append("user_id", 3333)
@@ -54,16 +58,16 @@ public class MongoDBTableCreation {
 //				 "$push", new Document("num", new Document("$each", list))
 //				 ) );
 		 
-		 db.getCollection("users").updateOne(new Document("user_id", 2222), new Document(
-				 "$addToSet", new Document("num", 5)
-				 ) );
-		 db.getCollection("users").updateOne(new Document("user_id", 2222), new Document(
-				 "$addToSet", new Document("num", 5)
-				 ) );
-//		 
-		 db.getCollection("users").updateOne(new Document("user_id", 1111), new Document(
-				 "$pull", new Document("num", 2)
-				 ) );
+//		 db.getCollection("users").updateOne(new Document("user_id", 2222), new Document(
+//				 "$addToSet", new Document("num", 5)
+//				 ) );
+//		 db.getCollection("users").updateOne(new Document("user_id", 2222), new Document(
+//				 "$addToSet", new Document("num", 5)
+//				 ) );
+////		 
+//		 db.getCollection("users").updateOne(new Document("user_id", 1111), new Document(
+//				 "$pull", new Document("num", 2)
+//				 ) );
 //		 FindIterable<Document> iterable = db.getCollection("users").find(eq("index_id", o));
 //		 if(iterable.first()!= null) {
 //			 Document d = iterable.first();

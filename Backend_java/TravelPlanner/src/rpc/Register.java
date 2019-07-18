@@ -1,34 +1,28 @@
 package rpc;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import db.DBConnection;
 import db.DBConnectionFactory;
-import entity.Place;
 
 /**
- * Servlet implementation class SaveRoutes
+ * Servlet implementation class Register
  */
-@WebServlet("/saveroutes")
-public class SaveRoutes extends HttpServlet {
+@WebServlet("/register")
+public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SaveRoutes() {
+    public Register() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,14 +44,19 @@ public class SaveRoutes extends HttpServlet {
 		
 		try {
 			JSONObject input = RpcHelper.readJSONObject(request);
-			JSONArray  array = input.getJSONArray("results");
-			System.out.println("JSONArray length is : " + array.length());
-			List<Place> places = RpcHelper.parseArray(array);
-			List<String> places_id =connection.savePlaces(places);
-//			for(int i =0; i<places.size(); i++) {
-//				System.out.println(places.get(i).toJSONObject());
-//			}
-		} catch (JSONException e) {
+			String userId = input.getString("user_id");
+			String password = input.getString("password");
+			String firstname = input.getString("first_name");
+			String lastname = input.getString("last_name");
+			
+			JSONObject obj = new JSONObject();
+			if(connection.registerUser(userId, password, firstname, lastname)) {
+				obj.put("status", "OK");
+			}else {
+				obj.put("status", "User Already Exist");
+			}
+			RpcHelper.writeJsonObject(response, obj);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

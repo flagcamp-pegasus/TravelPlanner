@@ -1,7 +1,10 @@
 package db.mongodb;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -96,29 +99,43 @@ public class MongoDBConnection implements DBConnection {
 	}
 
 	@Override
-	public List<Place> getRoutes(String userId) {
-		List<Place> routes = new ArrayList<>();
-		FindIterable<Document> iterable = db.getCollection("routes").find(eq("routes_id", userId));
+	public List<List<Place>> getRoutes(String userId) {
+		List<List<Place>> routes = new ArrayList<>();
+		 FindIterable<Document> iterable = db.getCollection("routes").find(eq("routes_id", "2222"));
+		 Map<Integer, List<String>> map = new HashMap<>();
+				 
+			for (Document doc: iterable) {
+				int ith = doc.getInteger("ithDay");
+				@SuppressWarnings("unchecked")
+				List<String> li = (List<String>) doc.get("routes_array");
+				map.put(ith, li);
+			}	
+			
+			for (Map.Entry<Integer, List<String>> entry : map.entrySet()) {
+				Integer ith = entry.getKey();
+				List<String> place_ids = entry.getValue();
+				List<Place> r = new ArrayList<>();
+				System.out.println(ith + "/" + place_ids);
+				for (String s : place_ids) {
+					Place p = getPlaces(s);
+					r.add(p);
+				}
+				routes.add(r);
+			}
 		
-		if (iterable.first() != null && iterable.first().containsKey("routes_array")) {
-			@SuppressWarnings("unchecked")
-			List<String> list = (List<String>) iterable.first().get("routes_array");
-			Integer ith = (Integer)iterable.first().get("ithDay");
-			for (String s : list) {
-				Place p = getPlaces(s);
-				routes.set(ith, p);
-			}			
-		}
 		return routes;
 	}
 	
-//	@Override
-	public Place getPlaces(String place_id) {
+	private Place getPlaces(String place_id) {
 		// convert place_id to Place object
-		Place place = new Place(null);
+		PlaceBuilder b = new PlaceBuilder();
+		Place place = b.build();
 		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
+		System.out.println(iterable);
+		
 		if (iterable.first() != null) {
 			Document doc = iterable.first();
+			System.out.println(doc);
 			
 			PlaceBuilder builder = new PlaceBuilder();
 			builder.setLat(doc.getDouble("lat"));
@@ -127,6 +144,8 @@ public class MongoDBConnection implements DBConnection {
 			builder.setName(doc.getString("name"));
 			
 			place = builder.build();			
+			
+			System.out.println("test place create: "+place.getName());
 		}
 		
 		return place; 

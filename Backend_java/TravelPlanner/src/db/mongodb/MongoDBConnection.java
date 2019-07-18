@@ -136,14 +136,14 @@ public class MongoDBConnection implements DBConnection {
 				int ith = doc.getInteger("ithDay");
 				@SuppressWarnings("unchecked")
 				List<String> li = (List<String>) doc.get("routes_array");
+//				System.out.println(li.toString());
 				map.put(ith, li);
 			}	
 			
-			for (Map.Entry<Integer, List<String>> entry : map.entrySet()) {
-				Integer ith = entry.getKey();
-				List<String> place_ids = entry.getValue();
+			for (int i = 1; i <= map.size(); i++) {
+				List<String> place_ids = map.get(i);
 				List<Place> r = new ArrayList<>();
-				System.out.println(ith + "/" + place_ids);
+//				System.out.println(i + "/" + place_ids);
 				for (String s : place_ids) {
 					Place p = getPlaces(s);
 					r.add(p);
@@ -153,7 +153,30 @@ public class MongoDBConnection implements DBConnection {
 		
 		return routes;
 	}
-
+	
+	private Place getPlaces(String place_id) {
+		// convert place_id to Place object
+		PlaceBuilder b = new PlaceBuilder();
+		Place place = b.build();
+		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
+		
+		if (iterable.first() != null) {
+			Document doc = iterable.first();
+//			System.out.println(doc);
+			
+			PlaceBuilder builder = new PlaceBuilder();
+			builder.setLat(doc.getDouble("lat"));
+			builder.setLon(doc.getDouble("lon"));
+			builder.setPlace_id(doc.getString("place_id"));
+			builder.setName(doc.getString("name"));
+			
+			place = builder.build();			
+			
+//			System.out.println("test place create: "+place.getName());
+		}
+		
+		return place; 
+	}
 	@Override
 	public boolean registerUser(String userId, String password, String firstname, String lastname) {
 		// TODO Auto-generated method stub

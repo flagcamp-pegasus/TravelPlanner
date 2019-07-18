@@ -95,6 +95,7 @@ name: users
 
 
 Name : places
+
 {
 	{
 	place_id: 
@@ -157,40 +158,89 @@ routes: {
 
 
 history
-{	
-	{
-		{
-		lat:xxx
-		lng:xxx
-		}
-		{
-		lat:xxx
-		lng:xxx
-		}
-		{
-		lat:xxx
-		lng:xxx
-		}
-	},
-	
-	{
-		{
-		lat:xxx
-		lng:xxx
-		}
-		{
-		lat:xxx
-		lng:xxx
-		}
-		{
-		lat:xxx
-		lng:xxx
-		}
-	}
-	
-}
+```
+[
+    [
+        {
+            "name": "New York1",
+            "location": {
+                "lng": 1.1,
+                "lat": 1111.1
+            },
+            "place_id": "1"
+        },
+        {
+            "name": "New York2",
+            "location": {
+                "lng": 2.2,
+                "lat": 2222.2
+            },
+            "place_id": "2"
+        },
+        {
+            "name": "New York3",
+            "location": {
+                "lng": 3.3,
+                "lat": 3333.3
+            },
+            "place_id": "3"
+        }
+    ],
+    [
+        {
+            "name": "New York4",
+            "location": {
+                "lng": 4.4,
+                "lat": 4444.4
+            },
+            "place_id": "4"
+        },
+        {
+            "name": "New York5",
+            "location": {
+                "lng": 5.5,
+                "lat": 5555.5
+            },
+            "place_id": "5"
+        },
+        {
+            "name": "New York6",
+            "location": {
+                "lng": 6.6,
+                "lat": 6666.6
+            },
+            "place_id": "6"
+        }
+    ],
+    [
+        {
+            "name": "New York7",
+            "location": {
+                "lng": 7.7,
+                "lat": 7777.7
+            },
+            "place_id": "7"
+        },
+        {
+            "name": "New York8",
+            "location": {
+                "lng": 8.8,
+                "lat": 88888.8
+            },
+            "place_id": "8"
+        },
+        {
+            "name": "New York9",
+            "location": {
+                "lng": 9.9,
+                "lat": 99999.9
+            },
+            "place_id": "9"
+        }
+    ]
+]
 
-
+```
 
 
 

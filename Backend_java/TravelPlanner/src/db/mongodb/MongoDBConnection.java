@@ -128,7 +128,7 @@ public class MongoDBConnection implements DBConnection {
 	@Override
 	public List<List<Place>> getRoutes(String userId) {
 		List<List<Place>> routes = new ArrayList<>();
-		 FindIterable<Document> iterable = db.getCollection("routes").find(eq("routes_id", "2222"));
+		 FindIterable<Document> iterable = db.getCollection("routes").find(eq("routes_id", userId));
 		 Map<Integer, List<String>> map = new HashMap<>();
 				 
 			for (Document doc: iterable) {

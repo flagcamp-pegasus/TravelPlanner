@@ -158,6 +158,8 @@ routes: {
 
 
 history
+
+eg: 3 days' trip, each day have 3 places to go.
 ```
 [
     [

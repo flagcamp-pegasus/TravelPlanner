@@ -19,6 +19,7 @@ export class Main extends React.Component {
     getLogin = () => {
         return this.props.isLoggedIn ? <Redirect to="/city"/> : <Login handleLogin={this.props.handleLogin} getHistory ={this.getHistory}/>;
     }
+
     getPlan = (props) => {
        return this.props.isLoggedIn ? <Plan city={props.location.state ? props.location.state.city : this.city}/> : <Redirect to="/login" />;
     }
@@ -26,6 +27,7 @@ export class Main extends React.Component {
     getCity = () => {
         return this.props.isLoggedIn ? <ChooseCity/> : <Redirect to="/login" />;
     }
+
 
  render() {
    return (

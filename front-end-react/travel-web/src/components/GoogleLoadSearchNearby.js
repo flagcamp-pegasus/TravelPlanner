@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DisplayLoadData } from './DisplayLoadData';
+import { DisplayLoadData } from '../unused/DisplayLoadData';
 import {API_KEY, LAT_SAMPLE,LON_SAMPLE} from "../constants.js"
 // reference: https://developers.google.com/maps/documentation/javascript/places#place_search_requests
 // reference: https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch

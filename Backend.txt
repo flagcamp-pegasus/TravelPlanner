@@ -72,47 +72,18 @@ saveRoutesToUser(String userID, String routes_id);
 saveRoutesToRoutes(String routes_id);
 
 
-
-
-
-
-
-
-
-
-
-
-
-Data Structure: MongoDB
-login/ logout/ register/
-name: users
+collection in MongoDB
+users:
 {	
 	user_id:
 	first_name: 
 	last_name:
 	password:
 }
-
-
-Name : places
-{
-	{
-	place_id: 
-	location:{
-		lat:
-		lng:
-	}
-
-
-	name:
-	}
-}
-
-Name : routes 
+routes:
 {
 	{
 	routeId: (= userId)
-	startDate: 
 	ithDay: 0,1,2
 	routes: [
 		place id, 
@@ -122,7 +93,6 @@ Name : routes
 
 	{
 	routeId:
-	startDate: 
 	ithDay: 0,1,2
 	routes: [
 		place id, 
@@ -132,6 +102,51 @@ Name : routes
 	
 	...
 }
+
+places:
+
+{
+	{
+	place_id: 
+	lat:
+	lon:
+	name:
+	},
+	...
+}
+
+
+saveroutes: input
+Example:
+{
+	"results" : [
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : -33.867217,
+               "lng" : 151.195939
+            }
+         },
+         "name" : "Biaggio Cafe - Pyrmont",
+         "place_id" : "ChIJIfBAsjeuEmsRdgu9Pl1Ps48",
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : -33.866786,
+               "lng" : 151.195633
+            }
+         },
+         "name" : "Doltone House",
+         "place_id" : "ChIJ5xQ7szeuEmsRs6Kj7YFZE9k",
+      },
+		],
+	"user_id":"1111",
+	"ithDay": 1,
+}
+		
+
+
 
 
 /*rpc Endpoint:*/
@@ -157,40 +172,92 @@ routes: {
 
 
 history
-{	
-	{
-		{
-		lat:xxx
-		lng:xxx
-		}
-		{
-		lat:xxx
-		lng:xxx
-		}
-		{
-		lat:xxx
-		lng:xxx
-		}
-	},
-	
-	{
-		{
-		lat:xxx
-		lng:xxx
-		}
-		{
-		lat:xxx
-		lng:xxx
-		}
-		{
-		lat:xxx
-		lng:xxx
-		}
-	}
-	
-}
 
+Example: 3 days' trip, each day have 3 places to go.
+ 
+```
+[
+    [
+        {
+            "name": "New York1",
+            "location": {
+                "lng": 1.1,
+                "lat": 1111.1
+            },
+            "place_id": "1"
+        },
+        {
+            "name": "New York2",
+            "location": {
+                "lng": 2.2,
+                "lat": 2222.2
+            },
+            "place_id": "2"
+        },
+        {
+            "name": "New York3",
+            "location": {
+                "lng": 3.3,
+                "lat": 3333.3
+            },
+            "place_id": "3"
+        }
+    ],
+    [
+        {
+            "name": "New York4",
+            "location": {
+                "lng": 4.4,
+                "lat": 4444.4
+            },
+            "place_id": "4"
+        },
+        {
+            "name": "New York5",
+            "location": {
+                "lng": 5.5,
+                "lat": 5555.5
+            },
+            "place_id": "5"
+        },
+        {
+            "name": "New York6",
+            "location": {
+                "lng": 6.6,
+                "lat": 6666.6
+            },
+            "place_id": "6"
+        }
+    ],
+    [
+        {
+            "name": "New York7",
+            "location": {
+                "lng": 7.7,
+                "lat": 7777.7
+            },
+            "place_id": "7"
+        },
+        {
+            "name": "New York8",
+            "location": {
+                "lng": 8.8,
+                "lat": 88888.8
+            },
+            "place_id": "8"
+        },
+        {
+            "name": "New York9",
+            "location": {
+                "lng": 9.9,
+                "lat": 99999.9
+            },
+            "place_id": "9"
+        }
+    ]
+]
 
+```
 
 
 

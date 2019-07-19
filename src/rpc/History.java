@@ -38,19 +38,18 @@ public class History extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		String userId = request.getParameter("user_id");
-		System.out.println("Get history routes of userId: "+userId);
+		System.out.println("userId: "+userId);
 		JSONArray array = new JSONArray();
 		
-		DBConnection connection = DBConnectionFactory.getConnection();
+		DBConnection conn = DBConnectionFactory.getConnection();
 		try {
-			List<List<Place>> routes = connection.getRoutes(userId);
-			for (List<Place> ithDay : routes) {
-				JSONArray ith = new JSONArray();
-				for (Place place : ithDay) {
-					JSONObject p = place.toJSONObject();
-					ith.put(p);
-				}
-				array.put(ith);
+			List<Place> routes = conn.getRoutes(userId);
+			System.out.println("routes_arr: "+routes.toString());
+//			if (routes == null) return;
+			for (Place place : routes) {
+				JSONObject obj = place.toJSONObject();
+				System.out.println(place.getName());
+				array.put(obj);
 			}
 			
 			RpcHelper.writeJsonArray(response, array);
@@ -58,7 +57,7 @@ public class History extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			connection.close();
+			conn.close();
 		}
 	}
 }

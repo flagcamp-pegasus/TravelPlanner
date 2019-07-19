@@ -8,10 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import db.DBConnection;
+import db.DBConnectionFactory;
 
 /**
  * Servlet implementation class Log
@@ -33,19 +37,28 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		JSONArray array = new JSONArray();
+		DBConnection connection = DBConnectionFactory.getConnection();
 		
 		try {
-			array.put(new JSONObject().put("username", "abcd").put("address", "San Francisco")
-					.put("time", "06/25/2019"));
-			array.put(new JSONObject().put("username", "efgh").put("address", "Los Angeles")
-					.put("time", "06/25/2019"));
-			
-		} catch (JSONException e) {
+			// need to change
+			HttpSession session = request.getSession(false);
+			JSONObject obj = new JSONObject();
+			if(session != null) {
+				String userId = session.getAttribute("user_id").toString();
+				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
+			}else {
+				obj.put("status", "Invalid Session");
+				response.setStatus(403);
+			}
+			RpcHelper.writeJsonObject(response, obj);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			connection.close();
 		}
-		response.sendRedirect("index.html");
+		
+		
 		//RpcHelper.writeJsonArray(response,array);
 		
 	}
@@ -55,7 +68,34 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		DBConnection connection = DBConnectionFactory.getConnection();
+
+		try {
+			JSONObject input = RpcHelper.readJSONObject(request);
+			String userId = input.getString("user_id");
+			System.out.println(" userId: " + userId);
+			String password = input.getString("password");
+			System.out.println(" password"+ password);
+			
+			JSONObject obj = new JSONObject();
+			if(connection.verifyLogin(userId, password)) {
+				HttpSession session = request.getSession();
+				session.setAttribute("user_id", userId);
+				session.setMaxInactiveInterval(600);
+				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
+			}else {
+				obj.put("status", "User Doesn't Exist");
+				response.setStatus(401);
+			}
+			RpcHelper.writeJsonObject(response, obj);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			connection.close();
+		}
+		
 	}
 
 }

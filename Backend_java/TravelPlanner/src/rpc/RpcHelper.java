@@ -3,12 +3,18 @@ package rpc;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import entity.Place;
+import entity.Place.PlaceBuilder;
 
 public class RpcHelper {
 	public static void writeJsonArray(HttpServletResponse response, JSONArray array) throws IOException {
@@ -41,6 +47,37 @@ public class RpcHelper {
 			e.printStackTrace();
 		}
 		return new JSONObject();
+	}
+	
+	public static List<Place> parseArray(JSONArray input) throws JSONException{
+		List<Place> places = new ArrayList<>();
+		for(int i =0; i<input.length(); i++) {
+			JSONObject place = input.getJSONObject(i); 
+			PlaceBuilder builder = new PlaceBuilder();
+			
+			if(!place.isNull("name")) {
+				builder.setName(place.getString("name"));
+			}
+			if(!place.isNull("place_id")) {
+				builder.setPlace_id(place.getString("place_id"));
+			}
+			if(!place.isNull("geometry")) {
+				JSONObject geometry = place.getJSONObject("geometry");
+				if(!geometry.isNull("location")) {
+					JSONObject location = geometry.getJSONObject("location");
+					if(!location.isNull("lat")) {
+						builder.setLat(location.getDouble("lat"));
+					}
+					if(!location.isNull("lng")) {
+						builder.setLon(location.getDouble("lng"));
+					}
+				}
+			}
+			places.add(builder.build());
+		}
+		return places;
+		
+		
 	}
 
 }

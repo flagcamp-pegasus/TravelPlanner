@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { DisplayLoadData } from '../unused/DisplayLoadData';
-import {API_KEY, LAT_SAMPLE,LON_SAMPLE} from "../constants.js"
-// reference: https://developers.google.com/maps/documentation/javascript/places#place_search_requests
-// reference: https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch
+import React, {Component} from 'react';
+import PropTypes from "prop-types"
+import {API_KEY, LAT_SAMPLE, LON_SAMPLE} from "../constants"
 
-export class GoogleLoadSearchNearby extends Component {
-    state ={
-        placesInfos:[],
+
+export  class AttractionsSearch extends Component {
+    static propTypes = {
+        location: PropTypes.object.isRequired,
     }
 
     componentDidMount() {
@@ -14,7 +13,6 @@ export class GoogleLoadSearchNearby extends Component {
     }
 
     renderMap = () => {
-
         loadScript(`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&callback=initMap`)
         window.initMap = this.initMap
     }
@@ -22,10 +20,10 @@ export class GoogleLoadSearchNearby extends Component {
 
     initMap = () => {
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
-        let pyrmont = new window.google.maps.LatLng(`${LAT_SAMPLE}`,`${LON_SAMPLE}`);
+        let location = new window.google.maps.LatLng(`${LAT_SAMPLE}`,`${LON_SAMPLE}`);
         let category = 'restaurant'
         let request = {
-            location: pyrmont,
+            location: location,
             radius: '200',
             type: category,
         };
@@ -53,6 +51,7 @@ export class GoogleLoadSearchNearby extends Component {
         return (
             <div>
                 <p>this is google load search near by element</p>
+                <Attractions placesInfos = {this.state.placesInfos} />
                 <div id="map"></div>
             </div>
         )
@@ -66,4 +65,7 @@ function loadScript(url) {
     script.async = true
     script.defer = true
     index.parentNode.insertBefore(script, index)
+}
+
+
 }

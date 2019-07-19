@@ -30,6 +30,7 @@ class City extends React.Component{
             pathname: `/plan`,
             state : {city: this.state}
         })
+
     }
 
     render(){

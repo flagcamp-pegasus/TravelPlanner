@@ -15,10 +15,10 @@ public interface DBConnection {
 	
 	public boolean verifyLogin(String userId, String password);
 	
-	public void saveRoutes(List<Place> places, String userId, int ith);
+	public boolean saveRoutes(List<Place> places, String userId, int ith);
 	
 	// unsave route is for the show routes page
-	public void unsaveRoutes(String userId, ObjectId routesId);
+	public void unsaveRoutes(String userId);
 	
 	public List<List<Place>> getRoutes(String userId);
 	

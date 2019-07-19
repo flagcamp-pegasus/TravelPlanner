@@ -45,21 +45,29 @@ public class SaveRoutes extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		DBConnection connection = DBConnectionFactory.getConnection();
 		
 		try {
 			JSONObject input = RpcHelper.readJSONObject(request);
 			JSONArray  array = input.getJSONArray("results");
-			System.out.println("JSONArray length is : " + array.length());
+			int ith = input.getInt("ithDay");
+			String userId = input.getString("user_id");
+//			System.out.println("JSONArray length is : " + array.length());
+//			System.out.println("ithDay is : " + ith);
 			List<Place> places = RpcHelper.parseArray(array);
-			List<String> places_id =connection.savePlaces(places);
-//			for(int i =0; i<places.size(); i++) {
-//				System.out.println(places.get(i).toJSONObject());
-//			}
+			JSONObject obj = new JSONObject();
+			
+			if(connection.saveRoutes(places, userId, ith)) {
+				obj.put("status", "OK");
+			}else {
+				obj.put("status", "failed to write to Collection routes");
+			}
+			RpcHelper.writeJsonObject(response, obj);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			connection.close();
 		}
 		
 	}

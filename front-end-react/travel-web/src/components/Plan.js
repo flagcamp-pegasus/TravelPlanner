@@ -26,6 +26,7 @@ export class Plan extends React.Component{
     }
 
     render(){
+        // console.log(this.props.city.latlng);
         // console.log(this.props.city)
         return(
             <div className="container">

@@ -1,15 +1,70 @@
-@import '~antd/dist/antd.css';
-
-
-
+/*=======*/
+/* Slide */
+/*=======*/
 .ant-carousel .slick-slide {
-    text-align: center;
-    height: 360px;
-    line-height: 360px;
-    background: #527972;
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+
+    /*height: 270px;*/
+    /*line-height: 270px;*/
+
+    background-color: transparent; /*The parent is className = "container"*/
     overflow: hidden;
+    border: 0 none transparent;
 }
 
-.ant-carousel .slick-slide h3 {
-    color: #fff;
+.ant-carousel .slick-slide img {
+    display: block;
+    width: 360px;
+    height: 270px;
+}
+/*=================*/
+/* Button of Slide */
+/*=================*/
+.ant-carousel .slick-dots li button {
+    background: black;
+    border-radius: 3px;
+    opacity: 0.3;
+}
+
+.ant-carousel .slick-dots li button:hover,
+.ant-carousel .slick-dots li button:focus {
+    opacity: 0.8;
+}
+
+/*.ant-carousel .slick-dots li.slick-active button:hover,*/
+/*.ant-carousel .slick-dots li.slick-active button:focus {*/
+    /*opacity: 1;*/
+/*}*/
+
+/*.ant-carousel-vertical .slick-dots li button {*/
+    /*width: 3px;*/
+    /*height: 16px;*/
+/*}*/
+
+.ant-carousel-vertical .slick-dots {
+    top: 50%;
+    bottom: auto;
+    width: 4px;
+    height: auto;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/*.ant-carousel-vertical .slick-dots li {*/
+    /*margin: 0 2px;*/
+    /*vertical-align: baseline;*/
+/*}*/
+
+/*.ant-carousel-vertical .slick-dots li button {*/
+    /*width: 4px;*/
+    /*height: 16px;*/
+/*}*/
+
+.ant-carousel-vertical .slick-dots li.slick-active button {
+    width: 5px;
+    height: 24px;
 }

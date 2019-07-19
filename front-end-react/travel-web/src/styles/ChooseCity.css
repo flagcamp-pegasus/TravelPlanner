@@ -1,16 +1,23 @@
 .container {
     display: flex; /* or inline-flex */
-    width: 750px;
+    width: 1200px;
+    height: 440px;
+    margin: 30px auto;
+    background-color: #f7f7f7;
+    padding-top: 20px;
+
 }
 
 .citylist{
-    width: 300px;
-    margin: 50px;
+    width: 360px;
+    height: 270px;
+    margin: 0 35px;
 }
 
 .citymap{
-    width: 800px;
-    margin: 50px;
+    width: 660px;
+    height: 660px;
+    margin: 0 35px;
 }
 
 .input{

@@ -71,41 +71,15 @@ savePlaceToRoutes();
 saveRoutesToUser(String userID, String routes_id);
 saveRoutesToRoutes(String routes_id);
 
-
-
-
-
-
-
-
-
-
-
-
-
-Data Structure: MongoDB
-login/ logout/ register/
-name: users
+collection in MongoDB
+users:
 {	
 	user_id:
 	first_name: 
 	last_name:
 	password:
 }
-
-
-Name : places
-
-{
-	{
-	place_id: 
-	lat:
-	lon:
-	name:
-	}
-}
-
-Name : routes 
+routes:
 {
 	{
 	routeId: (= userId)
@@ -127,6 +101,51 @@ Name : routes
 	
 	...
 }
+
+places:
+
+{
+	{
+	place_id: 
+	lat:
+	lon:
+	name:
+	},
+	...
+}
+
+
+saveroutes: input
+Example:
+{
+	"results" : [
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : -33.867217,
+               "lng" : 151.195939
+            }
+         },
+         "name" : "Biaggio Cafe - Pyrmont",
+         "place_id" : "ChIJIfBAsjeuEmsRdgu9Pl1Ps48",
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : -33.866786,
+               "lng" : 151.195633
+            }
+         },
+         "name" : "Doltone House",
+         "place_id" : "ChIJ5xQ7szeuEmsRs6Kj7YFZE9k",
+      },
+		],
+	"user_id":"1111",
+	"ithDay": 1,
+}
+		
+
+
 
 
 /*rpc Endpoint:*/

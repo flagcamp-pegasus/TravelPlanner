@@ -99,12 +99,8 @@ Name : places
 {
 	{
 	place_id: 
-	location:{
-		lat:
-		lng:
-	}
-
-
+	lat:
+	lon:
 	name:
 	}
 }
@@ -113,7 +109,6 @@ Name : routes
 {
 	{
 	routeId: (= userId)
-	startDate: 
 	ithDay: 0,1,2
 	routes: [
 		place id, 
@@ -123,7 +118,6 @@ Name : routes
 
 	{
 	routeId:
-	startDate: 
 	ithDay: 0,1,2
 	routes: [
 		place id, 

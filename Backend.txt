@@ -173,32 +173,8 @@ routes: {
 
 history
 
-eg: 3 days' trip, each day have 3 places to go.
-{
-0th: [
-	{
-	    "name": "New York1",
-            "location": {
-                "lng": 1.1,
-                "lat": 1111.1
-            },
-            "place_id": "1"
-	},
-	{
-            "name": "New York2",
-            "location": {
-                "lng": 2.2,
-                "lat": 2222.2
-            },
-            "place_id": "2"
-        },
-	
-]
-}
-
-
-
-testing 
+Example: 3 days' trip, each day have 3 places to go.
+ 
 ```
 [
     [

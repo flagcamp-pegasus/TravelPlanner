@@ -1,11 +1,10 @@
 import React from 'react';
-import { Spots } from '../unused/Spots';
+import { Spots } from './Spots';
 import {DrawPath} from './GoogleMapPath.js'
 import { Link } from 'react-router-dom';
 import {PATH_ZOOM} from "../constants.js"
+import {Attractions} from './Attractions';
 import {Button} from "antd"
-import {Attractions} from "./Attractions";
-import {GoogleLoadSearchNearby} from "./GoogleLoadSearchNearby"
 
 let spotsPlan = [
     {latlng: {lat:34.0195, lng:-118.4912}, name: "Santa Monica", place_id:0},
@@ -28,9 +27,10 @@ export class Plan extends React.Component{
     }
 
     render(){
-        console.log(this.props.city);
+        // console.log(this.props.city.latlng);
+        // console.log(this.props.city)
         return(
-            <div className="container">
+            <div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className = "btn">Generate Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className = "btn">Remove Route</Button>
@@ -38,7 +38,7 @@ export class Plan extends React.Component{
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
                     <DrawPath path={this.state.path} city = {this.props.city? this.props.city: this.state.path[0]} zoom={PATH_ZOOM}/>
                 </div>
-                <Attractions />
+                <Attractions/>
             </div>
         )
     }

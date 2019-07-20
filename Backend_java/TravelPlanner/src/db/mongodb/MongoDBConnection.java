@@ -8,9 +8,13 @@ import java.util.Map;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
+import com.mongodb.client.result.UpdateResult;
+
 import static com.mongodb.client.model.Filters.eq;
 
 import db.DBConnection;
@@ -68,9 +72,13 @@ public class MongoDBConnection implements DBConnection {
 		// TODO Auto-generated method stub
 		List<String> places_id = new ArrayList<String>();
 		for(Place p : places) {
-			db.getCollection("places").insertOne(new Document().append("lat", p.getLat())
-					.append("lon", p.getLon()).append("place_id", p.getPlace_id())
-					.append("name", p.getName()));
+			FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", p.getPlace_id()));
+			if(iterable.first() == null) {
+				db.getCollection("places").insertOne(new Document().append("lat", p.getLat())
+						.append("lon", p.getLon()).append("place_id", p.getPlace_id())
+						.append("name", p.getName()));
+			}
+
 			places_id.add(p.getPlace_id());
 		}
 		return places_id;
@@ -81,11 +89,10 @@ public class MongoDBConnection implements DBConnection {
 		PlaceBuilder b = new PlaceBuilder();
 		Place place = b.build();
 		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
-		System.out.println(iterable);
 		
 		if (iterable.first() != null) {
 			Document doc = iterable.first();
-			System.out.println(doc);
+			// System.out.println(doc);
 			
 			PlaceBuilder builder = new PlaceBuilder();
 			builder.setLat(doc.getDouble("lat"));
@@ -95,33 +102,39 @@ public class MongoDBConnection implements DBConnection {
 			
 			place = builder.build();			
 			
-			System.out.println("test place create: "+place.getName());
+			// System.out.println("test place create: "+place.getName());
 		}
 		
 		return place; 
 	}
+	
 	@Override
-	public void saveRoutes(List<Place> places, String userId, int ith) {
+	public boolean saveRoutes(List<Place> places, String userId, int ith) {
 		// TODO Auto-generated method stub
 		List<String> places_id = savePlaces(places);
-		ObjectId id = new ObjectId();
-		db.getCollection("routes").insertOne(new Document().append("routeId", id)
-				.append("ithDay", ith).append("routes", places_id)
-				);
-		db.getCollection("users").updateOne(new Document("user_id", userId),
-				new Document("$addToSet", new Document("routes_array", id))
-				);
+		Document info = new Document().append("routeId", userId)
+				.append("ithDay", ith).append("routes", places_id);
+		UpdateOptions upsert = new UpdateOptions().upsert(true);
+		
+		BasicDBObject andQuery = new BasicDBObject();
+		List<BasicDBObject> obj = new ArrayList<>();
+		obj.add(new BasicDBObject("routeId", userId));
+		obj.add(new BasicDBObject("ithDay", ith));
+		andQuery.append("$and", obj);
+		
+		
+		UpdateResult res = db.getCollection("routes").replaceOne(andQuery, info,upsert);
+		return res.wasAcknowledged();
 	}
 	
 	
 
 	@Override
-	public void unsaveRoutes(String userId, ObjectId routeId) {
+	public void unsaveRoutes(String userId) {
 		// TODO Auto-generated method stub
 		// find user delete routes id in its routes list
 		// find route collection delete routesid == routesId
-		db.getCollection("routes").deleteOne(eq("route_id", routeId));
-		db.getCollection("users").updateOne(new Document("user_id",  userId), new Document("$pull", new Document("routes_array", routeId)) );
+		db.getCollection("routes").deleteOne(eq("route_id", userId));
 		
 		
 	}
@@ -129,7 +142,7 @@ public class MongoDBConnection implements DBConnection {
 	@Override
 	public List<List<Place>> getRoutes(String userId) {
 		List<List<Place>> routes = new ArrayList<>();
-		 FindIterable<Document> iterable = db.getCollection("routes").find(eq("routes_id", "2222"));
+		 FindIterable<Document> iterable = db.getCollection("routes").find(eq("routes_id", userId));
 		 Map<Integer, List<String>> map = new HashMap<>();
 				 
 			for (Document doc: iterable) {
@@ -154,29 +167,6 @@ public class MongoDBConnection implements DBConnection {
 		return routes;
 	}
 	
-	private Place getPlaces(String place_id) {
-		// convert place_id to Place object
-		PlaceBuilder b = new PlaceBuilder();
-		Place place = b.build();
-		FindIterable<Document> iterable = db.getCollection("places").find(eq("place_id", place_id));
-		
-		if (iterable.first() != null) {
-			Document doc = iterable.first();
-//			System.out.println(doc);
-			
-			PlaceBuilder builder = new PlaceBuilder();
-			builder.setLat(doc.getDouble("lat"));
-			builder.setLon(doc.getDouble("lon"));
-			builder.setPlace_id(doc.getString("place_id"));
-			builder.setName(doc.getString("name"));
-			
-			place = builder.build();			
-			
-//			System.out.println("test place create: "+place.getName());
-		}
-		
-		return place; 
-	}
 	@Override
 	public boolean registerUser(String userId, String password, String firstname, String lastname) {
 		// TODO Auto-generated method stub

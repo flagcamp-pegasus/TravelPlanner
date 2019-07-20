@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {API_KEY} from "../constants.js"
+import {API_KEY, CAR_URL} from "../constants.js"
 import {MyMarker} from "./MyMarker"
+import distance_img from "../assets/images/distance_img.png"
 
 const { compose, withProps, withStateHandlers, lifecycle } = require("recompose");
 const {
@@ -13,6 +14,7 @@ const {
     GoogleMap: GoogleMapPath,
 } = require("react-google-maps");
 const {DrawingManager} = require("react-google-maps/lib/components/drawing/DrawingManager");
+const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 const _ = require("lodash");
 
@@ -69,7 +71,16 @@ class MyMap extends React.Component{
         let path = this.props.path.map(
             (spot) => (spot.latlng)
         )
-        console.log(path)
+        let centers=[];
+        for(let i =0;i<path.length-1;i++){
+            centers.push({
+                lat : (path[i].lat+path[i+1].lat)/2,
+                lng : (path[i].lng+path[i+1].lng)/2,
+                distance: (window.google.maps.geometry.spherical.computeDistanceBetween(
+                    new window.google.maps.LatLng(path[i].lat, path[i].lng),
+                    new window.google.maps.LatLng(path[i+1].lat, path[i+1].lng))/1000).toFixed(1)})
+        }
+        // console.log(centers)
         return (
             <GoogleMap
                 ref={this.state.onMapMounted}
@@ -77,6 +88,7 @@ class MyMap extends React.Component{
                 onBoundsChanged={this.state.onBoundsChanged}
                 center={path ? path[0] : latlng}
             >
+
             <GoogleMapPath
                 defaultZoom={this.props.zoom}
                 // defaultCenter={new window.google.maps.LatLng(-34.397, 150.644)}
@@ -117,7 +129,21 @@ class MyMap extends React.Component{
                 {this.props.path.map((spot)=>(
                 <MyMarker coor = {spot.latlng} key = {spot.place_id} name = {spot.name}/>
             ))}
+                {centers.map((center)=>{
+                    const {lat, lng, distance} = center
+                    return (
+                        <MyMarker
+                            coor = {{lat, lng}}
+                            key = {center.lat+center.lng+distance}
+                            name = {`${distance} km`}
+                            icon={distance_img}
+                            padding={`3px`}
+                            fontSize={`12px`}
+                        />
+                    )
+                })}
         </GoogleMapPath>
+
         </GoogleMap>
     )
     }

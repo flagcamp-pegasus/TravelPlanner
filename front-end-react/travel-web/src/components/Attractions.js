@@ -20,9 +20,9 @@ export class Attractions extends Component {
     }
 
 
-    static propTypes = {
-        placesData: PropTypes.object.isRequired,
-    }
+   // static propTypes = {
+     //   placesData: PropTypes.object.isRequired,
+    //}
 
     callback = (category) => {
         console.log(category);

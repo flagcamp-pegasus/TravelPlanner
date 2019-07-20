@@ -38,19 +38,16 @@ public class History extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		String userId = request.getParameter("user_id");
-		System.out.println("userId: "+userId);
+		System.out.println("Get history routes of userId: "+userId);
 		JSONArray array = new JSONArray();
 		
 		DBConnection connection = DBConnectionFactory.getConnection();
 		try {
 			List<List<Place>> routes = connection.getRoutes(userId);
-			System.out.println("routes_arr: "+routes.toString());
-//			if (routes == null) return;
 			for (List<Place> ithDay : routes) {
 				JSONArray ith = new JSONArray();
 				for (Place place : ithDay) {
 					JSONObject p = place.toJSONObject();
-					System.out.println(place.getName());
 					ith.put(p);
 				}
 				array.put(ith);

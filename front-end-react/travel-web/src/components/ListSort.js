@@ -30,7 +30,6 @@ function findChildInChildrenByKey(children, key) {
 
 export function mergeChildren(prev, next) {
   const ret = [];
-  // 保存更改后的顺序，新增的在新增时的位置插入。
   prev.forEach((c) => {
     if (!c) {
       return;

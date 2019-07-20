@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import {PATH_ZOOM} from "../constants.js"
 import {Button} from "antd"
 import {Attractions} from "./Attractions";
+import {GoogleLoadSearchNearby} from "./GoogleLoadSearchNearby"
 
 let spotsPlan = [
     {latlng: {lat:34.0195, lng:-118.4912}, name: "Santa Monica", place_id:0},
@@ -37,7 +38,7 @@ export class Plan extends React.Component{
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
                     <DrawPath path={this.state.path} city = {this.props.city? this.props.city: this.state.path[0]} zoom={PATH_ZOOM}/>
                 </div>
-                <Attractions loaction = {this.props.city}/>
+                <Attractions />
             </div>
         )
     }

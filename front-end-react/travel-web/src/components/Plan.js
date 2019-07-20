@@ -29,7 +29,7 @@ export class Plan extends React.Component{
         // console.log(this.props.city.latlng);
         // console.log(this.props.city)
         return(
-            <div className="container">
+            <div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className = "btn">Generate Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className = "btn">Remove Route</Button>

@@ -1,13 +1,8 @@
 import * as React from 'react';
 import { Carousel } from 'antd';
-import {API_KEY} from "../constants";
+import {API_KEY, CITY_LIST} from "../constants";
 
-const cityList = [
-    {name: "London", latlng: {lat: 51.506155, lng: -0.127824}},
-    {name: "Paris",  latlng: {lat: 48.854429, lng: 2.352198}},
-    {name: "Milano", latlng: {lat: 45.461719, lng: 9.190091}},
-    {name: "New York", latlng: {lat: 40.712921, lng: -74.006063}}
-];
+const cityList = CITY_LIST;
 
 export class CityList extends React.Component {
 
@@ -30,16 +25,15 @@ export class CityList extends React.Component {
         return imageUrl;
     }
 
-
     render() {
         return(
             <div className="citylist">
                 <Carousel dotPosition="left" afterChange={this.onChange} autoplay={false}>
                     {/*<img src={this.getPhoto()} alt="London"/>*/}
-                    <img src={require("../assets/images/city_london.jpg")} alt="London"/>
-                    <img src={require("../assets/images/city_paris.jpg")} alt="Paris"/>
-                    <img src={require("../assets/images/city_milano.jpg")} alt="Milano"/>
-                    <img src={require("../assets/images/city_newyork.jpg")} alt="New York"/>
+                    {/*<img src={require("../assets/images/city_london.jpg")} alt="London"/>*/}
+                    {/*<img src={cityList[0].imageUrl} alt="London"/>*/}
+
+                    {cityList.map((city) => <img src={city.imageUrl} alt={city.name} key={city.imageUrl}/>)}
                 </Carousel>
                 <h1>{this.props.name}</h1>
             </div>

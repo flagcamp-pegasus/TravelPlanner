@@ -38,7 +38,7 @@ class City extends React.Component{
         return(
             <div>
                 <div className="container">
-                    <CityList getPage={this.getPage}/>
+                    <CityList getPage={this.getPage} name={this.state.name}/>
                     {/*<button onClick={this.zoomToCity}>Locate City</button>*/}
                     <LocateCity latlng={this.state.latlng} name = {this.state.name} zoom={CITY_ZOOM}/>
                 </div>

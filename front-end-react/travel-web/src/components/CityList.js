@@ -41,6 +41,7 @@ export class CityList extends React.Component {
                     <img src={require("../assets/images/city_milano.jpg")} alt="Milano"/>
                     <img src={require("../assets/images/city_newyork.jpg")} alt="New York"/>
                 </Carousel>
+                <h1>{this.props.name}</h1>
             </div>
         );
     }

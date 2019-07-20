@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public class DistanceMatrix {
 	private static final String URL = "https://maps.googleapis.com/maps/api/distancematrix/json";
-	private static final String API_KEY = "AIzaSyCF0fQdt3mobT0CdhtxhERs663eOfT_u-o";// lobster API key
+	private static final String API_KEY = ""; // use your own API key
 
 	
 	public int getDistance(double[] origin, double[] dest) {

@@ -1,29 +1,25 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types"
+import {
+    withScriptjs,
+    withGoogleMap,
+} from "react-google-maps";
+
 import {API_KEY, LAT_SAMPLE, LON_SAMPLE} from "../constants"
 
+// try to use class rapper to solve this complexity search
 
-export  class AttractionsSearch extends Component {
+class NormalAttractionsSearch extends Component {
     static propTypes = {
-        location: PropTypes.object.isRequired,
+        city: PropTypes.object.isRequired,
     }
 
-    componentDidMount() {
-        this.renderMap()
-    }
-
-    renderMap = () => {
-        loadScript(`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&callback=initMap`)
-        window.initMap = this.initMap
-    }
-
-
-    initMap = () => {
+    searchAttractions = () => {
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
-        let location = new window.google.maps.LatLng(`${LAT_SAMPLE}`,`${LON_SAMPLE}`);
+        let pyrmont = new window.google.maps.LatLng(`${LAT_SAMPLE}`,`${LON_SAMPLE}`);
         let category = 'restaurant'
         let request = {
-            location: location,
+            location: pyrmont,
             radius: '200',
             type: category,
         };
@@ -47,25 +43,22 @@ export  class AttractionsSearch extends Component {
 
     }
 
+
+
+
+
+
     render() {
+        const city = this.props.city;
+        const cityName = city.name;
+        const cityLoc = city.latlng;
+
         return (
             <div>
-                <p>this is google load search near by element</p>
-                <Attractions placesInfos = {this.state.placesInfos} />
-                <div id="map"></div>
+               hi
             </div>
-        )
+        );
     }
 }
+export const AttractionsSearch = withScriptjs(withGoogleMap(NormalAttractionsSearch));
 
-function loadScript(url) {
-    let index  = window.document.getElementsByTagName("script")[0]
-    let script = window.document.createElement("script")
-    script.src = url
-    script.async = true
-    script.defer = true
-    index.parentNode.insertBefore(script, index)
-}
-
-
-}

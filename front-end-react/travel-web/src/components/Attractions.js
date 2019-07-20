@@ -9,7 +9,7 @@ import {AttractionList} from "./AttractionList"
 /* Attractions component receive city lat and lon and call google API and get three placesDetails  information
 step 1. check if can get lat and lon
 step 2. be able to display fake data
-step 3. call google api to get data
+step 3. call google api to get data, add attraction search to this documents
 
 * */
 const { TabPane } = Tabs;
@@ -21,7 +21,7 @@ export class Attractions extends Component {
 
 
     static propTypes = {
-        location: PropTypes.object.isRequired,
+        placesData: PropTypes.object.isRequired,
     }
 
     callback = (category) => {
@@ -33,7 +33,9 @@ export class Attractions extends Component {
 
 
     render() {
-        //console.log('test if get location',this.props.location);
+        //const { latlng } = this.props.location;
+        //console.log('at attractions, this is lat lng', latlng);
+        //console.log('test if get location',this.props.city);
 
         return (
             <Tabs defaultActiveKey="1" onChange={this.callback} className="attraction-tab">

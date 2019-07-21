@@ -85,7 +85,7 @@ routes:
 	{
 	routeId: (= userId)
 	ithDay: 0,1,2
-	routes: [
+	routes_array: [
 		place id, 
 		place id,
 		]	
@@ -94,7 +94,7 @@ routes:
 	{
 	routeId:
 	ithDay: 0,1,2
-	routes: [
+	routes_array: [
 		place id, 
 		place id,
 		]	

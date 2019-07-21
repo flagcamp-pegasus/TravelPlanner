@@ -4,14 +4,12 @@ import TweenOne from 'rc-tween-one';
 import QueueAnim from 'rc-queue-anim';
 import PropTypes from 'prop-types';
 import PubSub from 'pubsub-js';
-import smartPost from 'react-smart-post';
 
 function toArrayChildren(children) {
   const ret = [];
   React.Children.forEach(children, (c) => {
     ret.push(c);
   });
-  // console.log(ret)
   return ret;
 }
 

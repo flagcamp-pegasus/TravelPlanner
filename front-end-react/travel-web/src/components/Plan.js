@@ -6,7 +6,6 @@ import {Attractions} from './Attractions';
 import { Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button } from "antd";
 import { SpotsList } from './SpotsList';
 
-
 let spotsPlan = [];
 
 export class Plan extends React.Component{
@@ -98,7 +97,7 @@ export class Plan extends React.Component{
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
                     <DrawPath path={this.state.path} city = {this.props.city? this.props.city: this.state.path[0]} zoom={PATH_ZOOM}/>
                 </div>
-                <Attractions/>
+                <Attractions city =  {this.props.city? this.props.city: this.state.path[0]}/>
             </div>
         )
     }

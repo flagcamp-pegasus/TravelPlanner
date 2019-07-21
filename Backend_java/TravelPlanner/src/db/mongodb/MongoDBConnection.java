@@ -113,7 +113,7 @@ public class MongoDBConnection implements DBConnection {
 		// TODO Auto-generated method stub
 		List<String> places_id = savePlaces(places);
 		Document info = new Document().append("routeId", userId)
-				.append("ithDay", ith).append("routes", places_id);
+				.append("ithDay", ith).append("routes_array", places_id);
 		UpdateOptions upsert = new UpdateOptions().upsert(true);
 		
 		BasicDBObject andQuery = new BasicDBObject();

@@ -6,8 +6,8 @@ import {Attractions} from './Attractions';
 import { Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button } from "antd";
 import { SpotsList } from './SpotsList';
 import PubSub from 'pubsub-js';
-import smartPost from 'react-smart-post';
 
+import smartPost from 'react-smart-post';
 // let spotsPlan = [
 //     {latlng: {lat:34.0195, lng:-118.4912}, name: "Santa Monica", place_id:0},
 //     {latlng: {lat:33.8121, lng:-117.9190}, name: "Disneyland Park", place_id:1},
@@ -85,7 +85,7 @@ export class Plan extends React.Component{
     }
 //======================================
     render(){
-        console.log(this.props)
+        console.log("this is at plan components", this.props)
         const ithday = this.state.ithDay
         return(
             <div>
@@ -102,7 +102,7 @@ export class Plan extends React.Component{
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
                     <DrawPath path={this.state.path} city = {this.props.city? this.props.city: this.state.path[0]} zoom={PATH_ZOOM}/>
                 </div>
-                <Attractions/>
+                <Attractions city =  {this.props.city? this.props.city: this.state.path[0]}/>
             </div>
         )
     }

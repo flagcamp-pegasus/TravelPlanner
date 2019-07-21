@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 
 import placesData from '../assets/data/GoogleSearchSampleData.json';
-import {AttractionList} from "./AttractionList"
+import {AttractionList} from "./AttractionList";
+import {AttractionsSearch} from "./AttractionsSearch";
 
 
 /* Attractions component receive city lat and lon and call google API and get three placesDetails  information
@@ -15,20 +16,29 @@ step 3. call google api to get data, add attraction search to this documents
 const { TabPane } = Tabs;
 
 export class Attractions extends Component {
+
+    static propTypes = {
+        city: PropTypes.object.isRequired,
+    }
+
     state = {
+        city: null,
+        type: "restaurant",
         placesInfos:placesData,
     }
 
 
-   // static propTypes = {
-     //   placesData: PropTypes.object.isRequired,
-    //}
+    handleType = (type) => {
+        this.setState({type:type})
+        this.setState({city:this.props.city})
+        console.log("this is at the city page",this.props.city);
+        console.log("this is at the city page",this.state.type)
+        this.getGoogleSearchResult();
+    }
 
-    callback = (category) => {
-        console.log(category);
-       //set stage by category
-        // console.log("place info", this.state.placesInfos);
-
+    getGoogleSearchResult(){
+        console.log("call google search")
+        return <AttractionsSearch city = {this.state.city} type = {this.state.type}/>
     }
 
 
@@ -38,7 +48,7 @@ export class Attractions extends Component {
         //console.log('test if get location',this.props.city);
 
         return (
-            <Tabs defaultActiveKey="1" onChange={this.callback} className="attraction-tab">
+            <Tabs defaultActiveKey="1" onChange={this.handleType} className="attraction-tab">
                 <TabPane tab="food" key="restaurant">
                    food
                     <AttractionList placesInfos = {this.state.placesInfos}/>
@@ -46,9 +56,12 @@ export class Attractions extends Component {
 
                 <TabPane tab="shopping" key="shopping_mall">
                     shopping
+                    <AttractionList placesInfos = {this.state.placesInfos}/>
                 </TabPane>
+
                 <TabPane tab="museum" key="museum">
                     museum
+                    <AttractionList placesInfos = {this.state.placesInfos}/>
                 </TabPane>
             </Tabs>
         );

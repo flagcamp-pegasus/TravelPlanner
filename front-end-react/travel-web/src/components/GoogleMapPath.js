@@ -136,7 +136,10 @@ class MyMap extends React.Component{
                             coor = {{lat, lng}}
                             key = {center.lat+center.lng+distance}
                             name = {`${distance} km`}
-                            icon={distance_img}
+                            icon={{
+                                url: distance_img,
+                                scaledSize: new window.google.maps.Size(30,30),
+                            }}
                             padding={`3px`}
                             fontSize={`12px`}
                         />

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Spots } from './Spots';
 import {DrawPath} from './GoogleMapPath.js'
 import { Link } from 'react-router-dom';
 import {PATH_ZOOM} from "../constants.js"

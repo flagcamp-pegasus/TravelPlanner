@@ -51,10 +51,6 @@ export function mergeChildren(prev, next) {
       ret.splice(i, 0, c);
     }
   });
-
-  // PubSub.publish('key-ret', {ret});
-  // console.log("typeof",typeof(ret[0]));
-  // console.log("ret",ret[0]._self.state.path)
   return ret;
 }
 
@@ -349,30 +345,18 @@ export default class ListSort extends React.Component {
     this.setState({
       orderSpots: array
     })
-    // PubSub.publish('spotsPlan', this.state.orderSpots);
-    // smartPost.post(array,'Plan');
-    // console.log(array)
-    // this.props.transferMsg(array);
-    // console.log(this.props)
     console.log("ListSort: ", this.state.orderSpots)
     return array;
   };
 
 
   returnList=()=>{
-    console.log("returnList: ", this.state.orderSpots)
     return this.state.orderSpots;
   }
 
-  printSth = () =>{
-    console.log("here");
-  }
-
   render() {
-    // console.log(this.props);
-    // console.log(this.state.children);
     const childrenToRender = toArrayChildren(this.state.children).map(this.getChildren);
-    console.log(childrenToRender)
+    // console.log(childrenToRender)
     PubSub.publish('spotsPlan',{childrenToRender});
     const props = { ...this.props };
     [

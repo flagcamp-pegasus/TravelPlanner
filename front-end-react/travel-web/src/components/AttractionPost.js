@@ -10,7 +10,6 @@ export class AttractionPost extends Component {
 
     handleClick = ({location, name}) => {
         PubSub.publish('path', {location, name});
-        console.log({location,name});
     }
     render() {
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;

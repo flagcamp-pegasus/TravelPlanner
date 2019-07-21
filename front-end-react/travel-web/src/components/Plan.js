@@ -58,14 +58,21 @@ export class Plan extends React.Component{
       );
 
     generateRoute = () => {
-        this.pubsub_token_order = PubSub.subscribe('path', (path, data) => {
-            this.setState({
-                path: {data}
-            });
-        })
-        console.log(this.state.path);
+        const path = this.SpotsListRef ? this.SpotsListRef.returnSpotsList() : [];
+        console.log(path)
+        // this.pubsub_token_order = PubSub.subscribe('path', (path, data) => {
+        //     this.setState({
+        //         path: {data}
+        //     });
+        // })
+        // console.log(this.state.path);
         // this.setState((state)=>({path: spotsPlan}))
     }
+
+    getSpotsListRef = (ref) => {
+        this.SpotsListRef = ref;
+    }
+
     removeRoute = ()=>{
         this.setState((state)=>({path:[]}))
     }
@@ -86,7 +93,7 @@ export class Plan extends React.Component{
                     <Dropdown overlay={this.chooseDay} trigger={['click']}>
                         <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>
                     </Dropdown>
-                    <SpotsList/> 
+                    <SpotsList ref={this.getSpotsListRef}/>
                 </div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className = "btn">Generate Route</Button>

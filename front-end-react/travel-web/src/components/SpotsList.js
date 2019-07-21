@@ -45,8 +45,17 @@ export class SpotsList extends React.Component {
         PubSub.unsubscribe(this.pubsub_token);
     }
 
-    
+
+    getListSort=(ref)=>{
+        this.sortListRef = ref;
+    }
+
+    returnSpotsList=()=>{
+        return this.sortListRef.returnList();
+    }
+
     render() {
+
         const childrenToRender = this.state.path.map((item, index) => {
             item.switchActive = false;
             const {name} = item;
@@ -57,12 +66,12 @@ export class SpotsList extends React.Component {
                 </div>
             )
         });
-        
+
 
         return (
             <div className={`${this.props.className}-div`}>
                 <div className={`${this.props.className}-wrapper`}>
-                    <ListSort 
+                    <ListSort ref={this.getListSort}
                         dragClassName="list-drag-selected"
                         appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}>
                         {childrenToRender}
@@ -73,4 +82,6 @@ export class SpotsList extends React.Component {
         );
     }
 }
+
+
 

@@ -354,9 +354,15 @@ export default class ListSort extends React.Component {
     // console.log(array)
     // this.props.transferMsg(array);
     // console.log(this.props)
-    
+    console.log("ListSort: ", this.state.orderSpots)
     return array;
   };
+
+
+  returnList=()=>{
+    console.log("returnList: ", this.state.orderSpots)
+    return this.state.orderSpots;
+  }
 
   printSth = () =>{
     console.log("here");

@@ -14,7 +14,7 @@ import org.json.JSONObject;
 /**
  * Servlet implementation class RecommendRoutes
  */
-@WebServlet("/recommendroutes")
+@WebServlet("/recommend")
 public class RecommendRoutes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

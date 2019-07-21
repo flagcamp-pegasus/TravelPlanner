@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import TweenOne from 'rc-tween-one';
 import QueueAnim from 'rc-queue-anim';
 import PropTypes from 'prop-types';
-import PubSub from 'pubsub-js'
+import PubSub from 'pubsub-js';
+import smartPost from 'react-smart-post';
 
 function toArrayChildren(children) {
   const ret = [];
   React.Children.forEach(children, (c) => {
     ret.push(c);
   });
+  // console.log(ret)
   return ret;
 }
 
@@ -49,8 +51,10 @@ export function mergeChildren(prev, next) {
       ret.splice(i, 0, c);
     }
   });
-  console.log("ret",ret)
-  PubSub.publish('ret', ret);
+
+  // PubSub.publish('key-ret', {ret});
+  // console.log("typeof",typeof(ret[0]));
+  // console.log("ret",ret[0]._self.state.path)
   return ret;
 }
 
@@ -79,6 +83,7 @@ export default class ListSort extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      orderSpots: [],
       children: this.props.children,
       style: {},
       childStyle: [],
@@ -94,6 +99,7 @@ export default class ListSort extends React.Component {
 
   componentDidMount() {
     this.dom = ReactDOM.findDOMNode(this);
+    this.keyNamePair = [];
 
     if (window.addEventListener) {
       window.addEventListener('mousemove', this.onMouseMove);
@@ -340,6 +346,15 @@ export default class ListSort extends React.Component {
     const array = _array.map(item => item);
     array.splice(num, 1);
     array.splice(nextNum, 0, current);
+    this.setState({
+      orderSpots: array
+    })
+    // PubSub.publish('spotsPlan', this.state.orderSpots);
+    // smartPost.post(array,'Plan');
+    // console.log(array)
+    // this.props.transferMsg(array);
+    // console.log(this.props)
+    
     return array;
   };
 
@@ -348,7 +363,11 @@ export default class ListSort extends React.Component {
   }
 
   render() {
+    // console.log(this.props);
+    // console.log(this.state.children);
     const childrenToRender = toArrayChildren(this.state.children).map(this.getChildren);
+    console.log(childrenToRender)
+    PubSub.publish('spotsPlan',{childrenToRender});
     const props = { ...this.props };
     [
       'component',

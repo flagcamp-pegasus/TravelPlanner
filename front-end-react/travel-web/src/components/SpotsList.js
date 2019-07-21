@@ -9,7 +9,8 @@ import '../styles/SpotsList.css';
 
 export class SpotsList extends React.Component {
     state = {
-        path:[]
+        path:[],
+        orderPath: [],
     }
     static propTypes = {
         className: PropTypes.string,
@@ -23,13 +24,15 @@ export class SpotsList extends React.Component {
         disabled: true,
     };
 
+    transferMsg(msg) {
+        console.log(msg);
+      }
+
     toggle = () => {
         this.setState({
           disabled: !this.startBtnActive.disabled,
         });
     };
-    // this.eyeglass.btnAct = !this.eyeglass.btnAct;
-    // eyeglassesList.sort((x, y) => (Number(y.btnAct) - Number(x.btnAct)))
 
     componentDidMount() {
         this.pubsub_token = PubSub.subscribe('path', (path, data) => {
@@ -42,8 +45,8 @@ export class SpotsList extends React.Component {
         PubSub.unsubscribe(this.pubsub_token);
     }
 
+    
     render() {
-        console.log(this.state);
         const childrenToRender = this.state.path.map((item, index) => {
             item.switchActive = false;
             const {name} = item;
@@ -54,15 +57,17 @@ export class SpotsList extends React.Component {
                 </div>
             )
         });
+        
 
         return (
             <div className={`${this.props.className}-div`}>
                 <div className={`${this.props.className}-wrapper`}>
-                    <ListSort
+                    <ListSort 
                         dragClassName="list-drag-selected"
                         appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}>
                         {childrenToRender}
                     </ListSort>
+                    <button onClick={console.log(childrenToRender)}>click</button>
                 </div>
             </div>
         );

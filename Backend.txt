@@ -157,19 +157,19 @@ recommend(input and output are the same form but different order)
 "route": [
 		{
 			"name":"USC",
-			"location":{"lng":-118.285117,"lat":34.022352},
-			"place_id":"ChIJ7aVxnOTHwoARxKIntFtakKo"
+			"geometry": {"location":{"lng":-118.285117,"lat":34.022352}},
+			"place_id": "ChIJ7aVxnOTHwoARxKIntFtakKo"
 		}
                 {       "name":"Bestia",
-		        "location":{"lng":-118.229329,"lat":34.033822},
-			"place_id":"ChIJSRvZ1yHGwoARcLrfvc-APl4"
+		        "geometry": {"location":{"lng":-118.229329,"lat":34.033822}},
+			"place_id": "ChIJSRvZ1yHGwoARcLrfvc-APl4"
 		}
 		{	"name":"Universial Studio",
-			"location":{"lng":-118.353378,"lat":34.138117},
-			"place_id":"ChIJSW2jake-woARFCDsa_R2VxM"}
+			"geometry": {"location":{"lng":-118.353378,"lat":34.138117}},
+			"place_id": "ChIJSW2jake-woARFCDsa_R2VxM"}
 		{	"name":"UCLA",
-			"location":{"lng":-118.445181,"lat":34.068921},
-			"place_id":"ChIJZQ9c8IW8woARN0gTXFiTqSU"
+			"geometry": {"location":{"lng":-118.445181,"lat":34.068921}},
+			"place_id": "ChIJZQ9c8IW8woARN0gTXFiTqSU"
 		}
 	]
 }

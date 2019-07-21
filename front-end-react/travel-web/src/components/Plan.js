@@ -5,42 +5,17 @@ import {PATH_ZOOM} from "../constants.js"
 import {Attractions} from './Attractions';
 import { Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button } from "antd";
 import { SpotsList } from './SpotsList';
-import PubSub from 'pubsub-js';
 
-import smartPost from 'react-smart-post';
-// let spotsPlan = [
-//     {latlng: {lat:34.0195, lng:-118.4912}, name: "Santa Monica", place_id:0},
-//     {latlng: {lat:33.8121, lng:-117.9190}, name: "Disneyland Park", place_id:1},
-//     {latlng: {lat:34.0623, lng:-118.2383}, name: "Chinatown", place_id: 2},
-//     {latlng: {lat:34.1184, lng:-118.3004}, name: "Griffith Observatory",place_id:3},
-// ];
-
-// let spotsPlan = [
-//     {latlng: {lat:34.0195, lng:-118.4912}, 
-//         name: "Santa Monica", 
-//         // place_id: 0
-//     },
-//     {latlng: {lat:33.8121, lng:-117.9190}, 
-//         name: "Disneyland Park", 
-//         // place_id: 1
-//     },
-//     {latlng: {lat:34.0623, lng:-118.2383}, 
-//         name: "Chinatown", 
-//         // place_id: 2
-//     },
-//     {latlng: {lat:34.1184, lng:-118.3004}, 
-//         name: "Griffith Observatory",
-//         // place_id: 3
-//     },
-// ];
+let spotsPlan = [];
 
 export class Plan extends React.Component{
     state = {
         path: [],
-        ithDay: 1
+        prevPath:[],
+        ithDay: 1,
+        spotNum: 0
     }
-//======================================
-    
+
     onClick = ({ key }) => {
         message.info(`Changed to Day ${key}`);
         this.setState({ithDay: `${key}`});
@@ -58,34 +33,54 @@ export class Plan extends React.Component{
       );
 
     generateRoute = () => {
-        const path = this.SpotsListRef ? this.SpotsListRef.returnSpotsList() : [];
-        console.log(path)
-        // this.pubsub_token_order = PubSub.subscribe('path', (path, data) => {
-        //     this.setState({
-        //         path: {data}
-        //     });
-        // })
-        // console.log(this.state.path);
+        const path = this.SpotsListRef.returnSpotsList();
+        const originPath = this.SpotsListRef.state.path;
+
+        if (originPath.length === this.state.spotNum) {
+            if (path.length === 0) {
+                console.log("no add no move");
+                this.spotsPlan =  this.prevPath;
+            } else {
+                console.log("no add but move");
+                this.setState(function(){
+                    return{prevPath: path}
+                });
+                this.spotsPlan = path;
+            }
+        } else {
+            if (path.length !== originPath.length){
+                console.log("only add no move");
+                this.setState(function() {
+                    return {prevPath: this.state.prevPath.concat(originPath.slice(-(originPath.length-this.state.spotNum)))}
+                })
+                this.setState(function() {
+                    return {spotNum: originPath.length}
+                })
+                this.spotsPlan = this.state.prevPath.concat(originPath.slice(-(originPath.length-this.state.spotNum)));
+            } else {
+                console.log("both add and move");
+                this.setState(function(){
+                    return{ 
+                        spotNum: path.length,
+                        originPath: path
+                    }
+                })
+            }   
+        }
+        console.log("spotsPlan:",this.spotsPlan)
         // this.setState((state)=>({path: spotsPlan}))
     }
-
+ 
     getSpotsListRef = (ref) => {
         this.SpotsListRef = ref;
+        console.log("this.SpotsListRef",this.SpotsListRef);
     }
 
     removeRoute = ()=>{
         this.setState((state)=>({path:[]}))
     }
-    componentWillMount() {
-        // attention
-        smartPost.push(this);
-     }
-    smartPostOn=(message)=>{
-        console.log(message)
-    }
-//======================================
+
     render(){
-        console.log("this is at plan components", this.props)
         const ithday = this.state.ithDay
         return(
             <div>
@@ -109,4 +104,22 @@ export class Plan extends React.Component{
 }
 
 
+// let spotsPlan = [
+//     {latlng: {lat:34.0195, lng:-118.4912}, 
+//         name: "Santa Monica", 
+//         // place_id: 0
+//     },
+//     {latlng: {lat:33.8121, lng:-117.9190}, 
+//         name: "Disneyland Park", 
+//         // place_id: 1
+//     },
+//     {latlng: {lat:34.0623, lng:-118.2383}, 
+//         name: "Chinatown", 
+//         // place_id: 2
+//     },
+//     {latlng: {lat:34.1184, lng:-118.3004}, 
+//         name: "Griffith Observatory",
+//         // place_id: 3
+//     },
+// ];
 

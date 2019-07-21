@@ -151,21 +151,25 @@ Example:
 
 /*rpc Endpoint:*/
 
-recommend
+recommend(input and output are the same form but different order)
 {
 ith_day: xxx,
 routes: {
 		{
-			lat:xxx
-			lng:xxx
+			"name":"USC",
+			"location":{"lng":-118.285117,"lat":34.022352},
+			"place_id":"ChIJ7aVxnOTHwoARxKIntFtakKo"
 		}
-		{
-			lat:xxx
-			lng:xxx
+                {       "name":"Bestia",
+		        "location":{"lng":-118.229329,"lat":34.033822},
+			"place_id":"ChIJSRvZ1yHGwoARcLrfvc-APl4"
 		}
-		{
-			lat:xxx
-			lng:xxx
+		{	"name":"Universial Studio",
+			"location":{"lng":-118.353378,"lat":34.138117},
+			"place_id":"ChIJSW2jake-woARFCDsa_R2VxM"}
+		{	"name":"UCLA",
+			"location":{"lng":-118.445181,"lat":34.068921},
+			"place_id":"ChIJZQ9c8IW8woARN0gTXFiTqSU"
 		}
 	}
 }

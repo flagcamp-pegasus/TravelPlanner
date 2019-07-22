@@ -21,12 +21,6 @@ const _ = require("lodash");
 
 class MyMap extends React.Component{
 
-    // returnMapRef=()=>{
-    //     // debugger;
-    //     console.log(this.state.mapRef)
-    //     return this.state.mapRef;
-    // }
-
     componentWillMount() {
         const refs = {}
         this.setState({

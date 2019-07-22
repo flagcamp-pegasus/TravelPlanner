@@ -128,15 +128,15 @@ export class Plan extends React.Component{
     getMapRef=(ref)=>{
         this.setState({map : ref})
         window.map = ref
+        console.log("plan test: ",ref)
     }
 
-    componentDidMount() {
-        // debugger;
-        if(this.mapRef){
-            console.log(this.mapRef.returnMapRef())
-        }
-    }
-
+    // componentDidMount() {
+    //     // debugger;
+    //     if(this.mapRef){
+    //         console.log(this.mapRef.returnMapRef())
+    //     }
+    // }
 
     render(){
         const ithday = this.state.ithDay
@@ -154,15 +154,16 @@ export class Plan extends React.Component{
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className = "btn">Remove Route</Button>
                     {/*<button onClick={this.generateRoute}>Generate Route</button>*/}
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
+
                     <DrawPath
                         getMapRef={this.getMapRef}
                         path={this.state.path}
                         city = {this.props.city? this.props.city: this.state.path[0]}
                         zoom={PATH_ZOOM}
                         googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-                        loadingElement = <div style={{ height: `100%` }}/>
-                        containerElement = <div style={{ height: `400px` }}/>
-                        mapElement = <div style={{ height: `100%` }} />
+                        loadingElement = {<div style={{ height: `100%` }}/>}
+                        containerElement = {<div style={{ height: `400px` }}/>}
+                        mapElement = {<div style={{ height: `100%` }} />}
                     />
                 </div>
                 <Attractions

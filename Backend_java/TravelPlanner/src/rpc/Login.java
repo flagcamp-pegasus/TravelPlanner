@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import db.DBConnection;
 import db.DBConnectionFactory;
+import external.JwtUtil;
 
 /**
  * Servlet implementation class Log
@@ -41,10 +42,14 @@ public class Login extends HttpServlet {
 		
 		try {
 			// need to change
-			HttpSession session = request.getSession(false);
+			//HttpSession session = request.getSession(false);
+			String authorization = request.getHeader("Authorization");
+
 			JSONObject obj = new JSONObject();
-			if(session != null) {
-				String userId = session.getAttribute("user_id").toString();
+			if(authorization != null) {
+				String token = authorization.substring(7);
+				System.out.println("token is "+ token);
+				String userId = JwtUtil.parseToken(token);
 				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
 			}else {
 				obj.put("status", "Invalid Session");
@@ -73,6 +78,7 @@ public class Login extends HttpServlet {
 
 		try {
 			JSONObject input = RpcHelper.readJSONObject(request);
+
 			String userId = input.getString("user_id");
 			System.out.println(" userId: " + userId);
 			String password = input.getString("password");
@@ -80,10 +86,13 @@ public class Login extends HttpServlet {
 			
 			JSONObject obj = new JSONObject();
 			if(connection.verifyLogin(userId, password)) {
-				HttpSession session = request.getSession();
-				session.setAttribute("user_id", userId);
-				session.setMaxInactiveInterval(600);
-				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
+//				HttpSession session = request.getSession();
+//				session.setAttribute("user_id", userId);
+//				session.setMaxInactiveInterval(600);
+				String token = JwtUtil.generateToken(userId, password);
+				System.out.println(token);
+				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId))
+				.append("Token", token);
 			}else {
 				obj.put("status", "User Doesn't Exist");
 				response.setStatus(401);

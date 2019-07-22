@@ -40,8 +40,8 @@ export class Attractions extends Component {
     }
 
     initMap = () => {
-        console.log("map", this.props.map)
-        let service = new window.google.maps.places.PlacesService(document.getElementById(this.props.map));
+        // console.log("map", this.props.mapref)
+        let service = new window.google.maps.places.PlacesService(document.getElementById(this.props.mapref));
         let pyrmont = new window.google.maps.LatLng(`${LAT_SAMPLE}`,`${LON_SAMPLE}`);
         let category = 'restaurant'
         let request = {
@@ -76,8 +76,11 @@ export class Attractions extends Component {
         this.setState({city:this.props.city})
         console.log("this is at the city page",this.props.city);
         console.log("this is at the city page",this.state.type)
-        this.getGoogleSearchResult();
+        // this.getGoogleSearchResult();
+        this.initMap();
+        // console.log("attractions map ref: ",this.props.mapref)
     }
+
 
     getGoogleSearchResult(){
 
@@ -88,10 +91,8 @@ export class Attractions extends Component {
         //const { latlng } = this.props.location;
         //console.log('at attractions, this is lat lng', latlng);
         //console.log('test if get location',this.props.city);
-
         return (
             <div>
-            <div id="map"></div>
             <Tabs defaultActiveKey="1" onChange={this.handleType} className="attraction-tab">
                 <TabPane tab="food" key="restaurant">
                    food

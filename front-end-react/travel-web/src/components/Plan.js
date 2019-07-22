@@ -128,14 +128,15 @@ export class Plan extends React.Component{
     getMapRef=(ref)=>{
         this.setState({map : ref})
         window.map = ref
+        console.log("plan test: ",ref)
     }
 
-    componentDidMount() {
-        // debugger;
-        if(this.mapRef){
-            console.log(this.mapRef.returnMapRef())
-        }
-    }
+    // componentDidMount() {
+    //     // debugger;
+    //     if(this.mapRef){
+    //         console.log(this.mapRef.returnMapRef())
+    //     }
+    // }
 
     render(){
         const ithday = this.state.ithDay

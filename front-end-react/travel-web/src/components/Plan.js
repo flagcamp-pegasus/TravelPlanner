@@ -1,13 +1,13 @@
 import React from 'react';
 import {DrawPath} from './GoogleMapPath.js'
 import { Link } from 'react-router-dom';
-import {PATH_ZOOM} from "../constants.js"
+import {PATH_ZOOM, API_KEY} from "../constants.js"
 import {Attractions} from './Attractions';
+import {OverviewButton} from './OverviewButton';
 import { Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button } from "antd";
 import { SpotsList } from './SpotsList';
 import PubSub from 'pubsub-js';
 import smartPost from 'react-smart-post';
-
 // let spotsPlan = [
 //     {latlng: {lat:34.0195, lng:-118.4912}, name: "Santa Monica", place_id:0},
 //     {latlng: {lat:33.8121, lng:-117.9190}, name: "Disneyland Park", place_id:1},
@@ -37,7 +37,8 @@ import smartPost from 'react-smart-post';
 export class Plan extends React.Component{
     state = {
         path: [],
-        ithDay: 1
+        ithDay: 1,
+        plans: [["1st spot", "2nd spot", "3rd spot"], ["x","y","z"]]
     }
 //======================================
     
@@ -83,12 +84,33 @@ export class Plan extends React.Component{
     smartPostOn=(message)=>{
         console.log(message)
     }
+
+    setDay = (day)=>{
+        //set path and day for the day of choice
+        console.log(day)
+    }
+
+
+    getMapRef=(ref)=>{
+        this.setState({map : ref})
+        window.map = ref
+    }
+
+    componentDidMount() {
+        debugger;
+        if(this.mapRef){
+            console.log(this.mapRef.returnMapRef())
+        }
+    }
+
 //======================================
     render(){
+
         console.log(this.props)
         const ithday = this.state.ithDay
         return(
             <div>
+                <OverviewButton plans = {this.state.plans} setDay = {this.setDay}/>
                 <div>
                     <Dropdown overlay={this.chooseDay} trigger={['click']}>
                         <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>
@@ -100,13 +122,20 @@ export class Plan extends React.Component{
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className = "btn">Remove Route</Button>
                     {/*<button onClick={this.generateRoute}>Generate Route</button>*/}
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
-                    <DrawPath path={this.state.path} city = {this.props.city? this.props.city: this.state.path[0]} zoom={PATH_ZOOM}/>
+                    <DrawPath
+                        getMapRef={this.getMapRef}
+                        path={this.state.path}
+                        city = {this.props.city? this.props.city: this.state.path[0]}
+                        zoom={PATH_ZOOM}
+                        googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                        loadingElement = <div style={{ height: `100%` }}/>
+                        containerElement = <div style={{ height: `400px` }}/>
+                        mapElement = <div style={{ height: `100%` }} />
+                    />
                 </div>
                 <Attractions/>
             </div>
         )
     }
 }
-
-
 

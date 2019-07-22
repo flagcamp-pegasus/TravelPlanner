@@ -7,31 +7,7 @@ import PubSub from 'pubsub-js';
 
 import '../styles/SpotsList.css';
 
-export class SpotsList extends React.Component {
-    state = {
-        path:[],
-    }
-    static propTypes = {
-        className: PropTypes.string,
-      };
-
-    static defaultProps = {
-        className: 'list-sort-demo',
-      };
-
-
-    componentDidMount() {
-        this.pubsub_token = PubSub.subscribe('path', (path, data) => {
-            this.setState({
-                path: this.state.path.concat(data)
-            })
-        })
-    }
-
-    componentWillUnmount() {
-        PubSub.unsubscribe(this.pubsub_token);
-    }
-
+export class DayList extends React.Component {
 
     getListSort=(ref)=>{
         this.sortListRef = ref;
@@ -42,12 +18,12 @@ export class SpotsList extends React.Component {
     }
 
     render() {
-        const childrenToRender = this.state.path.map((item, index) => {
+        const childrenToRender = this.props.plans.map((item, index) => {
             item.switchActive = false;
             const {name} = item;
             return (
                 <div key={index} className={`${this.props.className}-list`}>
-                    {name } 
+                    {name }
                     {/*<Switch size="small" defaultunChecked/>*/}
                 </div>
             )
@@ -58,8 +34,8 @@ export class SpotsList extends React.Component {
             <div className={`${this.props.className}-div`}>
                 <div className={`${this.props.className}-wrapper`}>
                     <ListSort ref={this.getListSort}
-                        dragClassName="list-drag-selected"
-                        appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}>
+                              dragClassName="list-drag-selected"
+                              appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}>
                         {childrenToRender}
                     </ListSort>
                     <button onClick={console.log(childrenToRender)}>click</button>

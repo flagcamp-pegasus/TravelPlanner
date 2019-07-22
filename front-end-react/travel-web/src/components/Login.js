@@ -12,7 +12,6 @@ class NormalLoginForm extends React.Component {
      if (!err) {
        fetch(`${API_ROOT}/login`, {
          method: 'POST',
-         headers:{Origin: `http://localhost:3000`},
          body: JSON.stringify({
            user_id: values.username,
            password: values.password,

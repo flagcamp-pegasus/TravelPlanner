@@ -75,6 +75,7 @@ export class Attractions extends Component {
         this.setState({city:this.props.city})
         console.log("this is at the city page",this.props.city);
         console.log("this is at the city page",this.state.type)
+        console.log(this.props.mapref)
         this.getGoogleSearchResult();
     }
 

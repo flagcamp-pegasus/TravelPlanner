@@ -8,7 +8,7 @@ export const GEO_OPTIONS = {
 export const POS_KEY = 'POS_KEY';
 export const AUTH_HEADER = 'Bearer';
 export const LOC_SHAKE = 0.02;
-export const API_KEY="AIzaSyC6H9bJcyRzUYM3rc1DVGUu80ASLnoUkCc"
+export const API_KEY="AIzaSyC6H9bJcyRzUYM3rc1DVGUu80ASLnoUkCc";
 export const HISTORY_ENDPOINT = '/history'
 export const RECOM_ENDPOINT = '/recommendroute'
 export const SAVE_ENDPOINT= '/saveroute'
@@ -16,6 +16,9 @@ export const CITY_ZOOM = 2
 export const PATH_ZOOM = 9
 export const LAT_SAMPLE = '-33.8665433';
 export const LON_SAMPLE = '151.1956316';
+export const TYPE_FOOD ='restaurant';
+export const TYPE_SHOPPING ='shopping_mall';
+export const TYPE_MUSEUM = 'museum';
 export const CITY_LIST = [
     {
      name: "London",

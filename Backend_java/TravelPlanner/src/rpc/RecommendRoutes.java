@@ -1,6 +1,8 @@
 package rpc;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import entity.Place;
+import external.GoogleMapRecommendRoutesAPI;
+
 /**
- * Servlet implementation class RecommendRoutes
+ * Servlet implementation class RecommendRoute
  */
 @WebServlet("/recommend")
 public class RecommendRoutes extends HttpServlet {
@@ -31,20 +36,37 @@ public class RecommendRoutes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-JSONArray array = new JSONArray();
+		// check token
+		String authorization = request.getHeader("Authorization");
+		if(authorization == null) {
+			response.setStatus(403);
+			return;
+		}
+		
+		// main logic 
+		
 		
 		try {
-			array.put(new JSONObject().put("username", "abcd").put("address", "San Francisco")
-					.put("time", "06/25/2019"));
-			array.put(new JSONObject().put("username", "efgh").put("address", "Los Angeles")
-					.put("time", "06/25/2019"));
+			JSONObject input = RpcHelper.readJSONObject(request);
+			JSONArray  array = input.getJSONArray("route");
+			int day = input.getInt("ithDay");
+			List<Place> places = RpcHelper.parseArray(array);
+			GoogleMapRecommendRoutesAPI myAPI = new GoogleMapRecommendRoutesAPI();
+			List<Place> orderRoute = myAPI.search(places, null);
 			
+			JSONArray newRoute = new JSONArray();
+			for (Place onePlace : orderRoute) {
+				newRoute.put(onePlace.toJSONObject());
+			}
+			JSONObject recommRoute = new JSONObject();
+			recommRoute.put("ithDay", day);
+			recommRoute.put("route", newRoute);
+			System.out.println(recommRoute);
+			RpcHelper.writeJsonObject(response, recommRoute);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		RpcHelper.writeJsonArray(response,array);
 	}
 
 	/**

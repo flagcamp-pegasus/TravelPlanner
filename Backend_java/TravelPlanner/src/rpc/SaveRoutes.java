@@ -46,9 +46,16 @@ public class SaveRoutes extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBConnection connection = DBConnectionFactory.getConnection();
+		JSONObject input = RpcHelper.readJSONObject(request);
+
+		// check Token 
+		String authorization = request.getHeader("Authorization");
+		if(authorization == null) {
+			response.setStatus(403);
+			return;
+		}
 		
 		try {
-			JSONObject input = RpcHelper.readJSONObject(request);
 			JSONArray  array = input.getJSONArray("results");
 			int ith = input.getInt("ithDay");
 			String userId = input.getString("user_id");

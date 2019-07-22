@@ -36,12 +36,13 @@ public class MongoDBTableCreation {
 			// Step 3 Create new tables.
 
 			// ObjectId o = new ObjectId();
-			// db.getCollection("users").insertOne(new Document().append("user_id", 1111)
-			// .append("password", "3229c1097c00d497a0fd282d586be050").append("first_name",
-			// "John")
-			// .append("last_name", "Smith").append("index_id", o).append("num", list)
-			// //.append("$push", new Document("num",new Document("$each", list)))
-			// );
+			 db.getCollection("users").insertOne(new Document().append("user_id", "1111")
+			 .append("password", "2222").append("first_name",
+			 "John")
+			 .append("last_name", "Smith"));
+//			 .append("index_id", o).append("num", list)
+//			 .append("$push", new Document("num",new Document("$each", list)))
+//			 );
 			// db.getCollection("users").updateOne(new Document("user_id", 1111),
 			// new Document("$push", new Document("num", new Document("$each", list))));
 			//

@@ -20,8 +20,10 @@ class RegistrationForm extends React.Component {
        fetch(`${API_ROOT}/register`, {
          method: 'POST',
          body: JSON.stringify({
-           username: values.username,
+           user_id: values.username,
            password: values.password,
+             first_name:values.firstname,
+             last_name:values.lastname,
          })
        }).then((response) => {
            if (response.ok) {
@@ -131,6 +133,26 @@ class RegistrationForm extends React.Component {
            <Input type="password" onBlur={this.handleConfirmBlur} />
          )}
        </FormItem>
+         <FormItem
+             {...formItemLayout}
+             label="First Name"
+         >
+             {getFieldDecorator('firstname', {
+                 rules: [{ required: true, message: 'Please input your firstname!', whitespace: false }],
+             })(
+                 <Input />
+             )}
+         </FormItem>
+         <FormItem
+             {...formItemLayout}
+             label="Last Name"
+         >
+             {getFieldDecorator('lastname', {
+                 rules: [{ required: true, message: 'Please input your lastname!', whitespace: false }],
+             })(
+                 <Input />
+             )}
+         </FormItem>
        <FormItem {...tailFormItemLayout}>
          <Button type="primary" htmlType="submit">Register</Button>
          <p>I already have an account, go back to <Link to="/Login">login</Link></p>

@@ -14,7 +14,7 @@ export class Main extends React.Component {
 
     getHistory = (data)=>{
         console.log(data);
-        this.state.setState({ history: data ? data : []})
+        this.setState({ history: data ? data : []})
     }
 
     getLogin = () => {

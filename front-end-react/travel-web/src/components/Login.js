@@ -14,24 +14,25 @@ class NormalLoginForm extends React.Component {
          method: 'POST',
          headers:{Origin: `http://localhost:3000`},
          body: JSON.stringify({
-           username: values.username,
+           user_id: values.username,
            password: values.password,
          }),
        }).then((response) => {
            if (response.ok) {
-             return response.text();
+             return response.json();
            }
            throw new Error(response.statusText);
          })
          .then((data) => {
            message.success('Login Success')
-           this.props.handleLogin(data);   //?
+             // debugger;/**/
+             console.log(data)
+           this.props.handleLogin(data.Token[0]);   //?
 
            return fetch(`${API_ROOT}/history?user_id=${values.username}`)
          })
            .then((response)=>{
                if(response.ok){
-                   console.log(response.text())
                    return response.json();
                }
                throw new Error('No history routes for this username.');

@@ -12,9 +12,9 @@ export class Main extends React.Component {
     city = {name: "Los Angeles ", latlng: {lat: 34.0522, lng: -118.2437}}
     state = {history: []}
 
-    getHistory = (history)=>{
-      console.
-        this.state.setState({history:this.props.getHistory})
+    getHistory = (data)=>{
+        console.log(data);
+        this.state.setState({ history: data ? data : []})
     }
 
     getLogin = () => {

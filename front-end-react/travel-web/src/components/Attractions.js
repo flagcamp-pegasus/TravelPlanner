@@ -5,8 +5,8 @@ import { Tabs } from 'antd';
 import placesData from '../assets/data/GoogleSearchSampleData.json';
 import {AttractionList} from "./AttractionList";
 import {AttractionsSearch} from "./AttractionsSearch";
-import {LAT_SAMPLE, LON_SAMPLE} from "../constants"
-import {API_FEE_KEY} from "../charge"
+import {LAT_SAMPLE, LON_SAMPLE} from "../constants";
+import {API_FEE_KEY} from '../charge';
 
 
 /* Attractions component receive city lat and lon and call google API and get three placesDetails  information
@@ -35,12 +35,13 @@ export class Attractions extends Component {
 
     renderMap = () => {
 
-        loadScript(`https://maps.googleapis.com/maps/api/js?key=${API_FEE_KEY}&libraries=places&callback=initMap`)
+        // loadScript(`https://maps.googleapis.com/maps/api/js?key=${API_FEE_KEY}&libraries=places&callback=initMap`)
         window.initMap = this.initMap
     }
 
     initMap = () => {
-        let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
+        console.log("map", this.props.map)
+        let service = new window.google.maps.places.PlacesService(document.getElementById(this.props.map));
         let pyrmont = new window.google.maps.LatLng(`${LAT_SAMPLE}`,`${LON_SAMPLE}`);
         let category = 'restaurant'
         let request = {

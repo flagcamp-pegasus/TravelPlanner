@@ -80,6 +80,11 @@ export class Plan extends React.Component{
         this.setState((state)=>({path:[]}))
     }
 
+    getMapRef = (ref) => {
+        this.mapRef = ref.returnMapRef();
+        console.log("map ref ",this.mapRef);
+    }
+
     render(){
         const ithday = this.state.ithDay
         return(
@@ -95,7 +100,12 @@ export class Plan extends React.Component{
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className = "btn">Remove Route</Button>
                     {/*<button onClick={this.generateRoute}>Generate Route</button>*/}
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
-                    <DrawPath path={this.state.path} city = {this.props.city? this.props.city: this.state.path[0]} zoom={PATH_ZOOM}/>
+                    <DrawPath 
+                    path={this.state.path} 
+                    city = {this.props.city? this.props.city: this.state.path[0]} 
+                    zoom={PATH_ZOOM}
+                    ref = {this.getMapRef}
+                    />
                 </div>
                 <Attractions city =  {this.props.city? this.props.city: this.state.path[0]}/>
             </div>

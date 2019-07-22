@@ -24,15 +24,19 @@ class NormalLoginForm extends React.Component {
          })
          .then((data) => {
            message.success('Login Success')
-           this.props.handleLogin(data);
+           this.props.handleLogin(data);   //?
 
-           return fetch(`${API_ROOT}/history`)
+           return fetch(`${API_ROOT}/history?user_id=${username}`)
          })
            .then((response)=>{
                if(response.ok){
                    console.log(response.text())
-                   // this.props.getHistory();
+                   return response.text();
                }
+               throw new Error('No history routes for this username.');
+           })
+           .then((data)=>{
+            this.props.getHistory(data);
            })
          .catch((e) => {
            console.log(e)

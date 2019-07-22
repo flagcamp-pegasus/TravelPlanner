@@ -5,7 +5,8 @@ import { Tabs } from 'antd';
 import placesData from '../assets/data/GoogleSearchSampleData.json';
 import {AttractionList} from "./AttractionList";
 import {AttractionsSearch} from "./AttractionsSearch";
-import {API_FEE_KEY, LAT_SAMPLE, LON_SAMPLE} from "../constants"
+import {LAT_SAMPLE, LON_SAMPLE} from "../constants"
+import {API_FEE_KEY} from "../charge"
 
 
 /* Attractions component receive city lat and lon and call google API and get three placesDetails  information

@@ -13,7 +13,8 @@ export class Main extends React.Component {
     state = {history: []}
 
     getHistory = (history)=>{
-        this.state.setState({history:history})
+      console.
+        this.state.setState({history:this.props.getHistory})
     }
 
     getLogin = () => {

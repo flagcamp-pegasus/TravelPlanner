@@ -21,6 +21,10 @@ const _ = require("lodash");
 
 class MyMap extends React.Component{
 
+    returnMapRef = () => {
+        return this.mapRef;
+    }
+
     componentWillMount() {
         const refs = {}
         this.setState({
@@ -28,6 +32,8 @@ class MyMap extends React.Component{
             markers: [],
             onMapMounted: ref => {
                 refs.map = ref;
+                this.mapRef = ref;
+                // console.log(this.mapRef);
             },
             onBoundsChanged: () => {
                 this.setState({

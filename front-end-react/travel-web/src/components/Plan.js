@@ -34,14 +34,19 @@ import smartPost from 'react-smart-post';
 //     },
 // ];
 
+
+let spotsPlan = [];
+
+
 export class Plan extends React.Component{
     state = {
         path: [],
         ithDay: 1,
-        plans: [["1st spot", "2nd spot", "3rd spot"], ["x","y","z"]]
+        plans: [["1st spot", "2nd spot", "3rd spot"], ["x","y","z"]],
+        prevPath:[],
+        spotNum: 0,
     }
-//======================================
-    
+
     onClick = ({ key }) => {
         message.info(`Changed to Day ${key}`);
         this.setState({ithDay: `${key}`});
@@ -59,24 +64,53 @@ export class Plan extends React.Component{
       );
 
     generateRoute = () => {
-        const path = this.SpotsListRef ? this.SpotsListRef.returnSpotsList() : [];
-        console.log(path)
-        // this.pubsub_token_order = PubSub.subscribe('path', (path, data) => {
-        //     this.setState({
-        //         path: {data}
-        //     });
-        // })
-        // console.log(this.state.path);
+        const path = this.SpotsListRef.returnSpotsList();
+        const originPath = this.SpotsListRef.state.path;
+
+        if (originPath.length === this.state.spotNum) {
+            if (path.length === 0) {
+                console.log("no add no move");
+                this.spotsPlan =  this.prevPath;
+            } else {
+                console.log("no add but move");
+                this.setState(function(){
+                    return{prevPath: path}
+                });
+                this.spotsPlan = path;
+            }
+        } else {
+            if (path.length !== originPath.length){
+                console.log("only add no move");
+                this.setState(function() {
+                    return {prevPath: this.state.prevPath.concat(originPath.slice(-(originPath.length-this.state.spotNum)))}
+                })
+                this.setState(function() {
+                    return {spotNum: originPath.length}
+                })
+                this.spotsPlan = this.state.prevPath.concat(originPath.slice(-(originPath.length-this.state.spotNum)));
+            } else {
+                console.log("both add and move");
+                this.setState(function(){
+                    return{ 
+                        spotNum: path.length,
+                        originPath: path
+                    }
+                })
+            }   
+        }
+        console.log("spotsPlan:",this.spotsPlan)
         // this.setState((state)=>({path: spotsPlan}))
     }
-
+ 
     getSpotsListRef = (ref) => {
         this.SpotsListRef = ref;
+        console.log("this.SpotsListRef",this.SpotsListRef);
     }
 
     removeRoute = ()=>{
         this.setState((state)=>({path:[]}))
     }
+
     componentWillMount() {
         // attention
         smartPost.push(this);
@@ -97,16 +131,14 @@ export class Plan extends React.Component{
     }
 
     componentDidMount() {
-        debugger;
+        // debugger;
         if(this.mapRef){
             console.log(this.mapRef.returnMapRef())
         }
     }
 
-//======================================
-    render(){
 
-        console.log(this.props)
+    render(){
         const ithday = this.state.ithDay
         return(
             <div>
@@ -133,7 +165,10 @@ export class Plan extends React.Component{
                         mapElement = <div style={{ height: `100%` }} />
                     />
                 </div>
-                <Attractions/>
+                <Attractions
+                    city =  {this.props.city? this.props.city: this.state.path[0]}
+                    mapref = {this.state.map}
+                />
             </div>
         )
     }

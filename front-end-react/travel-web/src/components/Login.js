@@ -26,7 +26,7 @@ class NormalLoginForm extends React.Component {
            message.success('Login Success')
            this.props.handleLogin(data);   //?
 
-           return fetch(`${API_ROOT}/history?user_id=${username}`)
+           return fetch(`${API_ROOT}/history?user_id=${values.username}`)
          })
            .then((response)=>{
                if(response.ok){

@@ -13,7 +13,9 @@ export class Main extends React.Component {
     state = {history: []}
 
     getHistory = (data)=>{
-        console.log(data);
+        // test get data
+        const historyRoute = data.map((dailyRoutes, index)=>{  console.log(dailyRoutes[index].name, index);});
+
         this.setState({ history: data ? data : []})
     }
 

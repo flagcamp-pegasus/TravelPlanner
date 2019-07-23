@@ -49,7 +49,7 @@ public class Routes {
 		for (Place p : places) {
 			JSONObject place = new JSONObject();
 			try {
-				place.put("lat", p.getLat()).put("lon", p.getLon()).put("place_id", p.getPlace_id());
+				place.put("lat", p.getLat()).put("lng", p.getLon()).put("place_id", p.getPlace_id());
 				routes.put("place", place);
 			} catch (JSONException e) {
 				e.printStackTrace();

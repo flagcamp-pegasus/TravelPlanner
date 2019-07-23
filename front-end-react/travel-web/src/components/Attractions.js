@@ -35,6 +35,9 @@ export class Attractions extends Component {
     }
 
     handleSearch = (type) =>{
+        if(!window.google){
+            return
+        }
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
         const { latlng } = this.props.city;
         //console.log(this.props.city)

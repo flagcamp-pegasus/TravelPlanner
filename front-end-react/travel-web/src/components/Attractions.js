@@ -26,34 +26,70 @@ export class Attractions extends Component {
 
     state = {
         city: null,
-        type: "restaurant",
+        type: {TYPE_FOOD},
         placesInfos:placesData,
-       // testNum: 1,
+        ifSearched: false,
+    }
+    componentDidMount() {
+        this.handleSearch({TYPE_FOOD});
+    }
+
+    handleSearch = (type) =>{
+        let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
+        const { latlng } = this.props.city;
+        //console.log(this.props.city)
+        let location = new window.google.maps.LatLng(latlng.lat,latlng.lng);
+        let request = {
+            location: location,
+            radius: '200',
+            type: type,
+        };
+        let counter = 0;
+        let placesInfos = [];
+        let len = 0
+
+        service.nearbySearch(request, (results, status)=>{
+            if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+                if(results.length > 2){
+                    len = 2;
+                }else{
+                    len = results.length
+                }
+
+                   for (let i = 0; i < len; i++) {
+                         let place = results[i];
+                         placesInfos.push(place);
+                         counter ++;
+                     }
+                 }
+                 if(counter == len){
+                     this.setState(
+                         {placesInfos:placesInfos}) }
+                 //console.log('this is place infos', placesInfos);
+             })
+
     }
 
 
-
     render() {
-        //const { latlng } = this.props.location;
-        //console.log('at attractions, this is lat lng', latlng);
-        //console.log('test if get location',this.props.city);
         return (
             <div>
-
-                <Tabs defaultActiveKey={TYPE_FOOD}   className="attraction-tab">
+                <div id="map"></div>
+                <Tabs defaultActiveKey={TYPE_FOOD} onChange={this.handleSearch}  className="attraction-tab">
                     <TabPane tab="food" key={TYPE_FOOD}>
-                        <AttractionList placesInfos={placesData}/>
+                        <AttractionList placesInfos={this.state.placesInfos}/>
 
                     </TabPane>
 
                     <TabPane tab="shopping" key={TYPE_SHOPPING}>
-
+                        <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
 
                     <TabPane tab="museum" key={TYPE_MUSEUM}>
-
+                        <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
                 </Tabs>
+
             </div>
         );
     }

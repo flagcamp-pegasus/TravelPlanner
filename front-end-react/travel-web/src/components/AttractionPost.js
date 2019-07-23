@@ -15,10 +15,14 @@ export class AttractionPost extends Component {
     }
 
     handleURL = (photos) =>{
-        console.log(photos);
-        console.log(photos[0]);
+        //console.log(photos);
+        if (typeof photos !== 'undefined'){
+            let pic = photos[0];
+            //console.log(pic.getUrl());
+        }
 
-        return photos[0].getUrl({width: 300, height:300});
+
+        //return photos[0].getUrl({width: 300, height:300});
 
     }
     render() {
@@ -26,7 +30,7 @@ export class AttractionPost extends Component {
         const { location } = geometry;
         const { lat, lon } = location;
         const sampleURL = "https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg";
-       // const url = this.handleURL(photos);
+        this.handleURL(photos);
 
 
        // console.log(photos);
@@ -40,7 +44,7 @@ export class AttractionPost extends Component {
                 <div className = 'place-info'>
                     <p className='place-rating'>rating : {rating}</p>
                     <p className="place-address">{vicinity}</p>
-                    <p className= "place-type">type: {types[0]}</p>
+                    <p className= "place-type">Type: {types[0]}</p>
                 </div>
                 <Button onClick={(e) => this.handleClick({location, name}, e)}>add</Button>
             </div>

@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import db.DBConnection;
+import db.DBConnectionFactory;
 import entity.Place;
 import entity.Place.PlaceBuilder;
 
@@ -125,6 +127,12 @@ public class PlacesAPI {
 	private void queryAPI(double lat, double lon) {
 		List<Place> places = search(lat, lon, null);
 		
+		// use savePlaces for testing back-end database
+		DBConnection connection = DBConnectionFactory.getConnection();
+		List<String> ret = connection.savePlaces(places);
+		System.out.println(ret.toString());
+		connection.close();
+		
 		try {
 			for(Place p : places) {
 				System.out.println(p.toJSONObject());
@@ -140,6 +148,10 @@ public class PlacesAPI {
 		// TODO Auto-generated method stub
 		PlacesAPI pAPI = new PlacesAPI();
 		pAPI.queryAPI(-33.8670522, 151.1957362);
+		
+		pAPI.queryAPI(39.9606090, -75.1896830);
+		
+		pAPI.queryAPI(37.5311760, -122.2558530);
 
 		
 	}

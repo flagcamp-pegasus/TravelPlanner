@@ -7,7 +7,7 @@ import {AttractionList} from "./AttractionList";
 import {AttractionsSearch} from "./AttractionsSearch";
 import {LAT_SAMPLE, LON_SAMPLE, TYPE_FOOD, TYPE_MUSEUM, TYPE_SHOPPING} from "../constants";
 //import {API_FEE_KEY} from '../charge';
-import { Test } from './Test';
+
 
 /* Attractions component receive city lat and lon and call google API and get three placesDetails  information
 step 1. check if can get lat and lon

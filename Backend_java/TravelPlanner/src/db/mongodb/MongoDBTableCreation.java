@@ -8,11 +8,9 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.IndexOptions;
 
-import static com.mongodb.client.model.Filters.eq;
 
 public class MongoDBTableCreation {
 	// Run this as Java application to reset db schema.
@@ -25,6 +23,7 @@ public class MongoDBTableCreation {
 			MongoDatabase db = mongoClient.getDatabase(MongoDBUtil.DB_NAME);
 
 			if (db == null) {
+				mongoClient.close();
 				return;
 			}
 

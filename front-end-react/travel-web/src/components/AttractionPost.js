@@ -40,7 +40,7 @@ export class AttractionPost extends Component {
                 <div className = 'place-info'>
                     <p className='place-rating'>rating : {rating}</p>
                     <p className="place-address">{vicinity}</p>
-                    <p className= "place-type">{types}</p>
+                    <p className= "place-type">type: {types[0]}</p>
                 </div>
                 <Button onClick={(e) => this.handleClick({location, name}, e)}>add</Button>
             </div>

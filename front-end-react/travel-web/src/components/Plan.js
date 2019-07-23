@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import {PATH_ZOOM, API_KEY} from "../constants.js"
 import {API_FEE_KEY} from '../charge';
 import {Attractions} from './Attractions';
+
+import {Attractions} from './GoogleLoadSearchNearby';
 import {OverviewButton} from './OverviewButton';
 import { Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button } from "antd";
 import { SpotsList } from './SpotsList';
@@ -161,7 +163,11 @@ export class Plan extends React.Component{
                         path={this.state.path}
                         city = {this.props.city? this.props.city: this.state.path[0]}
                         zoom={PATH_ZOOM}
+<<<<<<< HEAD
                         googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=${API_FEE_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+=======
+                        googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places&callback=initMap`}
+>>>>>>> 0dee098cd7a05c49562646c98b80c7e3d29590b8
                         loadingElement = {<div style={{ height: `100%` }}/>}
                         containerElement = {<div style={{ height: `400px` }}/>}
                         mapElement = {<div style={{ height: `100%` }} />}

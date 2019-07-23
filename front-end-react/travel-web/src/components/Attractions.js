@@ -39,9 +39,12 @@ export class Attractions extends Component {
 
     attractionSearch = (type) => {
         // console.log(type);
-        debugger
+        if(!this.props.mapref){
+            return;
+        }
+        console.log(this.props.mapref)
         let service = new window.google.maps.places.PlacesService(this.props.mapref);
-        debugger
+
         const { latlng } = this.props.city;
         console.log(this.props.city)
         let location = new window.google.maps.LatLng(latlng.lat,latlng.lng);
@@ -52,9 +55,22 @@ export class Attractions extends Component {
         };
         let counter = 0;
         let placesInfos = [];
+        let maxLength = 10;
         console.log('request',request);
-        this.setState({testNum: 3});
+        service.nearbySearch(request, (results, status)=>{
+            if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+                for (let i = 0; i < (results.length > maxLength ? maxLength : results.length); i++) {
+                    let place = results[i];
+                    placesInfos.push(place);
+                    counter ++;
+                }
+            }
+            if(counter == results.length){
+                this.setState(
+                    {placesInfos:placesInfos}) }
 
+            console.log('this is place infos', placesInfos);
+        })
 
 
 
@@ -69,7 +85,7 @@ export class Attractions extends Component {
             <div>
                 <Tabs defaultActiveKey="1"  onChange={this.attractionSearch} className="attraction-tab">
                     <TabPane tab="food" key={TYPE_FOOD}>
-                        <Test num = {this.state.testNum}/>
+                        {/*<Test num = {this.state.testNum}/>*/}
 
                     </TabPane>
 

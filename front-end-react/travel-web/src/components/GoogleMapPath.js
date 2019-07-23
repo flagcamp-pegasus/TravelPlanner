@@ -68,6 +68,7 @@ class MyMap extends React.Component{
     }
 
     componentDidMount() {
+        // this.props.getMapRef(this.mapRef)
         this.props.getMapRef(this.mapRef)
     }
 

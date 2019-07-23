@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 // import {mergeChildren} from './ListSort';
 import ListSort from './ListSort';
 import { Switch } from 'antd';
-import PubSub from 'pubsub-js';
 
 import '../styles/SpotsList.css';
 
 export class DayList extends React.Component {
+
+    static defaultProps = {
+        className: 'list-sort-demo',
+    };
 
     getListSort=(ref)=>{
         this.sortListRef = ref;
@@ -20,10 +23,10 @@ export class DayList extends React.Component {
     render() {
         const childrenToRender = this.props.plans.map((item, index) => {
             item.switchActive = false;
-            const {name} = item;
+            const path = `start from: ${item[0]}. Visit: ${item.slice(1).toString()}`;
             return (
                 <div key={index} className={`${this.props.className}-list`}>
-                    {name }
+                    {path}
                     {/*<Switch size="small" defaultunChecked/>*/}
                 </div>
             )
@@ -38,7 +41,6 @@ export class DayList extends React.Component {
                               appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}>
                         {childrenToRender}
                     </ListSort>
-                    <button onClick={console.log(childrenToRender)}>click</button>
                 </div>
             </div>
         );

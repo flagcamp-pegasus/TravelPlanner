@@ -133,6 +133,10 @@ export class Plan extends React.Component{
         console.log("plan test: ",ref)
     }
 
+    getplaceId = (id) =>{
+        this.setState({placeId: id});
+    }
+
     // componentDidMount() {
     //     // debugger;
     //     if(this.mapRef){
@@ -167,11 +171,13 @@ export class Plan extends React.Component{
                         loadingElement = {<div style={{ height: `100%` }}/>}
                         containerElement = {<div style={{ height: `400px` }}/>}
                         mapElement = {<div style={{ height: `100%` }} />}
+
+                        getplaceId={this.getplaceId}
                     />
                 </div>
                 <Attractions
                     city =  {this.props.city? this.props.city: this.state.path[0]}
-                    mapref = {this.state.map}
+                    userSearchId={this.state.placeId}
                 />
             </div>
         )

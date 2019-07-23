@@ -32,12 +32,14 @@ export class Attractions extends Component {
     }
     componentDidMount() {
         this.handleSearch({TYPE_FOOD});
+
     }
 
     handleSearch = (type) =>{
         if(!window.google){
             return
         }
+        // debugger
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
         const { latlng } = this.props.city;
         //console.log(this.props.city)
@@ -71,7 +73,7 @@ export class Attractions extends Component {
                          {placesInfos:placesInfos}) }
                  //console.log('this is place infos', placesInfos);
              })
-
+        // debugger
     }
 
     render() {
@@ -81,10 +83,7 @@ export class Attractions extends Component {
                 <Tabs defaultActiveKey={TYPE_FOOD} onChange={this.handleSearch}  className="attraction-tab">
                     <TabPane tab="food" key={TYPE_FOOD}>
                         <AttractionList placesInfos={this.state.placesInfos}/>
-
-
                     </TabPane>
-
                     <TabPane tab="shopping" key={TYPE_SHOPPING}>
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>

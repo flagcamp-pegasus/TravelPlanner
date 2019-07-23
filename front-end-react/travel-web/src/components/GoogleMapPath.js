@@ -51,9 +51,12 @@ class MyMap extends React.Component{
                     }
                 });
 
-                const nextMarkers = places.map(place => ({
-                    position: place.geometry.location,
-                }));
+                const nextMarkers = places.map(place => {
+                    console.log(place)
+                    console.log(place.id)
+                    this.props.getplaceId(place.id);
+                    return {position: place.geometry.location,};
+                });
 
                 const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
@@ -114,9 +117,9 @@ class MyMap extends React.Component{
                     />
                 </SearchBox>
                 {/*marker from searchbox*/}
-                {this.state.markers.map((marker, index) =>
-                    <Marker key={index} position={marker.position} options={{icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'}}/>
-                )}
+                {this.state.markers.map((marker, index) =>{
+                    return <Marker key={index} position={marker.position} options={{icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'}}/>
+                })}
                 <Polyline
                     path={path}
                     defaultOptions={{

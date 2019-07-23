@@ -8,6 +8,7 @@ export const GEO_OPTIONS = {
 export const POS_KEY = 'POS_KEY';
 export const AUTH_HEADER = 'Bearer';
 export const LOC_SHAKE = 0.02;
+
 export const API_KEY="AIzaSyC6H9bJcyRzUYM3rc1DVGUu80ASLnoUkCc";
 export const HISTORY_ENDPOINT = '/history'
 export const RECOM_ENDPOINT = '/recommendroute'

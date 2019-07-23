@@ -6,8 +6,8 @@ import placesData from '../assets/data/GoogleSearchSampleData.json';
 import {AttractionList} from "./AttractionList";
 import {AttractionsSearch} from "./AttractionsSearch";
 import {LAT_SAMPLE, LON_SAMPLE, TYPE_FOOD, TYPE_MUSEUM, TYPE_SHOPPING} from "../constants";
-import {API_FEE_KEY} from '../charge';
-import { Test } from './Test';
+//import {API_FEE_KEY} from '../charge';
+
 
 /* Attractions component receive city lat and lon and call google API and get three placesDetails  information
 step 1. check if can get lat and lon
@@ -28,52 +28,7 @@ export class Attractions extends Component {
         city: null,
         type: "restaurant",
         placesInfos:placesData,
-        testNum: 1,
-    }
-
-
-    componentDidMount() {
-        this.attractionSearch({TYPE_FOOD})
-    }
-
-
-    attractionSearch = (type) => {
-        // console.log(type);
-        if(!this.props.mapref){
-            return;
-        }
-        console.log(this.props.mapref)
-        let service = new window.google.maps.places.PlacesService(this.props.mapref);
-
-        const { latlng } = this.props.city;
-        console.log(this.props.city)
-        let location = new window.google.maps.LatLng(latlng.lat,latlng.lng);
-        let request = {
-            location: location,
-            radius: '200',
-            type: type,
-        };
-        let counter = 0;
-        let placesInfos = [];
-        let maxLength = 10;
-        console.log('request',request);
-        service.nearbySearch(request, (results, status)=>{
-            if (status == window.google.maps.places.PlacesServiceStatus.OK) {
-                for (let i = 0; i < (results.length > maxLength ? maxLength : results.length); i++) {
-                    let place = results[i];
-                    placesInfos.push(place);
-                    counter ++;
-                }
-            }
-            if(counter == results.length){
-                this.setState(
-                    {placesInfos:placesInfos}) }
-
-            console.log('this is place infos', placesInfos);
-        })
-
-
-
+       // testNum: 1,
     }
 
 
@@ -83,9 +38,11 @@ export class Attractions extends Component {
         //console.log('test if get location',this.props.city);
         return (
             <div>
-                <Tabs defaultActiveKey="1"  onChange={this.attractionSearch} className="attraction-tab">
+
+                <Tabs defaultActiveKey={TYPE_FOOD}   className="attraction-tab">
                     <TabPane tab="food" key={TYPE_FOOD}>
-                        {/*<Test num = {this.state.testNum}/>*/}
+                        <AttractionList placesInfos={placesData}/>
+
 
                     </TabPane>
 

@@ -18,8 +18,9 @@ export const PATH_ZOOM = 9
 export const LAT_SAMPLE = '-33.8665433';
 export const LON_SAMPLE = '151.1956316';
 export const TYPE_FOOD ='restaurant';
-export const TYPE_SHOPPING ='shopping_mall';
+export const TYPE_SHOPPING ='store';
 export const TYPE_MUSEUM = 'museum';
+export const MAX_DISPLAY = 6;
 export const CITY_LIST = [
     {
      name: "London",

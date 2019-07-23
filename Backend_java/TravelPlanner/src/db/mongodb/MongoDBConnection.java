@@ -96,7 +96,7 @@ public class MongoDBConnection implements DBConnection {
 			
 			PlaceBuilder builder = new PlaceBuilder();
 			builder.setLat(doc.getDouble("lat"));
-			builder.setLon(doc.getDouble("lon"));
+			builder.setLon(doc.getDouble("lng"));
 			builder.setPlace_id(doc.getString("place_id"));
 			builder.setName(doc.getString("name"));
 			

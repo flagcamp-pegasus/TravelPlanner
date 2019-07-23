@@ -37,6 +37,8 @@ class NormalLoginForm extends React.Component {
                throw new Error('No history routes for this username.');
            })
            .then((data)=>{
+               console.log("user history: ",data);
+               console.log("see first day's first place: ",data[0][0]);
             this.props.getHistory(data);
            })
          .catch((e) => {

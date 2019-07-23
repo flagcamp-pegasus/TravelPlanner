@@ -11,7 +11,7 @@ export class AttractionPost extends Component {
 
 
     handleClick = ({location, name}) => {
-        PubSub.publish('path', {location, name});
+        PubSub.publish('xxx', {location, name});
     }
 
     handleURL = (photos) =>{

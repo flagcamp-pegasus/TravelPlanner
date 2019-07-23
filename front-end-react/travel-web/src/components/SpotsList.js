@@ -19,8 +19,9 @@ export class SpotsList extends React.Component {
 
 
     componentDidMount() {
-        this.pubsub_token = PubSub.subscribe('xxx', (path, data) => {
-            console.log()
+        this.pubsub_token = PubSub.subscribe('path', (path, data) => {
+            console.log(path)
+            console.log(data)
             this.setState({
                 path: this.state.path.concat(data)
             })

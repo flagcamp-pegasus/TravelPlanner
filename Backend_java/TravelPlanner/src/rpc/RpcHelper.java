@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import entity.Place;
 import entity.Place.PlaceBuilder;
+import external.JwtUtil;
 
 public class RpcHelper {
 	public static void writeJsonArray(HttpServletResponse response, JSONArray array) throws IOException {
@@ -47,6 +48,21 @@ public class RpcHelper {
 			e.printStackTrace();
 		}
 		return new JSONObject();
+	}
+	
+	public static String checkToken(HttpServletRequest request, HttpServletResponse response) {
+		String authorization = request.getHeader("Authorization");
+		if(authorization == null) {
+			response.setStatus(403);
+			return null;
+		}
+		String token = authorization.substring(7);
+		String sign = JwtUtil.parseToken(token);
+		if(sign == null) {
+			response.setStatus(403);
+			return null;
+		}
+		return sign;
 	}
 	
 	public static List<Place> parseArray(JSONArray input) throws JSONException{

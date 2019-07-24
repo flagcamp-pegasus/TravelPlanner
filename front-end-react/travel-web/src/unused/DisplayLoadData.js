@@ -15,6 +15,7 @@ export class DisplayLoadData extends Component {
             <div>
                 <h1>Display Test Data Page</h1>
                 {placesData.map((place, index) =>{
+                    let toRoute = {};
                     let geo = place.geometry;
                     return <div>
 

@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import db.DBConnection;
 import db.DBConnectionFactory;
+import external.JwtUtil;
 
 /**
  * Servlet implementation class Log
@@ -38,18 +39,16 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		DBConnection connection = DBConnectionFactory.getConnection();
+		JSONObject obj = new JSONObject();
 		
 		try {
-			// need to change
-			HttpSession session = request.getSession(false);
-			JSONObject obj = new JSONObject();
-			if(session != null) {
-				String userId = session.getAttribute("user_id").toString();
-				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
+			String userId = RpcHelper.checkToken(request, response);
+			if(userId == null) {
+				obj.put("status", "Invalid token");
 			}else {
-				obj.put("status", "Invalid Session");
-				response.setStatus(403);
+				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
 			}
+			
 			RpcHelper.writeJsonObject(response, obj);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -57,10 +56,7 @@ public class Login extends HttpServlet {
 		} finally {
 			connection.close();
 		}
-		
-		
-		//RpcHelper.writeJsonArray(response,array);
-		
+	
 	}
 
 	/**
@@ -73,6 +69,7 @@ public class Login extends HttpServlet {
 
 		try {
 			JSONObject input = RpcHelper.readJSONObject(request);
+
 			String userId = input.getString("user_id");
 			System.out.println(" userId: " + userId);
 			String password = input.getString("password");
@@ -80,10 +77,13 @@ public class Login extends HttpServlet {
 			
 			JSONObject obj = new JSONObject();
 			if(connection.verifyLogin(userId, password)) {
-				HttpSession session = request.getSession();
-				session.setAttribute("user_id", userId);
-				session.setMaxInactiveInterval(600);
-				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
+//				HttpSession session = request.getSession();
+//				session.setAttribute("user_id", userId);
+//				session.setMaxInactiveInterval(600);
+				String token = JwtUtil.generateToken(userId, password);
+				System.out.println(token);
+				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId))
+				.append("Token", token);
 			}else {
 				obj.put("status", "User Doesn't Exist");
 				response.setStatus(401);

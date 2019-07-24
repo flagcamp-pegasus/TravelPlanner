@@ -28,6 +28,7 @@ class MyMap extends React.Component{
             markers: [],
             onMapMounted: ref => {
                 refs.map = ref;
+                this.mapRef = ref;
             },
             onBoundsChanged: () => {
                 this.setState({
@@ -50,9 +51,12 @@ class MyMap extends React.Component{
                     }
                 });
 
-                const nextMarkers = places.map(place => ({
-                    position: place.geometry.location,
-                }));
+                const nextMarkers = places.map(place => {
+                    // console.log(place)
+                    // console.log(place.id)
+                    this.props.getplaceId(place.id);
+                    return {position: place.geometry.location,};
+                });
 
                 const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
@@ -66,7 +70,13 @@ class MyMap extends React.Component{
         })
     }
 
+    componentDidMount() {
+        // this.props.getMapRef(this.mapRef)
+        this.props.getMapRef(this.mapRef)
+    }
+
     render(){
+        // console.log("today's plan: ", this.props.path)
         let {latlng, name}=this.props.city
         let path = this.props.path.map(
             (spot) => (spot.latlng)
@@ -108,9 +118,9 @@ class MyMap extends React.Component{
                     />
                 </SearchBox>
                 {/*marker from searchbox*/}
-                {this.state.markers.map((marker, index) =>
-                    <Marker key={index} position={marker.position} options={{icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'}}/>
-                )}
+                {this.state.markers.map((marker, index) =>{
+                    return <Marker key={index} position={marker.position} options={{icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'}}/>
+                })}
                 <Polyline
                     path={path}
                     defaultOptions={{
@@ -136,7 +146,10 @@ class MyMap extends React.Component{
                             coor = {{lat, lng}}
                             key = {center.lat+center.lng+distance}
                             name = {`${distance} km`}
-                            icon={distance_img}
+                            icon={{
+                                url: distance_img,
+                                scaledSize: new window.google.maps.Size(30,30),
+                            }}
                             padding={`3px`}
                             fontSize={`12px`}
                         />
@@ -150,13 +163,15 @@ class MyMap extends React.Component{
 
 }
 
-export const DrawPath = compose(
-    withProps({
-        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
-        mapElement: <div style={{ height: `100%` }} />,
-    }),
-    withScriptjs,
-    withGoogleMap
-)(MyMap)
+export const DrawPath = withScriptjs(withGoogleMap(MyMap))
+
+// export const DrawPath = compose(
+//     withProps({
+//         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
+//         loadingElement: <div style={{ height: `100%` }} />,
+//         containerElement: <div style={{ height: `400px` }} />,
+//         mapElement: <div style={{ height: `100%` }} />,
+//     }),
+//     withScriptjs,
+//     withGoogleMap
+// )(MyMap)

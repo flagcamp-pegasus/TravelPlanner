@@ -37,6 +37,12 @@ public class History extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		// check token 
+		if(RpcHelper.checkToken(request, response) == null) {
+			return;
+		}
+		
+		
 		String userId = request.getParameter("user_id");
 		System.out.println("Get history routes of userId: "+userId);
 		JSONArray array = new JSONArray();

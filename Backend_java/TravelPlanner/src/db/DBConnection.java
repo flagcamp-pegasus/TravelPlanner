@@ -2,7 +2,7 @@ package db;
 
 import java.util.List;
 
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 
 import entity.Place;
 
@@ -18,7 +18,7 @@ public interface DBConnection {
 	public boolean saveRoutes(List<Place> places, String userId, int ith);
 	
 	// unsave route is for the show routes page
-	public void unsaveRoutes(String userId);
+	public boolean unsaveRoutes(String userId, int ith);
 	
 	public List<List<Place>> getRoutes(String userId);
 	

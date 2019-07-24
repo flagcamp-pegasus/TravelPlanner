@@ -13,27 +13,21 @@ class NormalLoginForm extends React.Component {
        fetch(`${API_ROOT}/login`, {
          method: 'POST',
          body: JSON.stringify({
-           username: values.username,
+           user_id: values.username,
            password: values.password,
          }),
        }).then((response) => {
            if (response.ok) {
-             return response.text();
+             return response.json();
            }
            throw new Error(response.statusText);
          })
          .then((data) => {
            message.success('Login Success')
-           this.props.handleLogin(data);
-
-           return fetch(`${API_ROOT}/history`)
+             // debugger;/**/
+             console.log(data)
+           this.props.handleLogin(data.Token[0], data.user_id);   //
          })
-           .then((response)=>{
-               if(response.ok){
-                   console.log(response.text())
-                   // this.props.getHistory();
-               }
-           })
          .catch((e) => {
            console.log(e)
            message.error('Login Failed.');

@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import db.DBConnection;
 import db.DBConnectionFactory;
 import entity.Place;
+import external.JwtUtil;
 
 /**
  * Servlet implementation class SaveRoutes
@@ -46,14 +47,17 @@ public class SaveRoutes extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBConnection connection = DBConnectionFactory.getConnection();
+
+		//check token
+		if(RpcHelper.checkToken(request, response)==null) {
+			return;
+		}
 		
 		try {
 			JSONObject input = RpcHelper.readJSONObject(request);
 			JSONArray  array = input.getJSONArray("results");
 			int ith = input.getInt("ithDay");
 			String userId = input.getString("user_id");
-//			System.out.println("JSONArray length is : " + array.length());
-//			System.out.println("ithDay is : " + ith);
 			List<Place> places = RpcHelper.parseArray(array);
 			JSONObject obj = new JSONObject();
 			
@@ -71,5 +75,35 @@ public class SaveRoutes extends HttpServlet {
 		}
 		
 	}
+	
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
+		DBConnection connection = DBConnectionFactory.getConnection();
+		JSONObject obj = new JSONObject();
+		System.out.println("in delete" + RpcHelper.checkToken(request, response));
+		if(RpcHelper.checkToken(request, response) == null) {
+			return;
+		}
+		
+		try {
+			JSONObject input = RpcHelper.readJSONObject(request);
+			String userId = input.getString("user_id");
+			int ith = input.getInt("ithDay");
+			if(connection.unsaveRoutes(userId, ith)) {
+				obj.put("status", "OK");
+			}else {
+				obj.put("status", "failed to delete the Document");
+			}
+			RpcHelper.writeJsonObject(response, obj);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	
 
 }

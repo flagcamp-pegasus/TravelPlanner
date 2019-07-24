@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
@@ -113,7 +114,7 @@ public class MongoDBConnection implements DBConnection {
 		// TODO Auto-generated method stub
 		List<String> places_id = savePlaces(places);
 		Document info = new Document().append("routeId", userId)
-				.append("ithDay", ith).append("routes", places_id);
+				.append("ithDay", ith).append("routes_array", places_id);
 		UpdateOptions upsert = new UpdateOptions().upsert(true);
 		
 		BasicDBObject andQuery = new BasicDBObject();
@@ -130,19 +131,23 @@ public class MongoDBConnection implements DBConnection {
 	
 
 	@Override
-	public void unsaveRoutes(String userId) {
+	public boolean unsaveRoutes(String userId, int ith) {
 		// TODO Auto-generated method stub
-		// find user delete routes id in its routes list
-		// find route collection delete routesid == routesId
-		db.getCollection("routes").deleteOne(eq("route_id", userId));
-		
-		
+//		delete one that routes_id == userId, and ithDay == ithDay
+		Bson filter = new Document().append("routeId", userId).append("ithDay", ith);
+		db.getCollection("routes").deleteOne(filter);
+		// move ithDay > ithDay forward 1
+		Bson ff = new Document().append("routeId", userId).append("ithDay", new Document().append("$gt", ith));
+		Bson update = new Document().append("$inc", new Document().append("ithDay", -1));
+		UpdateResult result = db.getCollection("routes").updateMany(ff, update);
+		return result.wasAcknowledged();
+
 	}
 
 	@Override
 	public List<List<Place>> getRoutes(String userId) {
 		List<List<Place>> routes = new ArrayList<>();
-		 FindIterable<Document> iterable = db.getCollection("routes").find(eq("routes_id", userId));
+		 FindIterable<Document> iterable = db.getCollection("routes").find(eq("routeId", userId));
 		 Map<Integer, List<String>> map = new HashMap<>();
 				 
 			for (Document doc: iterable) {

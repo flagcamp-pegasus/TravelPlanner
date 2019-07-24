@@ -1,0 +1,59 @@
+.list-sort-demo-div {
+    min-width: 200px;
+}
+
+.list-sort-demo-wrapper {
+    position: relative;
+    background: #e6e6e6;
+    overflow: hidden;
+    height: 385px;
+    cursor: pointer;
+}
+
+/* .list-sort-demo {
+    margin: 40px auto;
+    max-width: 350px;
+    width: 90%;
+    cursor: url('http://gtms02.alicdn.com/tps/i2/T1_PMSFLBaXXcu5FDa-20-20.png') 10 10,pointer!important;
+    position: relative;
+    height: 305px;
+} */
+/* .list-sort-demo > div{
+    overflow: hidden;
+} */
+
+.list-sort-demo-list {
+    background: #fff;
+    border-radius: 6px;
+    margin: 5px auto;
+    padding: 10px;
+    width: 90%;
+    transition:  box-shadow .5s, transform .5s;
+}
+
+.list-sort-demo-list.list-drag-selected{
+    box-shadow: 0 8px 20px #e6e6e6;
+    transform: scale(1.1) !important;
+}
+
+/* .list-sort-demo-text{
+    background: #fff;
+    width: 90%;
+    display: inline-block;
+    border-radius: 6px;
+    margin: 5px auto;
+    padding: 10px;
+    height: 50px;
+    transition:  box-shadow .5s, transform .5s;
+} */
+
+.list-sort-demo-list div{
+    font-size: 12px;
+}
+
+@media screen and (max-width: 320px) {
+    .list-sort-demo-text h1 {
+        font-size: 14px;
+        line-height: 28px;
+    }
+}

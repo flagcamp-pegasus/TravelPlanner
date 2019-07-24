@@ -51,7 +51,7 @@ export class Plan extends React.Component{
 
     onClick = ({ key }) => {
         message.info(`Changed to Day ${key}`);
-        this.setState({ithDay: `${key}`});
+        this.setState({ithDay: this.props.plans[0]} );
       };
     chooseDay = (
         <Menu onClick={this.onClick}>
@@ -130,19 +130,18 @@ export class Plan extends React.Component{
     getMapRef=(ref)=>{
         this.setState({map : ref})
         window.map = ref
-        console.log("plan test: ",ref)
+        // console.log("plan test: ",ref)
     }
 
     getplaceId = (id) =>{
         this.setState({placeId: id});
     }
 
-    // componentDidMount() {
-    //     // debugger;
-    //     if(this.mapRef){
-    //         console.log(this.mapRef.returnMapRef())
-    //     }
-    // }
+    componentDidMount() {
+        const history = this.props.history;
+        console.log("history in plan: ", history);
+        this.setState({ plans: history});
+    }
 
     render(){
         const ithday = this.state.ithDay

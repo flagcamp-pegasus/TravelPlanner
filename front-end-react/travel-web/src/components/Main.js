@@ -14,7 +14,7 @@ export class Main extends React.Component {
 
     getHistory = (data)=>{
         // test get data
-        const historyRoute = data.map((dailyRoutes, index)=>{  console.log(dailyRoutes[index].name, index);});
+        // let historyRoute = data.map((dailyRoutes, index)=>{  console.log(dailyRoutes[index].name, index);});
 
         this.setState({ history: data ? data : []})
     }
@@ -24,7 +24,12 @@ export class Main extends React.Component {
     }
 
     getPlan = (props) => {
-       return this.props.isLoggedIn ? <Plan city={props.location.state ? props.location.state.city : this.city}/> : <Redirect to="/login" />;
+       return this.props.isLoggedIn
+           ? <Plan
+               city = {props.location.state ? props.location.state.city : this.city} //?
+               history = { this.state.history }
+           />
+           : <Redirect to="/login" />;
     }
 
     getCity = () => {

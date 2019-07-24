@@ -32,14 +32,11 @@ export class OverviewButton extends React.Component {
         });
     };
 
-    handleOk = () => {
+    handleSave = () => {
         if(this.state.currentDay){
             this.props.setDay(this.state.currentDay)
         }
         // this.props.setDay()
-        this.setState({
-            visible: false,
-        });
     }
 
     handleCancel = () => {
@@ -70,6 +67,7 @@ export class OverviewButton extends React.Component {
         //     start: spots[0],
         //     spots: spots.slice(1, spots.length),
         // }))
+
         const { visible, confirmLoading } = this.state;
         return (
             <div>
@@ -79,10 +77,11 @@ export class OverviewButton extends React.Component {
                 <Modal
                     title="Plan Overview"
                     visible={visible}
-                    onOk={this.handleOk}
-                    okText='Plan for this day'
+                    onOk={this.handleSave}
+                    okText='Save Plan'
                     confirmLoading={confirmLoading}
                     onCancel={this.handleCancel}
+                    cancelText='close'
                 >
                     {/*{this.props.plans.map((plan, day)=>{*/}
 

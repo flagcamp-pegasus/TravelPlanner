@@ -76,6 +76,7 @@ class MyMap extends React.Component{
     }
 
     render(){
+        console.log("today's plan: ", this.props.path)
         let {latlng, name}=this.props.city
         let path = this.props.path.map(
             (spot) => (spot.latlng)

@@ -10,7 +10,8 @@
 @import 'styles/Plan.css';
 @import 'styles/Test.css';
 @import 'styles/DayList.css';
-
+@import 'styles/Attractions.css';
+@import 'styles/OverviewButton.css';
 body {
  margin: 0;
  padding: 0;

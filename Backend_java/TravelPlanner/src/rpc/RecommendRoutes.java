@@ -37,9 +37,7 @@ public class RecommendRoutes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// check token
-		String authorization = request.getHeader("Authorization");
-		if(authorization == null) {
-			response.setStatus(403);
+		if(RpcHelper.checkToken(request, response) == null) {
 			return;
 		}
 		

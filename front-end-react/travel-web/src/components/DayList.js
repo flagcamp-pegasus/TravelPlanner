@@ -39,29 +39,30 @@ export class DayList extends React.Component {
         // });
     }
 
-    gotoDay = (content) =>{
-        console.log("goto ", content)
+    gotoDay = (ithDay) =>{
+        this.props.setDay(ithDay);
+        this.props.hide();
     }
 
     render() {
         const childrenToRender = this.props.plans.map((item, index) => {
-            item.switchActive = false;
-            const path = `start from: ${item[0]}. Visit: ${item.slice(1).toString()}`;
+            item = item.map((content)=>(content.name))
+            // ["place1","", ""]
             return (
                 <div key={index} className={`${this.props.className}-list`}>
                     {/*{path}*/}
-
-                    <h3>{`start from: ${item[0]}`}</h3>
-                    <p>{`Visit: ${item.slice(1).toString()}`}</p>
-                    {/*<Switch size="small" defaultunChecked/>*/}
+                    <h3 className={"start"}>{`start from: ${item[0]}`}</h3>
+                    {item.slice(1).map((name, idx)=>(<p className="station" key={idx}>{`Station ${idx+1}: ${name}`}</p>))}
                 </div>
             )
         });
         const days = this.props.plans.map((content, idx)=>(
-            <Button key = {idx} type="link" onClick={()=>this.gotoDay(content)}>{`Day ${idx+1}`}</Button>
-        ))
-        const deletes = this.props.plans.map((content, idx)=>(
-            <Button key = {idx} type="dashed" onClick={()=>this.deletePlan(content, idx)}>Delete</Button>
+            <div key = {idx}>
+                <h4 className="day">{`Day ${idx+1}`}</h4>
+                <Button type="link" onClick={()=>this.gotoDay(idx+1)}>{`Go To Plan`}</Button>
+                <br/>
+                <Button type="dashed" onClick={()=>this.deletePlan(content, idx)}>Delete</Button>
+            </div>
         ))
         return (
             <div className={`${this.props.className}-div ${this.props.className}-wrapper planOverView`}>
@@ -75,9 +76,6 @@ export class DayList extends React.Component {
                               appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}>
                         {childrenToRender}
                     </ListSort>
-                </div>
-                <div>
-                    {deletes}
                 </div>
             </div>
         );

@@ -94,7 +94,7 @@ class MyMap extends React.Component{
         return (
             <GoogleMap
                 ref={this.state.onMapMounted}
-                defaultZoom={2}
+                defaultZoom={this.props.zoom}
                 onBoundsChanged={this.state.onBoundsChanged}
                 center={path ? path[0] : latlng}
             >

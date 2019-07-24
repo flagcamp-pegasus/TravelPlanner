@@ -12,7 +12,7 @@ const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
 
 export class MyMarker extends React.Component{
     state = {
-        isOpen: true
+        isOpen: false
     }
 
     onToggleOpen= () => {

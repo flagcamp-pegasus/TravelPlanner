@@ -12,6 +12,8 @@ import PubSub from 'pubsub-js';
 import smartPost from 'react-smart-post';
 import { func } from 'prop-types';
 // import { ServerHttp2Session } from 'http2';
+import {API_ROOT, USER_ID} from "../constants"
+
 
 let spotsPlan = [];
 
@@ -28,7 +30,10 @@ export class Plan extends React.Component{
 
     onClick = ({ key }) => {
         message.info(`Changed to Day ${key}`);
-        this.setState({ithDay: this.props.plans[0]} );
+        this.setState({
+            ithDay: key,
+            path : this.state.plans[key-1],
+        });
       };
     chooseDay = (
         <Menu onClick={this.onClick}>
@@ -129,7 +134,7 @@ export class Plan extends React.Component{
 
     getMapRef=(ref)=>{
         this.setState({map : ref})
-        window.map = ref
+        // window.map = ref
         // console.log("plan test: ",ref)
     }
 
@@ -138,13 +143,29 @@ export class Plan extends React.Component{
     }
 
     componentDidMount() {
-        const history = this.props.history;
-        console.log("history in plan: ", history);
-        this.setState({ plans: history});
+        fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`)
+        .then((response)=>{
+            if(response.ok){
+                return response.json();
+            }
+            throw new Error('No history routes for this username.');
+        }).then(
+            (history)=>{
+                // console.log("history in plan: ", history);
+                this.setState({ plans: history});
+            }
+        )
     }
 
     render(){
-        const ithday = this.state.ithDay
+        const ithday = this.state.ithDay;
+        const path = this.state.path.map((place)=>(
+            {
+                latlng: place.location,
+                place_id: place.place_id,
+                name: place.name,
+            }
+        ))
         return(
             <div>
                 <OverviewButton plans = {this.state.plans} setDay = {this.setDay}/>
@@ -162,7 +183,8 @@ export class Plan extends React.Component{
 
                     <DrawPath
                         getMapRef={this.getMapRef}
-                        path={this.state.path}
+                        path={path}
+                        //[{lat, lng}]
                         city = {this.props.city? this.props.city: this.state.path[0]}
                         zoom={PATH_ZOOM}
 

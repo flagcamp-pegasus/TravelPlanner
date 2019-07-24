@@ -355,7 +355,7 @@ export default class ListSort extends React.Component {
   render() {
     const childrenToRender = toArrayChildren(this.state.children).map(this.getChildren);
     // console.log(childrenToRender)
-    PubSub.publish('spotsPlan',{childrenToRender});
+    // PubSub.publish('spotsPlan',{childrenToRender});
     const props = { ...this.props };
     [
       'component',

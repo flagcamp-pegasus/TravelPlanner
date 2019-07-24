@@ -33,6 +33,7 @@ export class Plan extends React.Component{
             path : this.state.plans[key-1],
         });
       };
+
     chooseDay = (
         <Menu onClick={this.onClick}>
           <Menu.Item key="1">Day 1</Menu.Item>
@@ -141,32 +142,44 @@ export class Plan extends React.Component{
     }
 
     clickSaveToday = (path, ithDay) => {
+          // debugger
+
+
         const token = localStorage.getItem(TOKEN_KEY);
         const user_id = localStorage.getItem(USER_ID);
 
-        const {place_id, name} = path;
-        const location = path.latlng;
+        const body ={
+            results : path.map((data)=>{
+                console.log(data)
+                return {
+                        geometry: {location: data.location},
+                        name : data.name,
+                            place_id : data.place_id,
+                    }
+                }),
+            user_id : user_id,
+            ithDay: ithDay,
+        }
+        // debugger
+        // const {place_id, name} = path;
+        // const location = path.latlng;
         // const geometry = { geometry: location };
-        path = {place_id, name, geometry: {location} };
-        console.log("path JSON ",path);
-        debugger;
+        // path = {place_id, name, geometry: {location} };
+        console.log("path JSON ",body);
+        // debugger;
         // path = JSON.stringify(path);
 
         fetch(`${API_ROOT}/saveroutes`, {
-            method: 'POST',
-            headers: {
-                Authorization: `${AUTH_HEADER} ${token}`
-            },
-            body: JSON.stringify({
-                results: path,
-                ithDay: ithDay,
-                user_id: user_id,
-                })
+                method: 'POST',
+                headers: {
+                    Authorization: `${AUTH_HEADER} ${token}`
+                },
+                body: JSON.stringify(body),
             })
             .then((response) => {
                 if (response.ok) {
                     message.success('Save route successfully!');
-                    return response.json();
+                    return;
                 }
                 throw new Error('Failed to connect to database.');
             })
@@ -187,6 +200,7 @@ export class Plan extends React.Component{
             (history)=>{
                 // console.log("history in plan: ", history);
                 this.setState({ plans: history});
+                // debugger;
             }
         ).catch((e) => {
             console.log(e)
@@ -206,7 +220,7 @@ export class Plan extends React.Component{
         return(
             <div>
                 <OverviewButton plans = {this.state.plans} setDay = {this.setDay}/>
-                <Button onClick = {() => this.clickSaveToday(this.state.path, this.state.ithDay) } >Save Plan for this day.</Button>
+                <Button onClick = {() => {this.clickSaveToday(this.state.plans[ithday-1], this.state.ithDay)} } >Save Plan for this day.</Button>
                 <div>
                     <Dropdown overlay={this.chooseDay} trigger={['click']}>
                         <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>

@@ -26,26 +26,26 @@ export class Plan extends React.Component{
         spotNum: 0,
     }
 
-    onClick = ({ key }) => {
-        message.info(`Changed to Day ${key}`);
+    chooseday = ( ithday ) => {
+        message.info(`Changed to Day ${ithday}`);
         this.setState({
-            ithDay: key,
-            path : this.state.plans[key-1],
+            ithDay: ithday,
+            path : this.state.plans[ithday-1],
         });
       };
 
-    chooseDay = (
-        <Menu onClick={this.onClick}>
-          <Menu.Item key="1">Day 1</Menu.Item>
-          <Menu.Item key="2">Day 2</Menu.Item>
-          <Menu.Item key="3">Day 3</Menu.Item>
-          <Menu.Item key="4">Day 4</Menu.Item>
-          <Menu.Item key="5">Day 5</Menu.Item>
-          <Menu.Item key="6">Day 6</Menu.Item>
-          <Menu.Item key="7">Day 7</Menu.Item>
-        </Menu>
-      );
-    
+    // chooseDay = (
+    //     <Menu onClick={this.onClick}>
+    //       <Menu.Item key="1">Day 1</Menu.Item>
+    //       <Menu.Item key="2">Day 2</Menu.Item>
+    //       <Menu.Item key="3">Day 3</Menu.Item>
+    //       <Menu.Item key="4">Day 4</Menu.Item>
+    //       <Menu.Item key="5">Day 5</Menu.Item>
+    //       <Menu.Item key="6">Day 6</Menu.Item>
+    //       <Menu.Item key="7">Day 7</Menu.Item>
+    //     </Menu>
+    //   );
+    //
       getSortedList = (path) => {
         let nameArray = path.map( (spotItem) => {
             return spotItem.props.children
@@ -91,7 +91,7 @@ export class Plan extends React.Component{
                     return {spotNum: originPath.length}
                 })
                 this.spotsPlan = this.state.prevPath.concat(originPath.slice(-(originPath.length-this.state.spotNum)));
-                console.log("return!!!", this.spotsPlan)
+                // console.log("return!!!", this.spotsPlan)
                 return this.spotsPlan
             } else {
                 console.log("both add and move");
@@ -125,10 +125,6 @@ export class Plan extends React.Component{
         console.log(message)
     }
 
-    setDay = (day)=>{
-        //set path and day for the day of choice
-        console.log(day)
-    }
 
 
     getMapRef=(ref)=>{
@@ -219,7 +215,7 @@ export class Plan extends React.Component{
         ))
         return(
             <div>
-                <OverviewButton plans = {this.state.plans} setDay = {this.setDay}/>
+                <OverviewButton plans = {this.state.plans} setDay = {this.chooseday}/>
                 <Button onClick = {() => {this.clickSaveToday(this.state.plans[ithday-1], this.state.ithDay)} } >Save Plan for this day.</Button>
                 <div>
                     <Dropdown overlay={this.chooseDay} trigger={['click']}>

@@ -10,22 +10,6 @@ export class OverviewButton extends React.Component {
         currentDay:undefined,
     };
 
-    // columns = [
-    //     {
-    //         title: 'day',
-    //         dataIndex: 'day',
-    //         render: text => <a href="javascript:;">{text}</a>,
-    //     },
-    //     {
-    //         title: 'Start From',
-    //         dataIndex: 'start',
-    //     },
-    //     {
-    //         title: 'Spots',
-    //         dataIndex: 'spots',
-    //     },
-    // ];
-
     showModal = () => {
         this.setState({
             visible: true,
@@ -33,40 +17,21 @@ export class OverviewButton extends React.Component {
     };
 
     handleSave = () => {
-        if(this.state.currentDay){
-            this.props.setDay(this.state.currentDay)
-        }
-        // this.props.setDay()
+
     }
 
     handleCancel = () => {
+        this.hide();
+    };
+
+    hide = ()=>{
         this.setState({
             visible: false,
         });
-    };
-
-    // rowSelection = {
-    //     onChange: (selectedRowKeys, selectedRows) => {
-    //         this.setState({
-    //             currentDay: parseInt(selectedRowKeys)
-    //         });
-    //     },
-    //     getCheckboxProps: record => {
-    //         return {
-    //             name: record.day,
-    //         }
-    //     },
-    //     type: 'radio'
-    // }
+    }
 
     render() {
-        console.log(this.props.plans);
-        // const data = this.props.plans.map((spots, idx)=>({
-        //     key: `${idx+1}`,
-        //     day: `${idx+1}`,
-        //     start: spots[0],
-        //     spots: spots.slice(1, spots.length),
-        // }))
+        // console.log(this.props.plans);
 
         const { visible, confirmLoading } = this.state;
         return (
@@ -75,6 +40,7 @@ export class OverviewButton extends React.Component {
                     Plan Overview
                 </Button>
                 <Modal
+                    className="modal"
                     title="Plan Overview"
                     visible={visible}
                     onOk={this.handleSave}
@@ -83,12 +49,11 @@ export class OverviewButton extends React.Component {
                     onCancel={this.handleCancel}
                     cancelText='close'
                 >
-                    {/*{this.props.plans.map((plan, day)=>{*/}
-
-                    {/*})}*/}
-                    {/*<Table rowSelection={this.rowSelection} columns={this.columns} dataSource={data} />,*/}
-                {/*    <CreatePostForm ref={this.getFormRef}/>*/}
-                    <DayList plans={this.props.plans}/>
+                    <DayList
+                        plans={this.props.plans}
+                        setDay = {this.props.setDay}
+                        hide = {this.hide}
+                    />
                 </Modal>
             </div>
         );

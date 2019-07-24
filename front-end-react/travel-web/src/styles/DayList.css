@@ -1,11 +1,27 @@
 .planOverView{
     display: flex;
+    width: 600px;
 }
 
 .sliders{
     flex-grow: 1;
 }
 
-.planOverView > div{
-    height: 20px;
+.day{
+    margin: auto;
+}
+
+.station{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+.start{
+    margin: 1px;
+}
+
+div.list-sort-demo-list{
+    margin: 3px;
+    padding: 5px;
 }

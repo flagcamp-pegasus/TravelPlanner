@@ -153,7 +153,10 @@ export class Plan extends React.Component{
                 // console.log("history in plan: ", history);
                 this.setState({ plans: history});
             }
-        )
+        ).catch((e) => {
+            console.log(e)
+            message.error('failed to get history.');
+        });
     }
 
     render(){

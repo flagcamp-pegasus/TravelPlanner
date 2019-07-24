@@ -52,8 +52,8 @@ class MyMap extends React.Component{
                 });
 
                 const nextMarkers = places.map(place => {
-                    console.log(place)
-                    console.log(place.id)
+                    // console.log(place)
+                    // console.log(place.id)
                     this.props.getplaceId(place.id);
                     return {position: place.geometry.location,};
                 });
@@ -76,7 +76,7 @@ class MyMap extends React.Component{
     }
 
     render(){
-        console.log("today's plan: ", this.props.path)
+        // console.log("today's plan: ", this.props.path)
         let {latlng, name}=this.props.city
         let path = this.props.path.map(
             (spot) => (spot.latlng)

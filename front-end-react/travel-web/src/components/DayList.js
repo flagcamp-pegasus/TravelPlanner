@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import {mergeChildren} from './ListSort';
 import ListSort from './ListSort';
-import { Button  } from 'antd';
+import {Button, message} from 'antd';
 
 import '../styles/SpotsList.css';
+import {API_ROOT, USER_ID} from "../constants"
 
 export class DayList extends React.Component {
 
@@ -21,7 +22,21 @@ export class DayList extends React.Component {
     }
 
     deletePlan = (content, idx)=>{
-        console.log("delete ", content)
+        console.log("delete ", content, idx)
+        // fetch(`${API_ROOT}/saveroutes?user_id=${localStorage.getItem(USER_ID)}`)
+        //     .then((response)=>{
+        //         if(response.ok){
+        //             return response.json();
+        //         }
+        //         throw new Error('Failed to delete.');
+        //     }).then(
+        //     (history)=>{
+        //         // console.log("history in plan: ", history);
+        //         this.setState({ plans: history});
+        //     }
+        // ).catch((e) => {
+        //     console.log(e)
+        // });
     }
 
     gotoDay = (content) =>{

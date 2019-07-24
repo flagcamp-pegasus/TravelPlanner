@@ -8,6 +8,8 @@ export class AttractionList extends Component {
     static propTypes = {
         placesInfos: PropTypes.array.isRequired,
     }
+
+
     render() {
         return (
             <div>

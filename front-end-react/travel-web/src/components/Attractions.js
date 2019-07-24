@@ -4,7 +4,8 @@ import { Tabs } from 'antd';
 
 import placesData from '../assets/data/GoogleSearchSampleData.json';
 import {AttractionList} from "./AttractionList";
-import {LAT_SAMPLE, LON_SAMPLE, TYPE_FOOD, TYPE_MUSEUM, TYPE_SHOPPING,MAX_DISPLAY} from "../constants";
+import {SAMPLE_ID, TYPE_FOOD, TYPE_MUSEUM, TYPE_SHOPPING, MAX_DISPLAY} from "../constants";
+import {AttractionPost} from "./AttractionPost"
 //import {API_FEE_KEY} from '../charge';
 
 
@@ -13,6 +14,8 @@ step 1. check if can get lat and lon
 step 2. be able to display fake data
 step 3. call google api to get data, add attraction search to this documents
 step 4. follow teacher's guide
+reference: https://developers.google.com/maps/documentation/javascript/examples/place-details
+https://developers.google.com/places/web-service/search
 
 * */
 const { TabPane } = Tabs;
@@ -20,28 +23,65 @@ const { TabPane } = Tabs;
 export class Attractions extends Component {
 
     static propTypes = {
-        city: PropTypes.object.isRequired,
+        city: PropTypes.object.isRequired
     }
 
     state = {
         city: null,
         type: {TYPE_FOOD},
         placesInfos:placesData,
-        ifSearched: false,
+        userPlaceInfo:null,
+        placeId: SAMPLE_ID,
+        ifUserAdd:false
     }
-    componentDidMount() {
-        this.handleSearch({TYPE_FOOD});
 
-    }
 
 
 
     handleSearch = (type) =>{
         if(!window.google){
-            return
+            return;
         }
+        if (type ==='user-add'){
+
+            this.handleSearchById();
+        }else{
+            this.handleTypeSearch(type);
+        }
+    }
+
+
+    handleSearchById(){
         // debugger
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
+        console.log('searchID',this.props.userSearchId);
+        let request = {
+            // this need to change to this.props.userSearchId
+            placeId: this.props.userSearchId,
+            fields: ['name', 'icon', 'photos', 'geometry', 'place_id', 'rating', 'formatted_address','types','vicinity']
+           // fields: ['name', 'formatted_address', 'place_id', 'geometry']
+        };
+
+
+        service.getDetails(request, (result, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                console.log(result);
+                this.setState(
+                    {userPlaceInfo: result,
+                        ifUserAdd:true})
+
+            }else{
+                console.log('error in search by ID ')
+            }
+        });
+    }
+
+
+
+    handleTypeSearch = (type) =>{
+        // debugger
+        let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
+
         const { latlng } = this.props.city;
         //console.log(this.props.city)
         let location = new window.google.maps.LatLng(latlng.lat,latlng.lng);
@@ -68,28 +108,42 @@ export class Attractions extends Component {
                          placesInfos.push(place);
                          counter ++;
                      }
-                 }
+                 }else{
+                console.log('error in nearby search');
+            }
                  if(counter == len){
                      this.setState(
                          {placesInfos:placesInfos}) }
                  //console.log('this is place infos', placesInfos);
              })
-        // debugger
     }
 
+    renderUserAdd=()=>{
+        if(this.state.ifUserAdd === true){
+
+            return <AttractionPost info={this.state.userPlaceInfo}/>
+        }else{
+            console.log('no place has been added through search bar');
+        }
+    }
     render() {
         return (
             <div>
+                <p>Please add place from search bar above or Select places from recommended categories</p>
                 <div id="map"></div>
-                <Tabs defaultActiveKey={TYPE_FOOD} onChange={this.handleSearch}  className="attraction-tab">
-                    <TabPane tab="food" key={TYPE_FOOD}>
+                <Tabs defaultActiveKey='1' onChange={this.handleSearch}  className="attraction-tab">
+                    <TabPane tab="SELECTED SPOT" key="user-add">
+                        {this.renderUserAdd()}
+                    </TabPane>
+
+                    <TabPane tab="FOOD" key={TYPE_FOOD}>
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
-                    <TabPane tab="shopping" key={TYPE_SHOPPING}>
+                    <TabPane tab="SHOPPING" key={TYPE_SHOPPING}>
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
 
-                    <TabPane tab="museum" key={TYPE_MUSEUM}>
+                    <TabPane tab="MUSEUM" key={TYPE_MUSEUM}>
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
                 </Tabs>

@@ -21,7 +21,9 @@ export const LON_SAMPLE = '151.1956316';
 export const TYPE_FOOD ='restaurant';
 export const TYPE_SHOPPING ='store';
 export const TYPE_MUSEUM = 'museum';
+export const SAMPLE_ID = 'ChIJN1t_tDeuEmsRUsoyG83frY4';
 export const MAX_DISPLAY = 6;
+export const DEFAULT_IMAGE= 'https://cdn1.vectorstock.com/i/1000x1000/10/20/cafe-or-cafeteria-interior-cartoon-vector-20881020.jpg'
 export const CITY_LIST = [
     {
      name: "London",

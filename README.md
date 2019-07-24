@@ -1,3 +1,5 @@
+plz install CHROME CORS PLUGIN before you run the code
+
 # Travel Plan Pegasus 
 This is a design document for laioffer FLAG camp.
 Contributor: Jie Ma

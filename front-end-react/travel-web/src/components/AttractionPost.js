@@ -18,21 +18,30 @@ export class AttractionPost extends Component {
         //console.log(photos);
         if (typeof photos !== 'undefined'){
             let pic = photos[0];
+<<<<<<< HEAD
             return pic.getUrl? pic.getUrl({width: 100, height:100}) : null;
             //console.log(pic.prototype.getUrl());
 
+=======
+            return pic.getUrl ? pic.getUrl({width: 300, height:300}) : null;
+            console.log(photos[0]);
+>>>>>>> df348dad6ce27ea18ee38ff4e81b697332223c8f
         }
 
-
         //return photos[0].getUrl({width: 300, height:300});
-
     }
+
     render() {
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
+        // debugger
         const { location } = geometry;
         const { lat, lon } = location;
         const sampleURL = "https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg";
+<<<<<<< HEAD
        // this.handleURL(photos);
+=======
+        // this.handleURL(photos);
+>>>>>>> df348dad6ce27ea18ee38ff4e81b697332223c8f
 
 
        // console.log(photos);
@@ -42,7 +51,11 @@ export class AttractionPost extends Component {
         return (
             <div>
                 <div className = 'place-name'>{name}</div>
+<<<<<<< HEAD
                 <img alt="place image" src={this.handleURL(photos)} />
+=======
+                <img alt="place image" src={this.handleURL(photos)}/>
+>>>>>>> df348dad6ce27ea18ee38ff4e81b697332223c8f
                 <div className = 'place-info'>
                     <p className='place-rating'>rating : {rating}</p>
                     <p className="place-address">{vicinity}</p>

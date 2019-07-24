@@ -1,5 +1,6 @@
 export const API_ROOT = 'http://localhost:8080/TravelPlanner';
 export const TOKEN_KEY = 'TOKEN_KEY';
+export const USER_ID = 'user_id';
 export const GEO_OPTIONS = {
  enableHighAccuracy: true,
  maximumAge        : 3600000,
@@ -41,5 +42,10 @@ export const CITY_LIST = [
      name: "New York",
      latlng: {lat: 40.712921, lng: -74.006063},
      imageUrl: "https://images.unsplash.com/photo-1496664232858-ae3480e5d308?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+    },
+    {
+        name: "Sydney",
+        latlng: {lat: -33.8688197, lng: 151.2092955},
+        imageUrl: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200"
     }
 ];

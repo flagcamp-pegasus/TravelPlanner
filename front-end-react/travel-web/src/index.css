@@ -9,6 +9,7 @@
 @import 'styles/CityList.css';
 @import 'styles/Plan.css';
 @import 'styles/Test.css';
+@import 'styles/DayList.css';
 
 body {
  margin: 0;

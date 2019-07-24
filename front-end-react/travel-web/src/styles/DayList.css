@@ -1,0 +1,11 @@
+.planOverView{
+    display: flex;
+}
+
+.sliders{
+    flex-grow: 1;
+}
+
+.planOverView > div{
+    height: 20px;
+}

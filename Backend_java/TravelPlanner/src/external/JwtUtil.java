@@ -26,7 +26,7 @@ public class JwtUtil {
 	}
 	
 	public static String parseToken(String token) {
-		String userId= "";
+		String userId= null;
 		try {
 			Claims body = Jwts.parser()
 					.setSigningKey(key)
@@ -42,11 +42,11 @@ public class JwtUtil {
 		} catch (SignatureException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			return  "";
-		} catch (IllegalArgumentException e) {
+			return  null;
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			return  "";
+			return  null;
 		}
 		return userId;
 		

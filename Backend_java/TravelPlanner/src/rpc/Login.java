@@ -39,22 +39,16 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		DBConnection connection = DBConnectionFactory.getConnection();
+		JSONObject obj = new JSONObject();
 		
 		try {
-			// need to change
-			//HttpSession session = request.getSession(false);
-			String authorization = request.getHeader("Authorization");
-
-			JSONObject obj = new JSONObject();
-			if(authorization != null) {
-				String token = authorization.substring(7);
-				System.out.println("token is "+ token);
-				String userId = JwtUtil.parseToken(token);
-				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
+			String userId = RpcHelper.checkToken(request, response);
+			if(userId == null) {
+				obj.put("status", "Invalid token");
 			}else {
-				obj.put("status", "Invalid Session");
-				response.setStatus(403);
+				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullName(userId));
 			}
+			
 			RpcHelper.writeJsonObject(response, obj);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -62,10 +56,7 @@ public class Login extends HttpServlet {
 		} finally {
 			connection.close();
 		}
-		
-		
-		//RpcHelper.writeJsonArray(response,array);
-		
+	
 	}
 
 	/**

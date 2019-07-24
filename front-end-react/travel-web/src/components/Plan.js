@@ -133,7 +133,7 @@ export class Plan extends React.Component{
 
     getMapRef=(ref)=>{
         this.setState({map : ref})
-        window.map = ref
+        // window.map = ref
         // console.log("plan test: ",ref)
     }
 
@@ -158,7 +158,7 @@ export class Plan extends React.Component{
 
     render(){
         const ithday = this.state.ithDay;
-        const path = this.state.path.map((place, idx)=>(
+        const path = this.state.path.map((place)=>(
             {
                 latlng: place.location,
                 place_id: place.place_id,

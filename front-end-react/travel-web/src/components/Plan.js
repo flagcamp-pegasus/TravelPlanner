@@ -1,9 +1,7 @@
 import React from 'react';
 import {DrawPath} from './GoogleMapPath.js'
 import { Link } from 'react-router-dom';
-import {PATH_ZOOM, API_KEY} from "../constants.js"
-// import {API_FEE_KEY} from '../charge';
-
+import {PATH_ZOOM, API_KEY, API_ROOT, USER_ID, TOKEN_KEY, AUTH_HEADER} from "../constants.js"
 import {Attractions} from './Attractions';
 import {OverviewButton} from './OverviewButton';
 import { Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button } from "antd";
@@ -12,7 +10,7 @@ import PubSub from 'pubsub-js';
 import smartPost from 'react-smart-post';
 import { func } from 'prop-types';
 // import { ServerHttp2Session } from 'http2';
-import {API_ROOT, USER_ID} from "../constants"
+
 
 
 let spotsPlan = [];
@@ -142,6 +140,42 @@ export class Plan extends React.Component{
         this.setState({placeId: id});
     }
 
+    clickSaveToday = (path, ithDay) => {
+        const token = localStorage.getItem(TOKEN_KEY);
+        const user_id = localStorage.getItem(USER_ID);
+
+        const {place_id, name} = path;
+        const location = path.latlng;
+        // const geometry = { geometry: location };
+        path = {place_id, name, geometry: {location} };
+        console.log("path JSON ",path);
+        debugger;
+        // path = JSON.stringify(path);
+
+        fetch(`${API_ROOT}/saveroutes`, {
+            method: 'POST',
+            headers: {
+                Authorization: `${AUTH_HEADER} ${token}`
+            },
+            body: JSON.stringify({
+                results: path,
+                ithDay: ithDay,
+                user_id: user_id,
+                })
+            })
+            .then((response) => {
+                if (response.ok) {
+                    message.success('Save route successfully!');
+                    return response.json();
+                }
+                throw new Error('Failed to connect to database.');
+            })
+            .catch((e) => {
+                console.error(e);
+                message.error('Failed to save route.');
+            });
+    }
+
     componentDidMount() {
         fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`)
         .then((response)=>{
@@ -169,6 +203,7 @@ export class Plan extends React.Component{
         return(
             <div>
                 <OverviewButton plans = {this.state.plans} setDay = {this.setDay}/>
+                <Button onClick = {() => this.clickSaveToday(this.state.path, this.state.ithDay) } >Save Plan for this day.</Button>
                 <div>
                     <Dropdown overlay={this.chooseDay} trigger={['click']}>
                         <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>

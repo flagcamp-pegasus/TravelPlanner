@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { Carousel } from 'antd';
-import {API_KEY, CITY_LIST} from "../constants";
+
+import { API_KEY, CITY_LIST } from "../constants";
+import { CitySearchBar } from "./CitySearchBar"
 
 const cityList = CITY_LIST;
 
 export class CityList extends React.Component {
 
     onChange = (page) => {
-        this.props.getPage(page, cityList[page].name, cityList[page].latlng);
+        this.props.setSelectCity(page, cityList[page].name, cityList[page].latlng);
     }
 
     // findPlace = () => {
@@ -19,9 +21,8 @@ export class CityList extends React.Component {
 
     getPhoto = () => {
         //https://maps.googleapis.com/maps/api/place/photo?parameters
-        var imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=320&maxheight=240&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=${API_KEY}`;
+        let imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=320&maxheight=240&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=${API_KEY}`;
         console.log(imageUrl);
-
         return imageUrl;
     }
 
@@ -35,7 +36,8 @@ export class CityList extends React.Component {
 
                     {cityList.map((city) => <img src={city.imageUrl} alt={city.name} key={city.imageUrl}/>)}
                 </Carousel>
-                <h1>{this.props.name}</h1>
+                <h1>{this.props.city.name}</h1>
+                <CitySearchBar setSelectCity={this.props.setSelectCity}/>
             </div>
         );
     }

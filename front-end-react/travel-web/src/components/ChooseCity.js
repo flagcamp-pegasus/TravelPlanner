@@ -15,7 +15,7 @@ class City extends React.Component{
         name: "London"
     }
 
-    getPage = (curPage, cityName, cityLatLng) => {
+    setSelectCity = (curPage, cityName, cityLatLng) => {
         this.setState({page: curPage});
         this.setState({name: cityName});
         this.setState({latlng: cityLatLng});
@@ -34,11 +34,11 @@ class City extends React.Component{
     }
 
     render(){
-        // console.log(this.props.city)
+        console.log("Selected City: ", this.state.name)
         return(
             <div>
                 <div className="container">
-                    <CityList getPage={this.getPage} name={this.state.name}/>
+                    <CityList setSelectCity={this.setSelectCity} city={this.state}/>
                     {/*<button onClick={this.zoomToCity}>Locate City</button>*/}
                     <LocateCity latlng={this.state.latlng} name = {this.state.name} zoom={CITY_ZOOM}/>
                 </div>

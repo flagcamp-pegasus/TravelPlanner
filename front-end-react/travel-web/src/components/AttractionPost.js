@@ -18,7 +18,9 @@ export class AttractionPost extends Component {
         //console.log(photos);
         if (typeof photos !== 'undefined'){
             let pic = photos[0];
-            //console.log(pic.getUrl());
+            return pic.getUrl? pic.getUrl({width: 100, height:100}) : null;
+            //console.log(pic.prototype.getUrl());
+
         }
 
 
@@ -30,7 +32,7 @@ export class AttractionPost extends Component {
         const { location } = geometry;
         const { lat, lon } = location;
         const sampleURL = "https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg";
-        this.handleURL(photos);
+       // this.handleURL(photos);
 
 
        // console.log(photos);
@@ -40,7 +42,7 @@ export class AttractionPost extends Component {
         return (
             <div>
                 <div className = 'place-name'>{name}</div>
-                <img alt="place image" src={sampleURL}/>
+                <img alt="place image" src={this.handleURL(photos)} />
                 <div className = 'place-info'>
                     <p className='place-rating'>rating : {rating}</p>
                     <p className="place-address">{vicinity}</p>

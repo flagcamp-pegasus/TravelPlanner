@@ -4,7 +4,6 @@ import { Tabs } from 'antd';
 
 import placesData from '../assets/data/GoogleSearchSampleData.json';
 import {AttractionList} from "./AttractionList";
-import {AttractionsSearch} from "./AttractionsSearch";
 import {LAT_SAMPLE, LON_SAMPLE, TYPE_FOOD, TYPE_MUSEUM, TYPE_SHOPPING,MAX_DISPLAY} from "../constants";
 //import {API_FEE_KEY} from '../charge';
 
@@ -34,6 +33,8 @@ export class Attractions extends Component {
         this.handleSearch({TYPE_FOOD});
     }
 
+
+
     handleSearch = (type) =>{
         if(!window.google){
             return
@@ -55,7 +56,7 @@ export class Attractions extends Component {
             if (status == window.google.maps.places.PlacesServiceStatus.OK) {
                 if(results.length > `${MAX_DISPLAY}`){
                     len = `${MAX_DISPLAY}`;
-                    console.log(len);
+                    //console.log(len);
                 }else{
                     len = results.length
                 }

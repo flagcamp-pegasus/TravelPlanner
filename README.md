@@ -129,6 +129,9 @@ phase 2: advanced features like recommendation based on interests, frontend comp
 7.1-7.8    
 7.9-7.15   
 
+7.24: delete(user_id, ith_day): delete ith day for user, move all days > i forward by 1
+save Plan = fetch * n
+
 ## responsibilities:
 
 back end:

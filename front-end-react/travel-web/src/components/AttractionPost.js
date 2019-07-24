@@ -19,7 +19,7 @@ export class AttractionPost extends Component {
         //console.log(photos);
         if (typeof photos !== 'undefined'){
             let pic = photos[0];
-            return pic.getUrl ? pic.getUrl({width: 300, height:300}) : {DEFAULT_IMAGE};
+            return pic.getUrl ? pic.getUrl({width: 100, height:100}) : {DEFAULT_IMAGE};
             //console.log(photos[0]);
         }
         //return photos[0].getUrl({width: 300, height:300});
@@ -30,12 +30,12 @@ export class AttractionPost extends Component {
 
             if (pic.html_attributions){
                 let tag = pic.html_attributions[0];
-
-                //console.log( tag.replace("'","" ));
-                return tag.replace("'","" );
+                let sub1 = tag.split('photos')[0];
+                let sub2 = sub1.substring(9,sub1.length);
+                console.log(sub2)
+                return sub2;
             }
 
-            //return pic.html_attributions ? pic.html_attributions[0] : null;
 
         }
 
@@ -44,27 +44,18 @@ export class AttractionPost extends Component {
     render() {
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         // debugger
-        //const address = this.props.info.vincity;
         const { location } = geometry;
         const { lat, lon } = location;
-        //const sampleLink = this.handleMoreInfo()
-       // const sampleLink =  <a href="https://maps.google.com/maps/contrib/102493113014314842044/photos">Boyds Grill &amp; Wine Bar</a>;
-        // this.handleURL(photos);
-        // console.log(photos);
-        // const photos1 = photos[0];//
-        //const photoUrl = photos[0].getUrl({width: 300, height: 300});// set size of the url
-
-
         return (
             <div>
-                {this.handleMoreInfo(photos)}
+
                 <div className = 'place-name' >{name}</div>
-                <img alt="place image" src={this.handleURL(photos)}/>
+                <img className = 'place-image' alt="place-image" src={this.handleURL(photos)}/>
                 <div className = 'place-info'>
                     <p className='place-rating'>Rating : {rating}</p>
                     <p className="place-address">Location: {vicinity}</p>
                     <p className= "place-type">Type: {types[0]}</p>
-                    {/*{sampleLink}*/}
+                    <a href = {this.handleMoreInfo(photos)}>More Information</a>
                 </div>
                 <Button onClick={(e) => this.handleClick({location, name}, e)}>add</Button>
             </div>

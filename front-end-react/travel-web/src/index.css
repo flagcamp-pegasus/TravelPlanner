@@ -12,6 +12,7 @@
 @import 'styles/DayList.css';
 @import 'styles/Attractions.css';
 @import 'styles/OverviewButton.css';
+@import 'styles/Attractions.css';
 body {
  margin: 0;
  padding: 0;

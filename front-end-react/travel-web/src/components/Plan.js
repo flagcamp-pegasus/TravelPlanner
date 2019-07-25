@@ -172,6 +172,13 @@ export class Plan extends React.Component {
             });
     }
 
+    planRemoveIdx = (idx)=>{
+        this.setState(({plans})=>({
+            ...plans.slice(0,idx),
+            ...plans.slice(idx+1)
+        }));
+    }
+
     componentDidMount() {
         fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`, {
             method: 'GET',

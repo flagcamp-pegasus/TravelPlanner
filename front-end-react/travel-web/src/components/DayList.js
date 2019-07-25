@@ -5,7 +5,7 @@ import ListSort from './ListSort';
 import {Button, message} from 'antd';
 
 import '../styles/SpotsList.css';
-import {API_ROOT, USER_ID} from "../constants"
+import {API_ROOT, AUTH_HEADER, TOKEN_KEY, USER_ID} from "../constants"
 
 export class DayList extends React.Component {
 
@@ -21,22 +21,31 @@ export class DayList extends React.Component {
         return this.sortListRef.returnList();
     }
 
-    deletePlan = (content, idx)=>{
-        console.log(this.returnSpotsList())
-        // fetch(`${API_ROOT}/saveroutes?user_id=${localStorage.getItem(USER_ID)}`)
-        //     .then((response)=>{
-        //         if(response.ok){
-        //             return response.json();
-        //         }
-        //         throw new Error('Failed to delete.');
-        //     }).then(
-        //     (history)=>{
-        //         // console.log("history in plan: ", history);
-        //         this.setState({ plans: history});
-        //     }
-        // ).catch((e) => {
-        //     console.log(e)
-        // });
+    deletePlan = (idx)=>{
+        console.log(idx+1, this.returnSpotsList())
+        fetch(`${API_ROOT}/saveroutes`,{
+            method: 'DELETE',
+            headers: {
+                Authorization: `${AUTH_HEADER} ${localStorage.getItem(TOKEN_KEY)}`,
+            },
+            body: JSON.stringify({
+                user_id: localStorage.getItem(USER_ID),
+                ithDay: idx+1
+            }),
+        })
+            .then((response)=>{
+                if(response.ok){
+                    return response.json();
+                }
+                throw new Error('Failed to delete.');
+            }).then(
+            (history)=>{
+                console.log(this.props.plans.length);
+                this.props.planRemoveIdx(idx); ////rerender
+            }
+        ).catch((e) => {
+            console.log(e)
+        });
     }
 
     gotoDay = (ithDay) =>{
@@ -62,7 +71,7 @@ export class DayList extends React.Component {
                 <h4 className="day">{`Day ${idx+1}`}</h4>
                 <Button type="link" onClick={()=>this.gotoDay(idx+1)}>{`Go To Plan`}</Button>
                 <br/>
-                <Button type="dashed" onClick={()=>this.deletePlan(content, idx)}>Delete</Button>
+                <Button type="dashed" onClick={()=>this.deletePlan(idx)}>Delete</Button>
             </div>
         ))
         return (

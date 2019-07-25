@@ -22,7 +22,6 @@ export class DayList extends React.Component {
     }
 
     deletePlan = (idx)=>{
-        console.log(idx+1, this.returnSpotsList())
         fetch(`${API_ROOT}/saveroutes`,{
             method: 'DELETE',
             headers: {
@@ -40,8 +39,7 @@ export class DayList extends React.Component {
                 throw new Error('Failed to delete.');
             }).then(
             (history)=>{
-                console.log(this.props.plans.length);
-                this.props.planRemoveIdx(idx); ////rerender
+                this.props.planRemoveIdx(idx);
             }
         ).catch((e) => {
             console.log(e)
@@ -70,8 +68,8 @@ export class DayList extends React.Component {
             <div key = {idx}>
                 <h4 className="day">{`Day ${idx+1}`}</h4>
                 <Button type="link" onClick={()=>this.gotoDay(idx+1)}>{`Go To Plan`}</Button>
-                <br/>
-                <Button type="dashed" onClick={()=>this.deletePlan(idx)}>Delete</Button>
+                {/*<br/>*/}
+                {/*<Button type="dashed" onClick={()=>this.deletePlan(idx)}>Delete</Button>*/}
             </div>
         ))
         return (

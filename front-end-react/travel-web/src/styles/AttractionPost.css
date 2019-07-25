@@ -1,4 +1,6 @@
 .place-image {
-    height: 50%;
-    width: 50%;
+    margin:auto;
+    height: 75%;
+    width: 75%;
+    margin-top:10px;
 }

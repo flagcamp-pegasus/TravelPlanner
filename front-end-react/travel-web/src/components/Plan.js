@@ -31,21 +31,11 @@ export class Plan extends React.Component{
         this.setState({
             ithDay: ithday,
             path : this.state.plans[ithday-1],
+        },()=>{
+            console.log(this.state.path);
         });
       };
 
-    // chooseDay = (
-    //     <Menu onClick={this.onClick}>
-    //       <Menu.Item key="1">Day 1</Menu.Item>
-    //       <Menu.Item key="2">Day 2</Menu.Item>
-    //       <Menu.Item key="3">Day 3</Menu.Item>
-    //       <Menu.Item key="4">Day 4</Menu.Item>
-    //       <Menu.Item key="5">Day 5</Menu.Item>
-    //       <Menu.Item key="6">Day 6</Menu.Item>
-    //       <Menu.Item key="7">Day 7</Menu.Item>
-    //     </Menu>
-    //   );
-    //
       getSortedList = (path) => {
         let nameArray = path.map( (spotItem) => {
             return spotItem.props.children
@@ -146,11 +136,11 @@ export class Plan extends React.Component{
 
         const body ={
             results : path.map((data)=>{
-                console.log(data)
+                // console.log(data)
                 return {
                         geometry: {location: data.location},
                         name : data.name,
-                            place_id : data.place_id,
+                        place_id : data.place_id,
                     }
                 }),
             user_id : user_id,
@@ -199,13 +189,14 @@ export class Plan extends React.Component{
             throw new Error('No history routes for this username.');
         }).then(
             (history)=>{
-                // console.log("history in plan: ", history);
+                console.log("history in plan: ", history);
                 this.setState({ plans: history});
             }
         ).catch((e) => {
             console.log(e)
             message.error('failed to get history.');
         });
+
     }
 
     getAttractionRef = (ref)=>{
@@ -228,7 +219,11 @@ export class Plan extends React.Component{
         ))
         return(
             <div>
-                <OverviewButton plans = {this.state.plans} setDay = {this.chooseday}/>
+                <OverviewButton
+                    plans = {this.state.plans}
+                    setDay = {this.chooseday}
+                    clickSaveToday={this.clickSaveToday}
+                />
                 <Button onClick = {() => {this.clickSaveToday(this.state.plans[ithday-1], this.state.ithDay)} } >Save Plan for this day.</Button>
                 <div>
                     <h3>{`Day ${ithday}`}</h3>

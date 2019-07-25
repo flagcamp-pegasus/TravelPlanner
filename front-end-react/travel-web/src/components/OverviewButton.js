@@ -17,7 +17,11 @@ export class OverviewButton extends React.Component {
     };
 
     handleSave = () => {
-
+        console.log(this.dayListRef.returnSpotsList().map((a)=>(a.key)));
+        const newOrder = this.dayListRef.returnSpotsList().map((a)=>(parseInt(a.key)+1));
+        newOrder.map((newday, idx)=>{
+            this.props.clickSaveToday(this.props.plans[idx], newday);
+        })
     }
 
     handleCancel = () => {
@@ -28,6 +32,10 @@ export class OverviewButton extends React.Component {
         this.setState({
             visible: false,
         });
+    }
+
+    getDayListRef = (ref)=>{
+        this.dayListRef=ref;
     }
 
     render() {
@@ -50,6 +58,7 @@ export class OverviewButton extends React.Component {
                     cancelText='close'
                 >
                     <DayList
+                        ref={this.getDayListRef}
                         plans={this.props.plans}
                         setDay = {this.props.setDay}
                         hide = {this.hide}

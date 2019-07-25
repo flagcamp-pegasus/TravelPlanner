@@ -13,6 +13,8 @@
 @import 'styles/Attractions.css';
 @import 'styles/OverviewButton.css';
 @import 'styles/Attractions.css';
+@import 'styles/AttractionPost.css';
+
 body {
  margin: 0;
  padding: 0;

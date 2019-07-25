@@ -28,7 +28,6 @@ class MyMap extends React.Component{
             markers: [],
             onMapMounted: ref => {
                 refs.map = ref;
-                this.mapRef = ref;
             },
             onBoundsChanged: () => {
                 this.setState({
@@ -52,9 +51,8 @@ class MyMap extends React.Component{
                 });
 
                 const nextMarkers = places.map(place => {
-                    // console.log(place)
                     // console.log(place.id)
-                    this.props.getplaceId(place.id);
+                    this.props.getplaceId(place.place_id);
                     return {position: place.geometry.location,};
                 });
 
@@ -70,10 +68,6 @@ class MyMap extends React.Component{
         })
     }
 
-    componentDidMount() {
-        // this.props.getMapRef(this.mapRef)
-        this.props.getMapRef(this.mapRef)
-    }
 
     render(){
         // console.log("today's plan: ", this.props.path)

@@ -2,6 +2,37 @@
     margin: 10px 10px 10px 10px;
 }
 
-.path{
-    width: 1000px;
+.planContainer {
+    width:100%;
+    text-align:center;
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: center;
+    margin: 30px auto;
+    padding-top: 5px;
 }
+
+.path{
+    display: inline-block;
+    margin:0 auto;
+    width: 65%;
+    height: 600px;
+    /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
+}
+
+.leftContent {
+    float: left;
+    width: 20%;
+    height: 600px;
+    /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
+}
+
+.rightContent{
+    float:right;
+    width: 350px;
+    height: 600px;
+    /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
+}
+
+

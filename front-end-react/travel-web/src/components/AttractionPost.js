@@ -6,9 +6,6 @@ import {DEFAULT_IMAGE} from "../constants"
 
 export class AttractionPost extends Component {
 
-    static propTypes = {
-        info: PropTypes.object.isRequired,
-    }
 
 
     handleClick = ({location, name}) => {
@@ -43,7 +40,13 @@ export class AttractionPost extends Component {
 
     render() {
         if(!this.props.info){
+<<<<<<< HEAD
             return;
+=======
+            return(
+                <div></div>
+            )
+>>>>>>> 0f6d0af52496419e81f351a55e56b3f8f4d48120
         }
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         // debugger
@@ -58,7 +61,7 @@ export class AttractionPost extends Component {
                     <p className='place-rating'>Rating : {rating}</p>
                     <p className="place-address">Location: {vicinity}</p>
                     <p className= "place-type">Type: {types[0]}</p>
-                    <a href = {this.handleMoreInfo(photos)}>More Information</a>
+                    <a href = {this.handleMoreInfo(photos)} target="_blank">More Information</a>
                 </div>
                 <Button onClick={(e) => this.handleClick({location, name}, e)}>add</Button>
             </div>

@@ -135,7 +135,7 @@ import org.json.JSONObject;
 
 public class DistanceMatrix {
 	private static final String URL = "https://maps.googleapis.com/maps/api/distancematrix/json";
-	private static final String API_KEY = ""; // use your own API key
+	private static final String API_KEY = charge.GOOGLE_MAP_API; // use your own API key
 
 	
 	public int getDistance(double[] origin, double[] dest) {

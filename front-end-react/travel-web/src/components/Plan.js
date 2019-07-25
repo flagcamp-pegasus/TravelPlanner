@@ -1,51 +1,40 @@
 import React from 'react';
 import {DrawPath} from './GoogleMapPath.js'
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {PATH_ZOOM, API_KEY, API_ROOT, USER_ID, TOKEN_KEY, AUTH_HEADER} from "../constants.js"
 import {Attractions} from './Attractions';
 import {OverviewButton} from './OverviewButton';
-import { Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button } from "antd";
-import { SpotsList } from './SpotsList';
+import {Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button} from "antd";
+import {SpotsList} from './SpotsList';
 import PubSub from 'pubsub-js';
 import smartPost from 'react-smart-post';
-import { func } from 'prop-types';
+import {func} from 'prop-types';
 // import { ServerHttp2Session } from 'http2';
-
 
 
 let spotsPlan = [];
 
 
-export class Plan extends React.Component{
+export class Plan extends React.Component {
     state = {
         path: [],
         ithDay: 1,
-        plans: [["1st spot", "2nd spot", "3rd spot"], ["x","y","z"]],
-        prevPath:[],
+        plans: [["1st spot", "2nd spot", "3rd spot"], ["x", "y", "z"]],
+        prevPath: [],
         temp: [],
         spotNum: 0,
     }
 
-    chooseday = ( ithday ) => {
+    chooseday = (ithday) => {
         message.info(`Changed to Day ${ithday}`);
         this.setState({
             ithDay: ithday,
             path : this.state.plans[ithday-1],
+        },()=>{
+            console.log(this.state.path);
         });
-      };
+    };
 
-    // chooseDay = (
-    //     <Menu onClick={this.onClick}>
-    //       <Menu.Item key="1">Day 1</Menu.Item>
-    //       <Menu.Item key="2">Day 2</Menu.Item>
-    //       <Menu.Item key="3">Day 3</Menu.Item>
-    //       <Menu.Item key="4">Day 4</Menu.Item>
-    //       <Menu.Item key="5">Day 5</Menu.Item>
-    //       <Menu.Item key="6">Day 6</Menu.Item>
-    //       <Menu.Item key="7">Day 7</Menu.Item>
-    //     </Menu>
-    //   );
-    //
       getSortedList = (path) => {
         let nameArray = path.map( (spotItem) => {
             return spotItem.props.children
@@ -57,10 +46,10 @@ export class Plan extends React.Component{
             const spotObj = originPath.find((element) => (element.name === spotName))
             spotObjArray.push(spotObj);
         });
-        console.log("spotObjArray:",spotObjArray);
+        console.log("spotObjArray:", spotObjArray);
         return spotObjArray
     }
-    
+
     generateRoute = () => {
         let path = this.SpotsListRef.returnSpotsList();
         const originPath = this.SpotsListRef.state.path;
@@ -71,32 +60,32 @@ export class Plan extends React.Component{
         if (originPath.length === this.state.spotNum) {
             if (path.length === 0) {
                 console.log("no add no move");
-                this.spotsPlan =  this.state.prevPath;
+                this.spotsPlan = this.state.prevPath;
             } else {
                 console.log("no add but move");
-                this.setState(function(){
-                    return{prevPath: path}
+                this.setState(function () {
+                    return {prevPath: path}
                 });
                 this.spotsPlan = path;
                 console.log("return!!!", path)
                 return path
             }
         } else {
-            if (path.length !== originPath.length){
+            if (path.length !== originPath.length) {
                 console.log("only add no move");
-                this.setState(function() {
-                    return {prevPath: this.state.prevPath.concat(originPath.slice(-(originPath.length-this.state.spotNum)))}
+                this.setState(function () {
+                    return {prevPath: this.state.prevPath.concat(originPath.slice(-(originPath.length - this.state.spotNum)))}
                 })
-                this.setState(function() {
+                this.setState(function () {
                     return {spotNum: originPath.length}
                 })
-                this.spotsPlan = this.state.prevPath.concat(originPath.slice(-(originPath.length-this.state.spotNum)));
+                this.spotsPlan = this.state.prevPath.concat(originPath.slice(-(originPath.length - this.state.spotNum)));
                 // console.log("return!!!", this.spotsPlan)
                 return this.spotsPlan
             } else {
                 console.log("both add and move");
-                this.setState(function(){
-                    return{ 
+                this.setState(function () {
+                    return {
                         spotNum: path.length,
                         originPath: path
                     }
@@ -104,74 +93,72 @@ export class Plan extends React.Component{
                 this.spotsPlan = path;
                 console.log("return!!!", path)
                 return path
-            }   
+            }
         }
     }
- 
+
     getSpotsListRef = (ref) => {
         this.SpotsListRef = ref;
-        console.log("this.SpotsListRef",this.SpotsListRef);
+        console.log("this.SpotsListRef", this.SpotsListRef);
     }
 
-    removeRoute = ()=>{
-        this.setState((state)=>({path:[]}))
+    removeRoute = () => {
+        this.setState((state) => ({path: []}))
     }
 
     componentWillMount() {
         // attention
         smartPost.push(this);
-     }
-    smartPostOn=(message)=>{
+    }
+
+    smartPostOn = (message) => {
         console.log(message)
     }
 
 
-
-    getMapRef=(ref)=>{
-        this.setState({map : ref})
-        // window.map = ref
-        // console.log("plan test: ",ref)
-    }
-
-    getplaceId = (id) =>{
+    getplaceId = (id) => {
         this.setState({placeId: id});
     }
 
-    clickSaveToday = (path, ithDay) => {
-          // debugger
+    addOneDay = () => {
+        this.setState({ithDay: this.state.plans.length + 1, path: []});
+        this.setState(prevState => {
+                return {
+                    plans: [
+                        ...prevState.plans,
+                        []
+                    ]
+                };
+            },
+            // () => console.log("add one more day", this.state.path, this.state.plans, this.state.ithDay)
+        );
+    }
 
+    clickSaveToday = (path, ithDay) => {
 
         const token = localStorage.getItem(TOKEN_KEY);
         const user_id = localStorage.getItem(USER_ID);
-
         const body ={
             results : path.map((data)=>{
-                console.log(data)
+                // console.log(data)
                 return {
                         geometry: {location: data.location},
                         name : data.name,
-                            place_id : data.place_id,
+                        place_id : data.place_id,
                     }
                 }),
             user_id : user_id,
             ithDay: ithDay,
         }
-        // debugger
-        // const {place_id, name} = path;
-        // const location = path.latlng;
-        // const geometry = { geometry: location };
-        // path = {place_id, name, geometry: {location} };
-        console.log("path JSON ",body);
-        // debugger;
-        // path = JSON.stringify(path);
+        console.log("path JSON ", body);
 
         fetch(`${API_ROOT}/saveroutes`, {
-                method: 'POST',
-                headers: {
-                    Authorization: `${AUTH_HEADER} ${token}`
-                },
-                body: JSON.stringify(body),
-            })
+            method: 'POST',
+            headers: {
+                Authorization: `${AUTH_HEADER} ${token}`
+            },
+            body: JSON.stringify(body),
+        })
             .then((response) => {
                 if (response.ok) {
                     message.success('Save route successfully!');
@@ -185,8 +172,20 @@ export class Plan extends React.Component{
             });
     }
 
+    planRemoveIdx = (idx)=>{
+        this.setState(({plans})=>({
+            ...plans.slice(0,idx),
+            ...plans.slice(idx+1)
+        }));
+    }
+
     componentDidMount() {
-        fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`)
+        fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `${AUTH_HEADER} ${localStorage.getItem(TOKEN_KEY)}`
+            },
+        })
         .then((response)=>{
             if(response.ok){
                 return response.json();
@@ -196,36 +195,60 @@ export class Plan extends React.Component{
             (history)=>{
                 // console.log("history in plan: ", history);
                 this.setState({ plans: history});
-                // debugger;
             }
         ).catch((e) => {
             console.log(e)
             message.error('failed to get history.');
         });
+
     }
 
-    render(){
+    getAttractionRef = (ref) => {
+        this.attractionRef = ref;
+    }
+
+    selectSpot = () => {
+        this.attractionRef.handleSearchById();
+    }
+
+
+    render() {
         const ithday = this.state.ithDay;
-        const path = this.state.path.map((place)=>(
+        const path = this.state.path.map((place) => (
             {
                 latlng: place.location,
                 place_id: place.place_id,
                 name: place.name,
             }
         ))
-        return(
-            <div>
-                <OverviewButton plans = {this.state.plans} setDay = {this.chooseday}/>
-                <Button onClick = {() => {this.clickSaveToday(this.state.plans[ithday-1], this.state.ithDay)} } >Save Plan for this day.</Button>
-                <div>
-                    <Dropdown overlay={this.chooseDay} trigger={['click']}>
-                        <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>
-                    </Dropdown>
-                    <SpotsList ref={this.getSpotsListRef}/>
+        return (
+            <div className="planContainer">
+                <div className="leftContent">
+                    <OverviewButton plans={this.state.plans} setDay={this.chooseday}/>
+
+                    <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
+                            className="btn" >
+                        Save Plan for this day
+                    </Button>
+                    <Button onClick={this.addOneDay} className="btn">
+                        Add One More Day
+                    </Button>
+
+                    <div>
+                        <h3>{`Day ${ithday}`}</h3>
+                        {/*<Dropdown overlay={this.chooseDay} trigger={['click']}>*/}
+                        {/*    <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>*/}
+                        {/*</Dropdown>*/}
+                        <SpotsList ref={this.getSpotsListRef}/>
+                    </div>
                 </div>
                 <div className="path">
-                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className = "btn">Generate Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className = "btn">Remove Route</Button>
+                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn">Generate
+                        Route</Button>
+                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn">Remove
+                        Route</Button>
+                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn">Find more
+                        info</Button>
                     {/*<button onClick={this.generateRoute}>Generate Route</button>*/}
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
 
@@ -233,21 +256,24 @@ export class Plan extends React.Component{
                         getMapRef={this.getMapRef}
                         path={path}
                         //[{lat, lng}]
-                        city = {this.props.city? this.props.city: this.state.path[0]}
+                        city={this.props.city ? this.props.city : this.state.path[0]}
                         zoom={PATH_ZOOM}
 
-                        googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-                        loadingElement = {<div style={{ height: `100%` }}/>}
-                        containerElement = {<div style={{ height: `400px` }}/>}
-                        mapElement = {<div style={{ height: `100%` }} />}
+                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                        loadingElement={<div style={{height: `100%`}}/>}
+                        containerElement={<div style={{height: `400px`}}/>}
+                        mapElement={<div style={{height: `100%`}}/>}
 
                         getplaceId={this.getplaceId}
                     />
                 </div>
-                <Attractions
-                    city =  {this.props.city? this.props.city: this.state.path[0]}
-                    userSearchId={this.state.placeId}
-                />
+                <div className = "rightContent">
+                    <Attractions
+                        ref={this.getAttractionRef}
+                        city={this.props.city ? this.props.city : this.state.path[0]}
+                        userSearchId={this.state.placeId}
+                    />
+                </div>
             </div>
         )
     }

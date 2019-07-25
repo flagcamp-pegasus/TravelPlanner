@@ -52,9 +52,8 @@ class MyMap extends React.Component{
                 });
 
                 const nextMarkers = places.map(place => {
-                    // console.log(place)
                     // console.log(place.id)
-                    this.props.getplaceId(place.id);
+                    this.props.getplaceId(place.place_id);
                     return {position: place.geometry.location,};
                 });
 

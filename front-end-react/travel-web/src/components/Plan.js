@@ -186,7 +186,12 @@ export class Plan extends React.Component{
     }
 
     componentDidMount() {
-        fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`)
+        fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`,{
+            method: 'GET',
+            headers: {
+                Authorization: `${AUTH_HEADER} ${localStorage.getItem(TOKEN_KEY)}`
+            },
+        })
         .then((response)=>{
             if(response.ok){
                 return response.json();
@@ -196,13 +201,21 @@ export class Plan extends React.Component{
             (history)=>{
                 // console.log("history in plan: ", history);
                 this.setState({ plans: history});
-                // debugger;
             }
         ).catch((e) => {
             console.log(e)
             message.error('failed to get history.');
         });
     }
+
+    getAttractionRef = (ref)=>{
+          this.attractionRef =ref;
+    }
+
+    selectSpot = ()=>{
+          this.attractionRef.handleSearchById();
+    }
+
 
     render(){
         const ithday = this.state.ithDay;
@@ -218,14 +231,16 @@ export class Plan extends React.Component{
                 <OverviewButton plans = {this.state.plans} setDay = {this.chooseday}/>
                 <Button onClick = {() => {this.clickSaveToday(this.state.plans[ithday-1], this.state.ithDay)} } >Save Plan for this day.</Button>
                 <div>
-                    <Dropdown overlay={this.chooseDay} trigger={['click']}>
-                        <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>
-                    </Dropdown>
+                    <h3>{`Day ${ithday}`}</h3>
+                    {/*<Dropdown overlay={this.chooseDay} trigger={['click']}>*/}
+                    {/*    <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>*/}
+                    {/*</Dropdown>*/}
                     <SpotsList ref={this.getSpotsListRef}/>
                 </div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className = "btn">Generate Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className = "btn">Remove Route</Button>
+                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className = "btn">Find more info</Button>
                     {/*<button onClick={this.generateRoute}>Generate Route</button>*/}
                     {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
 
@@ -245,6 +260,7 @@ export class Plan extends React.Component{
                     />
                 </div>
                 <Attractions
+                    ref={this.getAttractionRef}
                     city =  {this.props.city? this.props.city: this.state.path[0]}
                     userSearchId={this.state.placeId}
                 />

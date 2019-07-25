@@ -38,12 +38,14 @@ public class History extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		// check token 
+
+		String userId = request.getParameter("user_id");
 		if(RpcHelper.checkToken(request, response) == null) {
+			System.out.println("token expired for user: "+userId);
 			return;
 		}
+	
 		
-		
-		String userId = request.getParameter("user_id");
 		System.out.println("Get history routes of userId: "+userId);
 		JSONArray array = new JSONArray();
 		

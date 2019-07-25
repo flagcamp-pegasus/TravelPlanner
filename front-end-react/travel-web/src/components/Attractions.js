@@ -133,7 +133,7 @@ export class Attractions extends Component {
                 <div id="map"></div>
                 <Tabs defaultActiveKey='1' onChange={this.handleSearch}  className="attraction-tab">
                     <TabPane tab="SELECTED SPOT" key="user-add">
-                        {this.renderUserAdd()}
+                        <AttractionPost info = {this.state.userPlaceInfo}/>
                     </TabPane>
 
                     <TabPane tab="FOOD" key={TYPE_FOOD}>

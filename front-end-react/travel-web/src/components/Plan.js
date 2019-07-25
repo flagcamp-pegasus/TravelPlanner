@@ -133,14 +133,14 @@ export class Plan extends React.Component {
     addOneDay = () => {
         this.setState({ithDay: this.state.plans.length + 1, path: []});
         this.setState(prevState => {
-            return {
-                plans: [
-                    ...prevState.plans,
-                    []
-                ]
-            };
-        },
-        () => console.log("add one more day", this.state.path, this.state.plans, this.state.ithDay)
+                return {
+                    plans: [
+                        ...prevState.plans,
+                        []
+                    ]
+                };
+            },
+            // () => console.log("add one more day", this.state.path, this.state.plans, this.state.ithDay)
         );
 
     }
@@ -227,24 +227,26 @@ export class Plan extends React.Component {
             }
         ))
         return (
-            <div>
-                <OverviewButton plans={this.state.plans} setDay={this.chooseday}/>
+            <div className="planContainer">
+                <div className="leftContent">
+                    <OverviewButton plans={this.state.plans} setDay={this.chooseday}/>
 
-                <Button onClick={() => {
-                    this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)
-                }}>
-                    Save Plan for this day.
-                </Button>
-                <Button onClick={this.addOneDay}>
-                    Add One More Day
-                </Button>
+                    <Button onClick={() => {
+                        this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)
+                    }} className="btn" >
+                        Save Plan for this day.
+                    </Button>
+                    <Button onClick={this.addOneDay} className="btn">
+                        Add One More Day
+                    </Button>
 
-                <div>
-                    <h3>{`Day ${ithday}`}</h3>
-                    {/*<Dropdown overlay={this.chooseDay} trigger={['click']}>*/}
-                    {/*    <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>*/}
-                    {/*</Dropdown>*/}
-                    <SpotsList ref={this.getSpotsListRef}/>
+                    <div>
+                        <h3>{`Day ${ithday}`}</h3>
+                        {/*<Dropdown overlay={this.chooseDay} trigger={['click']}>*/}
+                        {/*    <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>*/}
+                        {/*</Dropdown>*/}
+                        <SpotsList ref={this.getSpotsListRef}/>
+                    </div>
                 </div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn">Generate
@@ -271,11 +273,13 @@ export class Plan extends React.Component {
                         getplaceId={this.getplaceId}
                     />
                 </div>
-                <Attractions
-                    ref={this.getAttractionRef}
-                    city={this.props.city ? this.props.city : this.state.path[0]}
-                    userSearchId={this.state.placeId}
-                />
+                <div className = "rightContent">
+                    <Attractions
+                        ref={this.getAttractionRef}
+                        city={this.props.city ? this.props.city : this.state.path[0]}
+                        userSearchId={this.state.placeId}
+                    />
+                </div>
             </div>
         )
     }

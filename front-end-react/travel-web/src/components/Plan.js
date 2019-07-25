@@ -176,6 +176,13 @@ export class Plan extends React.Component {
             });
     }
 
+    planRemoveIdx = (idx)=>{
+        this.setState(({plans})=>({
+            ...plans.slice(0,idx),
+            ...plans.slice(idx+1)
+        }));
+    }
+
     componentDidMount() {
         fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`, {
             method: 'GET',
@@ -224,6 +231,7 @@ export class Plan extends React.Component {
                     plans = {this.state.plans}
                     setDay = {this.chooseday}
                     clickSaveToday={this.clickSaveToday}
+                    planRemoveIdx={this.planRemoveIdx}
                 />
                 <Button onClick = {() => {this.clickSaveToday(this.state.plans[ithday-1], this.state.ithDay)} } >Save Plan for this day.</Button>
                 <Button onClick={this.addOneDay}>Add One More Day</Button>

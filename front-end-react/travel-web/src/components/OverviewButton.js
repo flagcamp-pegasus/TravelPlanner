@@ -62,6 +62,7 @@ export class OverviewButton extends React.Component {
                         plans={this.props.plans}
                         setDay = {this.props.setDay}
                         hide = {this.hide}
+                        planRemoveIdx={this.props.planRemoveIdx}
                     />
                 </Modal>
             </div>

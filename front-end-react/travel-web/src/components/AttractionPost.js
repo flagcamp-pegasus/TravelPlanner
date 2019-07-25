@@ -49,7 +49,7 @@ export class AttractionPost extends Component {
         const { location } = geometry;
         const { lat, lon } = location;
         return (
-            <div>
+            <div className="attraction-place">
 
                 <div className = 'place-name' >{name}</div>
                 <img className = 'place-image' alt="place-image" src={this.handleURL(photos)}/>

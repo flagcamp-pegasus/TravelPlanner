@@ -29,24 +29,14 @@ export class Plan extends React.Component {
         message.info(`Changed to Day ${ithday}`);
         this.setState({
             ithDay: ithday,
-            path: this.state.plans[ithday - 1],
+            path : this.state.plans[ithday-1],
+        },()=>{
+            console.log(this.state.path);
         });
     };
 
-    // chooseDay = (
-    //     <Menu onClick={this.onClick}>
-    //       <Menu.Item key="1">Day 1</Menu.Item>
-    //       <Menu.Item key="2">Day 2</Menu.Item>
-    //       <Menu.Item key="3">Day 3</Menu.Item>
-    //       <Menu.Item key="4">Day 4</Menu.Item>
-    //       <Menu.Item key="5">Day 5</Menu.Item>
-    //       <Menu.Item key="6">Day 6</Menu.Item>
-    //       <Menu.Item key="7">Day 7</Menu.Item>
-    //     </Menu>
-    //   );
-    //
-    getSortedList = (path) => {
-        let nameArray = path.map((spotItem) => {
+      getSortedList = (path) => {
+        let nameArray = path.map( (spotItem) => {
             return spotItem.props.children
         });
         // console.log("nameArray: ", nameArray);
@@ -151,16 +141,17 @@ export class Plan extends React.Component {
         const token = localStorage.getItem(TOKEN_KEY);
         const user_id = localStorage.getItem(USER_ID);
 
-        const body = {
-            results: path.map((data) => {
-                console.log(data)
+
+        const body ={
+            results : path.map((data)=>{
+                // console.log(data)
                 return {
-                    geometry: {location: data.location},
-                    name: data.name,
-                    place_id: data.place_id,
-                }
-            }),
-            user_id: user_id,
+                        geometry: {location: data.location},
+                        name : data.name,
+                        place_id : data.place_id,
+                    }
+                }),
+            user_id : user_id,
             ithDay: ithDay,
         }
         console.log("path JSON ", body);
@@ -192,20 +183,21 @@ export class Plan extends React.Component {
                 Authorization: `${AUTH_HEADER} ${localStorage.getItem(TOKEN_KEY)}`
             },
         })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('No history routes for this username.');
-            }).then(
-            (history) => {
+        .then((response)=>{
+            if(response.ok){
+                return response.json();
+            }
+            throw new Error('No history routes for this username.');
+        }).then(
+            (history)=>{
                 // console.log("history in plan: ", history);
-                this.setState({plans: history});
+                this.setState({ plans: history});
             }
         ).catch((e) => {
             console.log(e)
             message.error('failed to get history.');
         });
+
     }
 
     getAttractionRef = (ref) => {

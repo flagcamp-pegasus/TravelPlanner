@@ -92,6 +92,8 @@ export default class ListSort extends React.Component {
   }
 
   componentDidMount() {
+
+
     this.dom = ReactDOM.findDOMNode(this);
     this.keyNamePair = [];
 

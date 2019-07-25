@@ -22,7 +22,7 @@ export class DayList extends React.Component {
     }
 
     deletePlan = (content, idx)=>{
-        console.log("delete ", content, idx)
+        console.log(this.returnSpotsList())
         // fetch(`${API_ROOT}/saveroutes?user_id=${localStorage.getItem(USER_ID)}`)
         //     .then((response)=>{
         //         if(response.ok){
@@ -56,6 +56,7 @@ export class DayList extends React.Component {
                 </div>
             )
         });
+
         const days = this.props.plans.map((content, idx)=>(
             <div key = {idx}>
                 <h4 className="day">{`Day ${idx+1}`}</h4>

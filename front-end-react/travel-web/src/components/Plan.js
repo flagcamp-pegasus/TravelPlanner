@@ -132,16 +132,12 @@ export class Plan extends React.Component {
             },
             // () => console.log("add one more day", this.state.path, this.state.plans, this.state.ithDay)
         );
-
     }
-
 
     clickSaveToday = (path, ithDay) => {
 
         const token = localStorage.getItem(TOKEN_KEY);
         const user_id = localStorage.getItem(USER_ID);
-
-
         const body ={
             results : path.map((data)=>{
                 // console.log(data)
@@ -223,10 +219,9 @@ export class Plan extends React.Component {
                 <div className="leftContent">
                     <OverviewButton plans={this.state.plans} setDay={this.chooseday}/>
 
-                    <Button onClick={() => {
-                        this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)
-                    }} className="btn" >
-                        Save Plan for this day.
+                    <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
+                            className="btn" >
+                        Save Plan for this day
                     </Button>
                     <Button onClick={this.addOneDay} className="btn">
                         Add One More Day

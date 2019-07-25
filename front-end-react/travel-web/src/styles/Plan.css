@@ -9,7 +9,7 @@
     flex-direction: row;            /* default value; can be omitted */
     flex-wrap: nowrap;              /* default value; can be omitted */
     justify-content: center;
-    margin: 30px auto;
+    /*margin: 30px auto;*/
     padding-top: 5px;
 }
 
@@ -17,7 +17,7 @@
     display: inline-block;
     margin:0 auto;
     width: 65%;
-    height: 600px;
+    height: 800px;
     /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
 }
 
@@ -25,6 +25,7 @@
     float: left;
     width: 20%;
     height: 600px;
+    padding-top: 10px;
     /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
 }
 
@@ -32,7 +33,11 @@
     float:right;
     width: 350px;
     height: 600px;
+    padding-top: 10px;
     /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
 }
+
+
+
 
 

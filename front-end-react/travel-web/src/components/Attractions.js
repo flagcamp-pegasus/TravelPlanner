@@ -124,19 +124,19 @@ export class Attractions extends Component {
             <div>
                 <p>Please add place from search bar or Select a place from recommended categories</p>
                 <div id="map"></div>
-                <Tabs defaultActiveKey='1' onChange={this.handleSearch}  className="attraction-tab" size = "small" >
+                <Tabs defaultActiveKey="user-add" onChange={this.handleSearch}  className="attraction-tab" size = "small" >
                     <TabPane
                         className = "tabPane"
                         tab={
                             <span> <Icon type="smile" /></span>}
-                        key="user-add" >
+                        key='user-add' >
                         <AttractionPost info = {this.state.userPlaceInfo}/>
                     </TabPane>
 
                     <TabPane
                         tab={
                             <span> <Icon type="coffee"/></span>}
-                        key={TYPE_FOOD}  forceRender = "true">
+                        key={TYPE_FOOD}  >
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
 

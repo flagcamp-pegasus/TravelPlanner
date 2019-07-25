@@ -43,7 +43,7 @@ class City extends React.Component{
                     <LocateCity latlng={this.state.latlng} name = {this.state.name} zoom={CITY_ZOOM}/>
                 </div>
                 {/*<NavLink to="/plan">Contact</NavLink>*/}
-                <Button type="primary" htmlType="submit" onClick={this.plan}>Plan now!</Button>
+                <Button type="primary" htmlType="submit" onClick={this.plan}>Plan Now !</Button>
                 {/*<button onClick={this.plan}>Plan now!</button>*/}
             </div>
         )

@@ -53,6 +53,7 @@ export class AttractionPost extends Component {
         const { lat, lon } = location;
         const description = `Rating ${rating};  Location: ${vicinity} `;
         return (
+
             <Card
                 style={{ width: 300 }}
                 cover={

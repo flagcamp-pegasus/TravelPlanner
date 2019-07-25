@@ -35,7 +35,7 @@ export class Plan extends React.Component {
         });
     };
 
-      getSortedList = (path) => {
+    getSortedList = (path) => {
         let nameArray = path.map( (spotItem) => {
             return spotItem.props.children
         });
@@ -174,10 +174,10 @@ export class Plan extends React.Component {
 
     planRemoveIdx = (idx)=>{
         this.setState(({plans})=>({
-            ...plans.slice(0,idx),
-            ...plans.slice(idx+1)
-        }));
+            plans:[ ...plans.slice(0,idx), ...plans.slice(idx+1)]
+        }), ()=>console.log(this.state.plans.length));
     }
+
 
     componentDidMount() {
         fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`, {
@@ -224,16 +224,16 @@ export class Plan extends React.Component {
         return (
             <div className="planContainer">
                 <div className="leftContent">
-                    <OverviewButton plans={this.state.plans} setDay={this.chooseday}/>
+                    <OverviewButton
+                        plans={this.state.plans}
+                        setDay={this.chooseday}
+                        planRemoveIdx={this.planRemoveIdx}
+                    />
 
                     <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
                             className="btn" >
                         Save Plan for this day
                     </Button>
-                    <Button onClick={this.addOneDay} className="btn">
-                        Add One More Day
-                    </Button>
-
                     <div>
                         <h3>{`Day ${ithday}`}</h3>
                         {/*<Dropdown overlay={this.chooseDay} trigger={['click']}>*/}
@@ -241,6 +241,10 @@ export class Plan extends React.Component {
                         {/*</Dropdown>*/}
                         <SpotsList ref={this.getSpotsListRef}/>
                     </div>
+                    <Button onClick={this.addOneDay} className="btn">
+                        Add One More Day
+                    </Button>
+                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)}>Delete Today's Plan</Button>
                 </div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn">Generate

@@ -4,6 +4,7 @@ import ListSort from './ListSort';
 import PubSub from 'pubsub-js';
 
 import '../styles/SpotsList.css';
+import {Button, Icon} from "antd"
 
 export class SpotsList extends React.Component {
     state = {
@@ -50,12 +51,24 @@ export class SpotsList extends React.Component {
             )
         });
 
+        const deletes = this.state.path.map((content, idx)=>(
+            <div key = {idx}>
+                <Icon
+                    className="dynamic-delete-button"
+                    type="minus-circle-o"
+                    onClick={() => this.remove()}
+                />
+            </div>
+        ))
+
         return (
-            <div className={`${this.props.className}-div`}>
-                <div className={`${this.props.className}-wrapper`}>
+            <div className={`${this.props.className}-div ${this.props.className}-wrapper planOverView`}>
+                <div>{deletes}</div>
+                <div className="spotpath" >
                     <ListSort ref={this.getListSort}
                         dragClassName="list-drag-selected"
-                        appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}>
+                        appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}
+                    >
                         {childrenToRender}
                     </ListSort>
                 </div>

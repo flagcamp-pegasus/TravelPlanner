@@ -1,7 +1,7 @@
 import React from 'react';
 import { API_KEY } from "../constants";
 
-const { compose, withProps, lifecycle } = require("recompose");
+const { compose, withProps } = require("recompose");
 const {
     withScriptjs,
 } = require("react-google-maps");
@@ -25,7 +25,7 @@ class MySearchBar extends React.Component {
         })
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         this.state.places.map(({name, geometry: { location }}) => {
             let latlng = {lat: location.lat(), lng: location.lng()}
             this.props.setSelectCity(undefined, name, latlng)}

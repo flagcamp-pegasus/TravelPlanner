@@ -42,6 +42,9 @@ export class AttractionPost extends Component {
     }
 
     render() {
+        if(!this.props.info){
+            return;
+        }
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         // debugger
         const { location } = geometry;

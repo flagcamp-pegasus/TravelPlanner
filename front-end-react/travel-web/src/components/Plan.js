@@ -46,11 +46,7 @@ export class Plan extends React.Component {
     }
 
     generateRoute = () => {
-        let path = this.SpotsListRef.returnSpotsList();
-        console.log(path);
-        const originPath = this.SpotsListRef.state.path;
-        // this.setState( function() { return {temp: this.getSortedList(path)} })
-        path = this.getSortedList(path);
+        this.refreshTodayPath();
         // console.log("tempInit:", this.state.temp);
     }
 
@@ -124,22 +120,24 @@ export class Plan extends React.Component {
             });
     }
 
-    clickSaveToday = (path) => {
-        // debugger;
+    refreshTodayPath = () => {
         const newpath = [];
-        const ithDay = this.state.ithDay
         const newOrder = this.SpotsListRef.returnSpotsList().map((a)=>(parseInt(a.key)));
-        console.log(newOrder)
+        console.log(newOrder);
         for(let i = 0 ; i < newOrder.length; i++){
             newpath.push(1);
         }
         for(let i = 0 ; i < newOrder.length; i++){
             newpath[i]=this.state.path[newOrder[i]];
         }
-        // debugger
         this.modifyPath(newpath);
-        // console.log(path)
-        // console.log(this.state.path);
+        return newpath;
+    }
+
+    clickSaveToday = (path) => {
+        // debugger;
+        const ithDay = this.state.ithDay
+        const newpath = this.refreshTodayPath();
         this.saveToDB(newpath, ithDay);
     }
 

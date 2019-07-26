@@ -1,7 +1,7 @@
 import React from 'react';
 import {LocateCity} from './GoogleMapCity'
 import {CityList} from "./CityList"
-import { Link, withRouter  } from 'react-router-dom'
+import {withRouter  } from 'react-router-dom'
 import {CITY_ZOOM} from "../constants.js"
 import {Button} from "antd"
 // let city={lat:47.608013, lng:-122.335167}

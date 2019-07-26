@@ -1,15 +1,11 @@
 import React from 'react';
 import {DrawPath} from './GoogleMapPath.js'
-import {Link} from 'react-router-dom';
 import {PATH_ZOOM, API_KEY, API_ROOT, USER_ID, TOKEN_KEY, AUTH_HEADER} from "../constants.js"
 import {Attractions} from './Attractions';
 import {OverviewButton} from './OverviewButton';
-import {Layout, Breadcrumb, Menu, Dropdown, Icon, message, Button} from "antd";
+import { message, Button} from "antd";
 import {SpotsList} from './SpotsList';
-import PubSub from 'pubsub-js';
 import smartPost from 'react-smart-post';
-import {func} from 'prop-types';
-// import { ServerHttp2Session } from 'http2';
 
 
 let spotsPlan = [];
@@ -47,6 +43,7 @@ export class Plan extends React.Component {
             spotObjArray.push(spotObj);
         });
         console.log("spotObjArray:", spotObjArray);
+        console.log(spotObjArray);
         return spotObjArray
     }
 
@@ -61,7 +58,7 @@ export class Plan extends React.Component {
 
     getSpotsListRef = (ref) => {
         this.SpotsListRef = ref;
-        console.log("this.SpotsListRef", this.SpotsListRef);
+        // console.log("this.SpotsListRef", this.SpotsListRef);
     }
 
     removeRoute = () => {
@@ -96,6 +93,12 @@ export class Plan extends React.Component {
     }
 
     clickSaveToday = (path, ithDay) => {
+        if(ithDay === this.state.ithDay){
+            const curPath= this.SpotsListRef.returnSpotsList();
+            console.log(curPath);
+            this.modifyPath(curPath);
+            return;
+        }
         console.log(this.state.path);
         const token = localStorage.getItem(TOKEN_KEY);
         const user_id = localStorage.getItem(USER_ID);
@@ -144,8 +147,8 @@ export class Plan extends React.Component {
         const {ithDay, plans} = this.state;
         this.setState({path: newPath});
         const newplans = [...plans.slice(0, ithDay-1), newPath, ...plans.slice(ithDay)];
-        // this.setState({plans: newplans});
-        this.setState(({plans})=>({plans: newplans}), console.log(this.state.plans));
+        // this.setState({plans: newplans}, ()=>console.log(this.state.plans));
+        this.setState(({plans})=>({plans: newplans}), ()=>console.log(this.state.plans));
     }
 
     componentDidMount() {

@@ -52,8 +52,10 @@ export class Attractions extends Component {
 
 
     handleSearchById(){
-        // debugger
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
+        if(!this.props.userSearchId){
+            return;
+        }
         console.log('searchID',this.props.userSearchId);
         let request = {
             // this need to change to this.props.userSearchId
@@ -83,7 +85,7 @@ export class Attractions extends Component {
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
 
         const { latlng } = this.props.city;
-        //console.log(this.props.city)
+        // console.log(latlng)
         let location = new window.google.maps.LatLng(latlng.lat,latlng.lng);
         let request = {
             location: location,
@@ -130,7 +132,7 @@ export class Attractions extends Component {
                         tab={
                             <span> <Icon type="smile" /></span>}
                         key='user-add' >
-                        <AttractionPost info = {this.state.userPlaceInfo}/>
+                        {this.props.userSearchId ? <AttractionPost info = {this.state.userPlaceInfo}/> : `Please add place from search bar or Select a place from recommended categories`}
                     </TabPane>
 
                     <TabPane

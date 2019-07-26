@@ -1,6 +1,5 @@
 import React from 'react';
-import { Modal, Button, message, Table } from 'antd';
-import { API_ROOT, AUTH_HEADER } from '../constants';
+import { Modal, Button} from 'antd';
 import {DayList} from './DayList'
 
 export class OverviewButton extends React.Component {

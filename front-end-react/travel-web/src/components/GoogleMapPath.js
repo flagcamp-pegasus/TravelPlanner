@@ -1,20 +1,14 @@
 import * as React from 'react';
-import {API_KEY, CAR_URL} from "../constants.js"
 import {MyMarker} from "./MyMarker"
 import distance_img from "../assets/images/distance_img.png"
-
-const { compose, withProps, withStateHandlers, lifecycle } = require("recompose");
 const {
     Polyline,
     withScriptjs,
     withGoogleMap,
     GoogleMap,
     Marker,
-    InfoWindow,
     GoogleMap: GoogleMapPath,
 } = require("react-google-maps");
-const {DrawingManager} = require("react-google-maps/lib/components/drawing/DrawingManager");
-const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 const _ = require("lodash");
 
@@ -72,9 +66,11 @@ class MyMap extends React.Component{
     render(){
         // console.log("today's plan: ", this.props.path)
         let {latlng, name}=this.props.city
+        // console.log(this.props.path)
         let path = this.props.path.map(
             (spot) => (spot.latlng)
         )
+        // console.log(path)
         let centers=[];
         for(let i =0;i<path.length-1;i++){
             centers.push({
@@ -159,13 +155,3 @@ class MyMap extends React.Component{
 
 export const DrawPath = withScriptjs(withGoogleMap(MyMap))
 
-// export const DrawPath = compose(
-//     withProps({
-//         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
-//         loadingElement: <div style={{ height: `100%` }} />,
-//         containerElement: <div style={{ height: `400px` }} />,
-//         mapElement: <div style={{ height: `100%` }} />,
-//     }),
-//     withScriptjs,
-//     withGoogleMap
-// )(MyMap)

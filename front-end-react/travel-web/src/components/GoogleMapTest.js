@@ -1,5 +1,5 @@
 import { Form, Input, Icon, Button } from 'antd';
-import React, {Component} from 'react';
+import React from 'react';
 let id = 0;
 
 class DynamicFieldSet extends React.Component {

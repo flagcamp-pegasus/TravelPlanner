@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 // import {mergeChildren} from './ListSort';
 import ListSort from './ListSort';
-import {Button, message} from 'antd';
+import {Button} from 'antd';
 
 import '../styles/SpotsList.css';
 import {API_ROOT, AUTH_HEADER, TOKEN_KEY, USER_ID} from "../constants"

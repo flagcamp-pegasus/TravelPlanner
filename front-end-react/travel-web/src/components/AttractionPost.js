@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button} from "antd";
-import PropTypes from 'prop-types';
 import PubSub from 'pubsub-js'
 import {DEFAULT_IMAGE} from "../constants"
 import { Card, Icon, Avatar } from 'antd';
@@ -48,12 +47,13 @@ export class AttractionPost extends Component {
             )
         }
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
-        // debugger
 
-        const location = {lat: geometry.location.lat(), lng:geometry.location.lng()};
-        const description = `Rating ${rating};  Location: ${vicinity} `;
+        const curloc = geometry.location;
+        const location = {lat: curloc.lat? curloc.lat : curloc.lat() , lng: curloc.lng? curloc.lng : curloc.lng()};
+        // const description = `Rating ${rating}; Location: ${vicinity} `;
+        const description = <div><p>Rating {rating};</p><p>Location: {vicinity}</p></div>;
         return (
-            
+
             <Card
                 style={{ width: 300 }}
                 cover={

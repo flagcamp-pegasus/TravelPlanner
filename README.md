@@ -144,3 +144,6 @@ Lin Lingzhi, Yang Yi, Jiahui Yang
 
 front end(others):
 https://docs.google.com/presentation/d/1UDRo6CPn3_8RZ0SdCnYxCgmBj_74D6t-nGSucmTrnxk/edit#slide=id.g59928f68e9_0_873
+
+presentation
+https://docs.google.com/document/d/1TIRMBvTfldXitIE0U7SlYmpszOWHqUAdOlzH02T12n8/edit

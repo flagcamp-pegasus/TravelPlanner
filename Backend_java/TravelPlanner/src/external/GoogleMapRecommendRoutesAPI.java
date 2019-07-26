@@ -24,7 +24,7 @@ import entity.Place.PlaceBuilder;
 public class GoogleMapRecommendRoutesAPI {
 	private static final String URL = "https://maps.googleapis.com/maps/api/distancematrix/json";
 	private static final String DEFAULT_KEYWORD = "imperial"; // no restriction
-	private static final String API_KEY = "YOUR API KEY";
+	private static final String API_KEY = "YOUR API KEY"; //   
 	public  List<Place> search(List<Place> places, String units) {//according to the client's location and keywords to do the search 
 		if (units == null) {
 			units = DEFAULT_KEYWORD;
@@ -164,6 +164,8 @@ public class GoogleMapRecommendRoutesAPI {
 		places.add(three.build());
 		places.add(four.build());
 		List<Place> locations = search(places, null);
+		System.out.println(locations.toString());
+		
 		for (Place place : locations) {
 			System.out.println(place.toJSONObject());
 		}

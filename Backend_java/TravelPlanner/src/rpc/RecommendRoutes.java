@@ -51,6 +51,7 @@ public class RecommendRoutes extends HttpServlet {
 			List<Place> places = RpcHelper.parseArray(array);
 			GoogleMapRecommendRoutesAPI myAPI = new GoogleMapRecommendRoutesAPI();
 			List<Place> orderRoute = myAPI.search(places, null);
+			System.out.println("returned recommend route: "+orderRoute.toString());
 			
 			JSONArray newRoute = new JSONArray();
 			for (Place onePlace : orderRoute) {

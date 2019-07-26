@@ -183,6 +183,43 @@ export class Plan extends React.Component {
 
     }
 
+    recommendRoute = (path, ithDay) => {
+        // debugger
+        const body ={
+            route : path.map((data)=>{
+                // console.log(data)
+                return {
+                    geometry: {location: data.location},
+                    name : data.name,
+                    place_id : data.place_id,
+                }
+            }),
+            ithDay: ithDay,
+        }
+        fetch(`${API_ROOT}/recommend?`, {
+            method: 'POST',
+            headers: {
+                Authorization: `${AUTH_HEADER} ${localStorage.getItem(TOKEN_KEY)}`
+            },
+            body: JSON.stringify(body),
+        })
+            .then((response)=>{
+                if(response.ok){
+                    return response.json();
+                }
+                throw new Error('Faile to get recommend route.');
+            }).then(
+            (data)=>{
+                console.log("recommend: ",data);
+                this.setState({ path: data.route });
+            }
+        ).catch((e) => {
+            console.log(e)
+            message.error('No recommend routes for this date.');
+        });
+
+    }
+
     getAttractionRef = (ref) => {
         this.attractionRef = ref;
     }
@@ -194,6 +231,7 @@ export class Plan extends React.Component {
 
     render() {
         const ithday = this.state.ithDay;
+        console.log(this.state.path);
         const path = this.state.path.map((place) => (
             {
                 latlng: place.location,
@@ -210,25 +248,27 @@ export class Plan extends React.Component {
                         planRemoveIdx={this.planRemoveIdx}
                     />
                     <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
-                            className="btn-3d yellow" >
+                            className="btn-3d yellow" icon="save">
                         Save Plan for this day
                     </Button>
-                    <div>
+                    <div className="show-plan">
                         <h3>{this.state.plans.length ? `Day ${ithday}` : `No plan`}</h3>
                         <SpotsList ref={this.getSpotsListRef} modifyPath={this.modifyPath}/>
                     </div>
-                    <Button onClick={this.addOneDay} className="btn-3d">
+                    <Button onClick={this.addOneDay} className="btn-3d green" icon="plus"  >
                         Add One More Day
                     </Button>
-                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)} className="btn-3d red">Delete Today's Plan</Button>
+                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)} className="btn-3d red" icon="delete">Delete Today's Plan</Button>
 
                 </div>
                 <div className="path">
-                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn-3d cyan">Generate
+                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn-3d cyan" icon="edit">Generate
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d purple">Remove
+                    <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="radar-chart">Recommend
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green">Find more
+                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove
+                        Route</Button>
+                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Find more
                         info</Button>
                     <DrawPath
                         getMapRef={this.getMapRef}

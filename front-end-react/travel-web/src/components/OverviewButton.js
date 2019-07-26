@@ -43,7 +43,7 @@ export class OverviewButton extends React.Component {
         const { visible, confirmLoading } = this.state;
         return (
             <div>
-                <Button type="primary" onClick={this.showModal} className="btn-3d blue">
+                <Button type="primary" onClick={this.showModal} className="btn-3d blue" icon="sliders">
                     Plan Overview
                 </Button>
                 <Modal

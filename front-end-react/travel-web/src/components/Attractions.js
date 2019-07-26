@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Tabs } from 'antd';
+import { Tabs,Icon } from 'antd';
 
 import placesData from '../assets/data/GoogleSearchSampleData.json';
 import {AttractionList} from "./AttractionList";
@@ -118,32 +118,40 @@ export class Attractions extends Component {
              })
     }
 
-    renderUserAdd=()=>{
-        if(this.state.ifUserAdd === true){
 
-            return <AttractionPost info={this.state.userPlaceInfo}/>
-        }else{
-            console.log('no place has been added through search bar');
-        }
-    }
     render() {
         return (
             <div>
-                <p>Please add place from search bar above or Select places from recommended categories</p>
+                <p>Please add place from search bar or Select a place from recommended categories</p>
                 <div id="map"></div>
-                <Tabs defaultActiveKey='1' onChange={this.handleSearch}  className="attraction-tab">
-                    <TabPane tab="SELECTED SPOT" key="user-add">
+                <Tabs defaultActiveKey="user-add" onChange={this.handleSearch}  className="attraction-tab" size = "small" >
+                    <TabPane
+                        className = "tabPane"
+                        tab={
+                            <span> <Icon type="smile" /></span>}
+                        key='user-add' >
                         <AttractionPost info = {this.state.userPlaceInfo}/>
                     </TabPane>
 
-                    <TabPane tab="FOOD" key={TYPE_FOOD}>
-                        <AttractionList placesInfos={this.state.placesInfos}/>
-                    </TabPane>
-                    <TabPane tab="SHOPPING" key={TYPE_SHOPPING}>
+                    <TabPane
+                        tab={
+                            <span> <Icon type="coffee"/></span>}
+                        key={TYPE_FOOD}  >
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
 
-                    <TabPane tab="MUSEUM" key={TYPE_MUSEUM}>
+
+                    <TabPane
+                        tab={
+                            <span> <Icon type="shopping" /></span>}
+                        key={TYPE_SHOPPING} >
+                        <AttractionList placesInfos={this.state.placesInfos}/>
+                    </TabPane>
+
+                    <TabPane
+                        tab={
+                            <span> <Icon type="bank" /></span>}
+                        key={TYPE_MUSEUM} >
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
                 </Tabs>

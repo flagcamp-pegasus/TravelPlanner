@@ -1,4 +1,29 @@
 .place-image {
-    height: 50%;
-    width: 50%;
+    margin:auto;
+    height: 75%;
+    width: 75%;
+    margin-top:10px;
+}
+.attraction-place {
+    border: dotted thin lightgrey;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 4px;
+}
+.place-info {
+    font-size: 12px;
+    margin: 0 auto;
+
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+}
+.place-name {
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px darkgrey;
+}
+.place-rating {
+    font-size: 12px;
+    font-style: italic;
 }

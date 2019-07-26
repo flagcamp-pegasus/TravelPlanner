@@ -3,6 +3,9 @@ import {Button} from "antd";
 import PropTypes from 'prop-types';
 import PubSub from 'pubsub-js'
 import {DEFAULT_IMAGE} from "../constants"
+import { Card, Icon, Avatar } from 'antd';
+
+const { Meta } = Card;
 
 export class AttractionPost extends Component {
 
@@ -46,20 +49,25 @@ export class AttractionPost extends Component {
         }
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         // debugger
-        const location = {lat: geometry.location.lat(), lng:geometry.location.lng()};
-        return (
-            <div>
 
-                <div className = 'place-name' >{name}</div>
-                <img className = 'place-image' alt="place-image" src={this.handleURL(photos)}/>
-                <div className = 'place-info'>
-                    <p className='place-rating'>Rating : {rating}</p>
-                    <p className="place-address">Location: {vicinity}</p>
-                    <p className= "place-type">Type: {types[0]}</p>
-                    <a href = {this.handleMoreInfo(photos)} target="_blank">More Information</a>
-                </div>
-                <Button onClick={(e) => this.handleClick({location, name, place_id}, e)}>add</Button>
-            </div>
+        const location = {lat: geometry.location.lat(), lng:geometry.location.lng()};
+        const description = `Rating ${rating};  Location: ${vicinity} `;
+        return (
+            
+            <Card
+                style={{ width: 300 }}
+                cover={
+                    <img className = 'place-image' alt="place-image" src={this.handleURL(photos)}/>
+                }
+                actions={[<Button href = {this.handleMoreInfo(photos)} target="_blank">More Info</Button>,
+                    <Button onClick={(e) => this.handleClick({location, name, place_id}, e)}>add</Button>]}
+            >
+                <Meta
+                    title={name}
+                    description={description}
+                />
+            </Card>
+
         );
     }
 }

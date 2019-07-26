@@ -203,24 +203,26 @@ export class Plan extends React.Component {
                         planRemoveIdx={this.planRemoveIdx}
                     />
                     <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
-                            className="btn">
+                            className="btn-3d yellow" >
+
                         Save Plan for this day
                     </Button>
                     <div>
                         <h3>{this.state.plans.length ? `Day ${ithday}` : `No plan`}</h3>
                         <SpotsList ref={this.getSpotsListRef} modifyPath={this.modifyPath}/>
                     </div>
-                    <Button onClick={this.addOneDay} className="btn">
+                    <Button onClick={this.addOneDay} className="btn-3d">
                         Add One More Day
                     </Button>
-                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)}>Reset Today's Plan</Button>
+                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)} className="btn-3d red">Delete Today's Plan</Button>
+
                 </div>
                 <div className="path">
-                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn">Generate
+                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn-3d cyan">Generate
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn">Remove
+                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d purple">Remove
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn">Find more
+                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green">Find more
                         info</Button>
                     <DrawPath
                         getMapRef={this.getMapRef}
@@ -231,7 +233,7 @@ export class Plan extends React.Component {
 
                         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                         loadingElement={<div style={{height: `100%`}}/>}
-                        containerElement={<div style={{height: `400px`}}/>}
+                        containerElement={<div style={{height: `750px`}}/>}
                         mapElement={<div style={{height: `100%`}}/>}
                         getplaceId={this.getplaceId}
                     />

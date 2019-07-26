@@ -20,15 +20,14 @@
 
 
 .dynamic-delete-button {
-    height: 20%;
+    height: 60px;
     padding-: 10%;
-    margin-top: 180%;
+    margin-top: 20%;
 }
 
 div.list-sort-demo-list{
     flex: 1 auto;
     font-size: 20px;
-    height: 20%;
     background: #fff;
     border-radius: 6px;
     margin: 5px auto;

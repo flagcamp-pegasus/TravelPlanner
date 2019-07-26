@@ -203,7 +203,7 @@ export class Plan extends React.Component {
                 if(response.ok){
                     return response.json();
                 }
-                throw new Error('No recommend routes for this date.');
+                throw new Error('Faile to get recommend route.');
             }).then(
             (data)=>{
                 console.log("recommend: ",data);
@@ -211,7 +211,7 @@ export class Plan extends React.Component {
             }
         ).catch((e) => {
             console.log(e)
-            message.error('failed to get recommend route.');
+            message.error('No recommend routes for this date.');
         });
 
     }
@@ -263,7 +263,7 @@ export class Plan extends React.Component {
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="retweet">Recommend
+                    <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="radar-chart">Recommend
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Find more
                         info</Button>

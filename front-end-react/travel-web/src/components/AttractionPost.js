@@ -23,7 +23,7 @@ export class AttractionPost extends Component {
                 return pic.getUrl({width: 100, height:100});
 
             }else{
-                //console.log(2)
+                console.log(2)
                 return `${DEFAULT_IMAGE}`
             }
 

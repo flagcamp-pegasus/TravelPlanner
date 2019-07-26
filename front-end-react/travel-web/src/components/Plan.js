@@ -269,14 +269,14 @@ export class Plan extends React.Component {
 
                 </div>
                 <div className="path">
+                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Insert My Spot</Button>
+
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn-3d cyan" icon="edit">Generate
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="radar-chart">Recommend
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Find more
-                        info</Button>
                     <DrawPath
                         getMapRef={this.getMapRef}
                         path={path}

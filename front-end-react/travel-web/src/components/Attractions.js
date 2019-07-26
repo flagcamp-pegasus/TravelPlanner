@@ -127,7 +127,7 @@ export class Attractions extends Component {
         return (
             <div>
 
-                <span><p>Search a place and click "Find more Info"</p>
+                <span><p>Search a place and click "Insert My Spot"</p>
                     <p> or Select a place from recommended categories</p></span>
                 <div id="map"></div>
                 <Tabs defaultActiveKey="user-add" onChange={this.handleSearch}  className="attraction-tab" size = "small" >
@@ -143,6 +143,7 @@ export class Attractions extends Component {
                         tab={
                             <span> <Icon type="coffee"/></span>}
                         key={TYPE_FOOD}  >
+
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
 

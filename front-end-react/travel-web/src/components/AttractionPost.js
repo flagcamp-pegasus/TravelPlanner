@@ -59,6 +59,7 @@ export class AttractionPost extends Component {
         return (
 
             <Card
+                className='attraction-post'
                 style={{ width: 300 }}
                 cover={
                     <img className = 'place-image' alt="place-image" src={this.handleURL(photos)}/>

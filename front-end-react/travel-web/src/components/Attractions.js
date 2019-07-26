@@ -127,7 +127,9 @@ export class Attractions extends Component {
         //console.log("user", this.state.userPlaceInfo)
         return (
             <div>
-                <p>Please add place from search bar or Select a place from recommended categories</p>
+
+                <span><p>Search a place and click "Find more Info"</p>
+                    <p> or Select a place from recommended categories</p></span>
                 <div id="map"></div>
                 <Tabs defaultActiveKey="user-add" onChange={this.handleSearch}  className="attraction-tab" size = "small" >
                     <TabPane
@@ -135,7 +137,7 @@ export class Attractions extends Component {
                         tab={
                             <span> <Icon type="smile" /></span>}
                         key='user-add' >
-                        {this.props.userSearchId ? <AttractionPost info = {this.state.userPlaceInfo}/> : `Please add place from search bar or Select a place from recommended categories`}
+                        {this.props.userSearchId ? <AttractionPost info = {this.state.userPlaceInfo}/> : `Please add a place from the search bar or tabs above `}
                     </TabPane>
 
                     <TabPane

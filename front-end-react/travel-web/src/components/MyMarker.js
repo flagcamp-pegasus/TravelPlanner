@@ -1,14 +1,8 @@
 import * as React from 'react';
-import {API_KEY} from "../constants.js"
-const { compose } = require("recompose");
 const {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
     InfoWindow,
     Marker,
 } = require("react-google-maps");
-const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
 
 export class MyMarker extends React.Component{
     state = {

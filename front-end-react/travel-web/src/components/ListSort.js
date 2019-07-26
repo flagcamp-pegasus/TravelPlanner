@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import TweenOne from 'rc-tween-one';
 import QueueAnim from 'rc-queue-anim';
 import PropTypes from 'prop-types';
-import PubSub from 'pubsub-js';
 
 function toArrayChildren(children) {
   const ret = [];
@@ -91,7 +90,7 @@ export default class ListSort extends React.Component {
   }
 
   addChild = () =>{
-    // console.log(this.state.children)
+    console.log(this.state.children)
     this.setState({orderSpots: this.state.children})
   }
 

@@ -122,8 +122,8 @@ export class Attractions extends Component {
 
 
     render() {
-        console.log("serach ", this.state.placesInfos)
-        console.log("user", this.state.userPlaceInfo)
+        // console.log("serach ", this.state.placesInfos)
+        // console.log("user", this.state.userPlaceInfo)
         return (
             <div>
                 <p>Please add place from search bar or Select a place from recommended categories</p>

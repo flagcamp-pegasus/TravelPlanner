@@ -86,37 +86,21 @@ export class Plan extends React.Component {
         );
     }
 
-    clickSaveToday = (path, ithDay) => {
-        // debugger;
-        const newpath = [];
-        if(ithDay === this.state.ithDay){
-            const newOrder = this.SpotsListRef.returnSpotsList().map((a)=>(parseInt(a.key)));
-            console.log(newOrder)
-            for(let i = 0 ; i < newOrder.length; i++){
-                newpath.push(1);
-            }
-            for(let i = 0 ; i < newOrder.length; i++){
-                newpath[i]=this.state.path[newOrder[i]];
-            }
-            // debugger
-            this.modifyPath(newpath);
-            path=newpath
-            console.log(path)
-        }
-        console.log(this.state.path);
+    saveToDB=(path, ithDay)=>{
         const token = localStorage.getItem(TOKEN_KEY);
         const user_id = localStorage.getItem(USER_ID);
+        const results= path.map((data)=>{
+            // console.log(data)
+            return {
+                geometry: {location: data.location},
+                name : data.name,
+                place_id : data.place_id,
+            }
+        });
         const body ={
-            results : path.map((data)=>{
-                // console.log(data)
-                return {
-                        geometry: {location: data.location},
-                        name : data.name,
-                        place_id : data.place_id,
-                    }
-                }),
-            user_id : user_id,
-            ithDay: ithDay,
+            results ,
+            user_id ,
+            ithDay ,
         }
         // console.log("path JSON ", body);
 
@@ -138,6 +122,25 @@ export class Plan extends React.Component {
                 console.error(e);
                 message.error('Failed to save route.');
             });
+    }
+
+    clickSaveToday = (path) => {
+        // debugger;
+        const newpath = [];
+        const ithDay = this.state.ithDay
+        const newOrder = this.SpotsListRef.returnSpotsList().map((a)=>(parseInt(a.key)));
+        console.log(newOrder)
+        for(let i = 0 ; i < newOrder.length; i++){
+            newpath.push(1);
+        }
+        for(let i = 0 ; i < newOrder.length; i++){
+            newpath[i]=this.state.path[newOrder[i]];
+        }
+        // debugger
+        this.modifyPath(newpath);
+        // console.log(path)
+        // console.log(this.state.path);
+        this.saveToDB(newpath, ithDay);
     }
 
     planRemoveIdx = (idx)=>{
@@ -246,14 +249,20 @@ export class Plan extends React.Component {
                         plans={this.state.plans}
                         setDay={this.chooseday}
                         planRemoveIdx={this.planRemoveIdx}
+                        modifyPath = {this.modifyPath}
+                        saveToDB={this.saveToDB}
                     />
-                    <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
+                    <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1])}}
                             className="btn-3d yellow" icon="save">
                         Save Plan for this day
                     </Button>
                     <div className="show-plan">
                         <h3>{this.state.plans.length ? `Day ${ithday}` : `No plan`}</h3>
-                        <SpotsList ref={this.getSpotsListRef} modifyPath={this.modifyPath}/>
+                        <SpotsList
+                            ref={this.getSpotsListRef}
+                            path={this.state.path}
+                            modifyPath={this.modifyPath}
+                        />
                     </div>
                     <Button onClick={this.addOneDay} className="btn-3d green" icon="plus"  >
                         Add One More Day

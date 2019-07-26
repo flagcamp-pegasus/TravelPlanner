@@ -16,10 +16,11 @@ export class OverviewButton extends React.Component {
     };
 
     handleSave = () => {
-        console.log(this.dayListRef.returnSpotsList().map((a)=>(a.key)));
-        const newOrder = this.dayListRef.returnSpotsList().map((a)=>(parseInt(a.key)+1));
-        newOrder.map((newday, idx)=>{
-            this.props.clickSaveToday(this.props.plans[idx], newday);
+        const newOrder = this.dayListRef.returnSpotsList().map((a)=>(a.key));
+        console.log(newOrder);
+        newOrder.map((repDay, idx)=>{
+            console.log(`Day ${idx+1} is plans[${repDay}]`)
+            this.props.saveToDB(this.props.plans[repDay], idx+1);
         })
     }
 

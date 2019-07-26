@@ -245,10 +245,9 @@ export class Plan extends React.Component {
                     />
                     <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
                             className="btn-3d yellow" icon="save">
-
                         Save Plan for this day
                     </Button>
-                    <div>
+                    <div className="show-plan">
                         <h3>{this.state.plans.length ? `Day ${ithday}` : `No plan`}</h3>
                         <SpotsList ref={this.getSpotsListRef} modifyPath={this.modifyPath}/>
                     </div>
@@ -261,9 +260,9 @@ export class Plan extends React.Component {
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn-3d cyan" icon="edit">Generate
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove
-                        Route</Button>
                     <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="radar-chart">Recommend
+                        Route</Button>
+                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Find more
                         info</Button>

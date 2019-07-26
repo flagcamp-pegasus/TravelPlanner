@@ -79,7 +79,7 @@ export class SpotsList extends React.Component {
         return (
             <div className={`${this.props.className}-div ${this.props.className}-wrapper planOverView`}>
                 <div>{deletes}</div>
-                <div className="spotpath" >
+                <div className="spotPath" >
                     <ListSort ref={this.getListSort}
                         dragClassName="list-drag-selected"
                         appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}

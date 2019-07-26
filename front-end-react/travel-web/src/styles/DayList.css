@@ -5,8 +5,6 @@
 .sliders{
     height:400px;
     float: left;
-
-
 }
 .day{
     height:100px;
@@ -28,14 +26,15 @@
     margin: 0px;
 }
 
-div.list-sort-demo-list{
-    height:100px;
-    margin: 0px;
-    padding: 0px 5px 0px 5px;}
+/*div.list-sort-demo-list{*/
+/*    height:30%;*/
+/*    margin: 0px;*/
+/*    padding: 0px 5px 0px 5px;*/
+/*}*/
 
-.div-wrapper{
-    height:400px;
-    overflow: auto;
-    display:flex;
+/*.div-wrapper{*/
+/*    height:400px;*/
+/*    overflow: auto;*/
+/*    display:flex;*/
 
-}
+/*}*/

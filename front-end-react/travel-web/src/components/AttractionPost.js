@@ -15,11 +15,18 @@ export class AttractionPost extends Component {
     }
 
     handleURL = (photos) =>{
-        // console.log(photos);
+        //console.log(photos);
         if (typeof photos !== 'undefined'){
             let pic = photos[0];
-            return pic.getUrl ? pic.getUrl({width: 100, height:100}) : {DEFAULT_IMAGE};
-            //console.log(photos[0]);
+            if(pic.getUrl){
+                //console.log(1, pic.getUrl())
+                return pic.getUrl({width: 100, height:100});
+
+            }else{
+                //console.log(2)
+                return `${DEFAULT_IMAGE}`
+            }
+
         }
         //return photos[0].getUrl({width: 300, height:300});
     }
@@ -48,7 +55,7 @@ export class AttractionPost extends Component {
         const curloc = geometry.location;
         const location = {lat: curloc.lat? curloc.lat : curloc.lat() , lng: curloc.lng? curloc.lng : curloc.lng()};
         // const description = `Rating ${rating}; Location: ${vicinity} `;
-        const description = <div><p>Rating {rating};</p><p>Location: {vicinity}</p></div>;
+        const description = <div><p>Rating {rating};</p><p>Type:{types[0]}</p><p>Location: {vicinity}</p></div>;
         return (
 
             <Card

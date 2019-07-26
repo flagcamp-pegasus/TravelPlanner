@@ -56,6 +56,7 @@ export class Attractions extends Component {
         if(!this.props.userSearchId){
             return;
         }
+
         console.log('searchID',this.props.userSearchId);
         let request = {
             // this need to change to this.props.userSearchId
@@ -81,7 +82,7 @@ export class Attractions extends Component {
 
 
     handleTypeSearch = (type) =>{
-        // debugger
+
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
 
         const { latlng } = this.props.city;
@@ -94,26 +95,26 @@ export class Attractions extends Component {
         };
         let counter = 0;
         let placesInfos = [];
-        let len = 0
 
         service.nearbySearch(request, (results, status)=>{
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                if(results.length > `${MAX_DISPLAY}`){
-                    len = `${MAX_DISPLAY}`;
-                    //console.log(len);
-                }else{
-                    len = results.length
-                }
-
-                   for (let i = 0; i < len; i++) {
+                   for (let i = 0; i < results.length; i++) {
                          let place = results[i];
-                         placesInfos.push(place);
-                         counter ++;
+                         // if there is no image do not add this search result
+
+                       let photos = place.photos;
+                       if (typeof photos !== 'undefined'){
+                           let pic = photos[0];
+                           if(pic.getUrl) {
+                               placesInfos.push(place);
+                               counter++;
+                           }
+                        }
                      }
                  }else{
-                console.log('error in nearby search');
+                //console.log('error in nearby search');
             }
-                 if(counter === len){
+                 if(counter > 1){
                      this.setState(
                          {placesInfos:placesInfos}) }
                  //console.log('this is place infos', placesInfos);
@@ -122,8 +123,8 @@ export class Attractions extends Component {
 
 
     render() {
-        console.log("serach ", this.state.placesInfos)
-        console.log("user", this.state.userPlaceInfo)
+       // console.log("serach ", this.state.placesInfos)
+        //console.log("user", this.state.userPlaceInfo)
         return (
             <div>
                 <p>Please add place from search bar or Select a place from recommended categories</p>

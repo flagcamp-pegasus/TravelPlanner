@@ -13,7 +13,7 @@ export class AttractionList extends Component {
     render() {
         return (
             <div>
-                {this.props.placesInfos.map((placeInfo) => <AttractionPost info={placeInfo} key={placeInfo.name} />)}
+                {this.props.placesInfos.map((placeInfo) => <AttractionPost info={placeInfo} key={placeInfo.place_id} />)}
             </div>
         );
     }

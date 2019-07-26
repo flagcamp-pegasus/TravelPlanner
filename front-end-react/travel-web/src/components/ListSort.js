@@ -90,7 +90,7 @@ export default class ListSort extends React.Component {
   }
 
   addChild = () =>{
-    console.log(this.state.children)
+    // console.log(this.state.children)
     this.setState({orderSpots: this.state.children})
   }
 
@@ -133,6 +133,7 @@ export default class ListSort extends React.Component {
       window.detachEvent('ontouchend', this.onMouseUp);
     }
   }
+
 
   onMouseDown = (i, e) => {
     if (this.isDrage) {

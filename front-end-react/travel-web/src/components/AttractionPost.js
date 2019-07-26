@@ -15,7 +15,7 @@ export class AttractionPost extends Component {
     }
 
     handleURL = (photos) =>{
-        //console.log(photos);
+        // console.log(photos);
         if (typeof photos !== 'undefined'){
             let pic = photos[0];
             return pic.getUrl ? pic.getUrl({width: 100, height:100}) : {DEFAULT_IMAGE};
@@ -34,10 +34,7 @@ export class AttractionPost extends Component {
                 // console.log(sub2)
                 return sub2;
             }
-
-
         }
-
     }
 
     render() {
@@ -46,8 +43,8 @@ export class AttractionPost extends Component {
                 <div></div>
             )
         }
+        // debugger
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
-
         const curloc = geometry.location;
         const location = {lat: curloc.lat? curloc.lat : curloc.lat() , lng: curloc.lng? curloc.lng : curloc.lng()};
         // const description = `Rating ${rating}; Location: ${vicinity} `;

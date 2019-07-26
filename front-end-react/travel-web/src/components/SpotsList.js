@@ -21,9 +21,10 @@ export class SpotsList extends React.Component {
     componentDidMount() {
         this.pubsub_token = PubSub.subscribe('path', (path, spot) => {
             const {name, place_id, location} = spot;
-            const lat=location.lat(), lng = location.lng();
+            // debugger
+            // const lat=location.lat, lng = location.lng;
             this.setState({
-                path: this.state.path.concat({name, place_id, location:{lat, lng}})
+                path: this.state.path.concat({name, place_id, location})
             }, ()=>{
                 this.props.modifyPath(this.state.path);
             }
@@ -62,6 +63,7 @@ export class SpotsList extends React.Component {
             return (
                 <div key={index} className={`${this.props.className}-list`}>
                     {name }
+                    {/*{item}*/}
                 </div>
             )
         });

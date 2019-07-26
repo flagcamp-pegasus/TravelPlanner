@@ -97,7 +97,7 @@ export class Attractions extends Component {
         let len = 0
 
         service.nearbySearch(request, (results, status)=>{
-            if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                 if(results.length > `${MAX_DISPLAY}`){
                     len = `${MAX_DISPLAY}`;
                     //console.log(len);
@@ -113,7 +113,7 @@ export class Attractions extends Component {
                  }else{
                 console.log('error in nearby search');
             }
-                 if(counter == len){
+                 if(counter === len){
                      this.setState(
                          {placesInfos:placesInfos}) }
                  //console.log('this is place infos', placesInfos);
@@ -122,6 +122,8 @@ export class Attractions extends Component {
 
 
     render() {
+        console.log("serach ", this.state.placesInfos)
+        console.log("user", this.state.userPlaceInfo)
         return (
             <div>
                 <p>Please add place from search bar or Select a place from recommended categories</p>

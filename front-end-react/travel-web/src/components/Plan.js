@@ -8,9 +8,6 @@ import {SpotsList} from './SpotsList';
 import smartPost from 'react-smart-post';
 
 
-let spotsPlan = [];
-
-
 export class Plan extends React.Component {
     state = {
         path: [],
@@ -29,6 +26,7 @@ export class Plan extends React.Component {
         },()=>{
             console.log(this.state.path);
         });
+        return;
     };
 
     getSortedList = (path) => {
@@ -58,7 +56,6 @@ export class Plan extends React.Component {
 
     getSpotsListRef = (ref) => {
         this.SpotsListRef = ref;
-        // console.log("this.SpotsListRef", this.SpotsListRef);
     }
 
     removeRoute = () => {
@@ -70,9 +67,6 @@ export class Plan extends React.Component {
         smartPost.push(this);
     }
 
-    smartPostOn = (message) => {
-        console.log(message)
-    }
 
     getplaceId = (id) => {
         this.setState({placeId: id});
@@ -93,11 +87,21 @@ export class Plan extends React.Component {
     }
 
     clickSaveToday = (path, ithDay) => {
+        // debugger;
+        const newpath = [];
         if(ithDay === this.state.ithDay){
-            const curPath= this.SpotsListRef.returnSpotsList();
-            console.log(curPath);
-            this.modifyPath(curPath);
-            return;
+            const newOrder = this.SpotsListRef.returnSpotsList().map((a)=>(parseInt(a.key)));
+            console.log(newOrder)
+            for(let i = 0 ; i < newOrder.length; i++){
+                newpath.push(1);
+            }
+            for(let i = 0 ; i < newOrder.length; i++){
+                newpath[i]=this.state.path[newOrder[i]];
+            }
+            // debugger
+            this.modifyPath(newpath);
+            path=newpath
+            console.log(path)
         }
         console.log(this.state.path);
         const token = localStorage.getItem(TOKEN_KEY);
@@ -143,7 +147,7 @@ export class Plan extends React.Component {
     }
 
     modifyPath = (newPath)=>{
-        console.log(newPath);
+        // console.log(newPath);
         const {ithDay, plans} = this.state;
         this.setState({path: newPath});
         const newplans = [...plans.slice(0, ithDay-1), newPath, ...plans.slice(ithDay)];
@@ -168,7 +172,7 @@ export class Plan extends React.Component {
                 // console.log("history in plan: ", history);
                 this.setState({ plans: history});
                 if(history.length){
-                    this.setState({path: history[0]}, ()=>{console.log(this.state.path)});
+                    this.setState({path: history[0]});
                     this.SpotsListRef.setState({path: history[0]});
                 }
             }
@@ -207,7 +211,6 @@ export class Plan extends React.Component {
                     />
                     <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
                             className="btn-3d yellow" >
-
                         Save Plan for this day
                     </Button>
                     <div>

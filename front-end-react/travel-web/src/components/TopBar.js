@@ -7,7 +7,7 @@ export class TopBar extends React.Component {
      <header className="App-header">
        <div className="App-title">Travel Planner</div>
        {this.props.isLoggedIn ?
-         <a className="logout" onClick={this.props.handleLogout} >
+         <a className="logout" href="#" onClick={this.props.handleLogout} >
            <Icon type="logout"/>{' '}Logout
          </a> : null}
      </header>

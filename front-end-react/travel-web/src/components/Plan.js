@@ -109,14 +109,14 @@ export class Plan extends React.Component {
         })
             .then((response) => {
                 if (response.ok) {
-                    message.success('Save route successfully!');
+                    message.success('(๑•̀ㅂ•́)و✧  Save route successfully!');
                     return;
                 }
                 throw new Error('Failed to connect to database.');
             })
             .catch((e) => {
                 console.error(e);
-                message.error('Failed to save route.');
+                message.error('w(ﾟДﾟ)w  Failed to save route.');
             });
     }
 
@@ -165,6 +165,7 @@ export class Plan extends React.Component {
         })
         .then((response)=>{
             if(response.ok){
+                message.success('n(*≧▽≦*)n   Get your route successfully!');
                 return response.json();
             }
             throw new Error('No history routes for this username.');
@@ -179,7 +180,7 @@ export class Plan extends React.Component {
             }
         ).catch((e) => {
             console.log(e)
-            message.error('failed to get history.');
+            message.error('w(ﾟДﾟ)w  Failed to get history.');
         });
 
     }
@@ -206,6 +207,7 @@ export class Plan extends React.Component {
         })
             .then((response)=>{
                 if(response.ok){
+                    message.success('n(*≧▽≦*)n   Get your recommend route successfully!');
                     return response.json();
                 }
                 throw new Error('Faile to get recommend route.');
@@ -216,7 +218,7 @@ export class Plan extends React.Component {
             }
         ).catch((e) => {
             console.log(e)
-            message.error('No recommend routes for this date.');
+            message.error('(⊙x⊙;)   No recommend routes for this date.');
         });
 
     }

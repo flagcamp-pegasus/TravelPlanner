@@ -61,7 +61,6 @@ export default class ListSort extends React.Component {
     appearAnim: PropTypes.object,
     onEventChange: PropTypes.any,
   };
-  
 
   static defaultProps = {
     component: 'div',
@@ -91,6 +90,11 @@ export default class ListSort extends React.Component {
     this.isDrage = false;
   }
 
+  addChild = () =>{
+    // console.log(this.state.children)
+    this.setState({orderSpots: this.state.children})
+  }
+
   componentDidMount() {
 
 
@@ -114,7 +118,7 @@ export default class ListSort extends React.Component {
     const currentChildren = this.state.children;
     const nextChildren = nextProps.children;
     const newChildren = mergeChildren(currentChildren, nextChildren);
-    this.setState({ children: newChildren });
+    this.setState({ children: newChildren }, this.addChild);
   }
 
   componentWillUnmount() {

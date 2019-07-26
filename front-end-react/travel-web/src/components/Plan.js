@@ -19,7 +19,7 @@ export class Plan extends React.Component {
     state = {
         path: [],
         ithDay: 1,
-        plans: [["1st spot", "2nd spot", "3rd spot"], ["x", "y", "z"]],
+        plans: [],
         prevPath: [],
         temp: [],
         spotNum: 0,
@@ -52,49 +52,11 @@ export class Plan extends React.Component {
 
     generateRoute = () => {
         let path = this.SpotsListRef.returnSpotsList();
+        console.log(path);
         const originPath = this.SpotsListRef.state.path;
         // this.setState( function() { return {temp: this.getSortedList(path)} })
         path = this.getSortedList(path);
         // console.log("tempInit:", this.state.temp);
-
-        if (originPath.length === this.state.spotNum) {
-            if (path.length === 0) {
-                console.log("no add no move");
-                this.spotsPlan = this.state.prevPath;
-            } else {
-                console.log("no add but move");
-                this.setState(function () {
-                    return {prevPath: path}
-                });
-                this.spotsPlan = path;
-                console.log("return!!!", path)
-                return path
-            }
-        } else {
-            if (path.length !== originPath.length) {
-                console.log("only add no move");
-                this.setState(function () {
-                    return {prevPath: this.state.prevPath.concat(originPath.slice(-(originPath.length - this.state.spotNum)))}
-                })
-                this.setState(function () {
-                    return {spotNum: originPath.length}
-                })
-                this.spotsPlan = this.state.prevPath.concat(originPath.slice(-(originPath.length - this.state.spotNum)));
-                // console.log("return!!!", this.spotsPlan)
-                return this.spotsPlan
-            } else {
-                console.log("both add and move");
-                this.setState(function () {
-                    return {
-                        spotNum: path.length,
-                        originPath: path
-                    }
-                })
-                this.spotsPlan = path;
-                console.log("return!!!", path)
-                return path
-            }
-        }
     }
 
     getSpotsListRef = (ref) => {
@@ -115,7 +77,6 @@ export class Plan extends React.Component {
         console.log(message)
     }
 
-
     getplaceId = (id) => {
         this.setState({placeId: id});
     }
@@ -135,7 +96,7 @@ export class Plan extends React.Component {
     }
 
     clickSaveToday = (path, ithDay) => {
-
+        console.log(this.state.path);
         const token = localStorage.getItem(TOKEN_KEY);
         const user_id = localStorage.getItem(USER_ID);
         const body ={
@@ -150,7 +111,7 @@ export class Plan extends React.Component {
             user_id : user_id,
             ithDay: ithDay,
         }
-        console.log("path JSON ", body);
+        // console.log("path JSON ", body);
 
         fetch(`${API_ROOT}/saveroutes`, {
             method: 'POST',
@@ -178,6 +139,14 @@ export class Plan extends React.Component {
         }), ()=>console.log(this.state.plans.length));
     }
 
+    modifyPath = (newPath)=>{
+        console.log(newPath);
+        const {ithDay, plans} = this.state;
+        this.setState({path: newPath});
+        const newplans = [...plans.slice(0, ithDay-1), newPath, ...plans.slice(ithDay)];
+        // this.setState({plans: newplans});
+        this.setState(({plans})=>({plans: newplans}), console.log(this.state.plans));
+    }
 
     componentDidMount() {
         fetch(`${API_ROOT}/history?user_id=${localStorage.getItem(USER_ID)}`, {
@@ -195,6 +164,10 @@ export class Plan extends React.Component {
             (history)=>{
                 // console.log("history in plan: ", history);
                 this.setState({ plans: history});
+                if(history.length){
+                    this.setState({path: history[0]}, ()=>{console.log(this.state.path)});
+                    this.SpotsListRef.setState({path: history[0]});
+                }
             }
         ).catch((e) => {
             console.log(e)
@@ -229,22 +202,18 @@ export class Plan extends React.Component {
                         setDay={this.chooseday}
                         planRemoveIdx={this.planRemoveIdx}
                     />
-
                     <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1], this.state.ithDay)}}
-                            className="btn" >
+                            className="btn">
                         Save Plan for this day
                     </Button>
                     <div>
-                        <h3>{`Day ${ithday}`}</h3>
-                        {/*<Dropdown overlay={this.chooseDay} trigger={['click']}>*/}
-                        {/*    <a className="ant-dropdown-link" href="#"> Day {ithday} <Icon type="down"/></a>*/}
-                        {/*</Dropdown>*/}
-                        <SpotsList ref={this.getSpotsListRef}/>
+                        <h3>{this.state.plans.length ? `Day ${ithday}` : `No plan`}</h3>
+                        <SpotsList ref={this.getSpotsListRef} modifyPath={this.modifyPath}/>
                     </div>
                     <Button onClick={this.addOneDay} className="btn">
                         Add One More Day
                     </Button>
-                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)}>Delete Today's Plan</Button>
+                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)}>Reset Today's Plan</Button>
                 </div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn">Generate
@@ -253,9 +222,6 @@ export class Plan extends React.Component {
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn">Find more
                         info</Button>
-                    {/*<button onClick={this.generateRoute}>Generate Route</button>*/}
-                    {/*<button onClick={this.removeRoute}>Remove Route</button>*/}
-
                     <DrawPath
                         getMapRef={this.getMapRef}
                         path={path}
@@ -267,7 +233,6 @@ export class Plan extends React.Component {
                         loadingElement={<div style={{height: `100%`}}/>}
                         containerElement={<div style={{height: `400px`}}/>}
                         mapElement={<div style={{height: `100%`}}/>}
-
                         getplaceId={this.getplaceId}
                     />
                 </div>

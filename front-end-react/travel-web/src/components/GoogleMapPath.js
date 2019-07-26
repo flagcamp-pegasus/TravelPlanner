@@ -130,15 +130,15 @@ class MyMap extends React.Component{
                         }],
                     }}
                 />
-                {this.props.path.map((spot)=>(
-                <MyMarker coor = {spot.latlng} key = {spot.place_id} name = {spot.name}/>
+                {this.props.path.map((spot, idx)=>(
+                <MyMarker coor = {spot.latlng} key = {idx} name = {spot.name}/>
             ))}
-                {centers.map((center)=>{
+                {centers.map((center, idx)=>{
                     const {lat, lng, distance} = center
                     return (
                         <MyMarker
                             coor = {{lat, lng}}
-                            key = {center.lat+center.lng+distance}
+                            key = {idx}
                             name = {`${distance} km`}
                             icon={{
                                 url: distance_img,

@@ -8,8 +8,8 @@ export class AttractionPost extends Component {
 
 
 
-    handleClick = ({location, name}) => {
-        PubSub.publish('path', {location, name});
+    handleClick = (spot) => {
+        PubSub.publish('path', spot);
     }
 
     handleURL = (photos) =>{
@@ -29,7 +29,7 @@ export class AttractionPost extends Component {
                 let tag = pic.html_attributions[0];
                 let sub1 = tag.split('photos')[0];
                 let sub2 = sub1.substring(9,sub1.length);
-                console.log(sub2)
+                // console.log(sub2)
                 return sub2;
             }
 
@@ -46,8 +46,7 @@ export class AttractionPost extends Component {
         }
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         // debugger
-        const { location } = geometry;
-        const { lat, lon } = location;
+        const location = {lat: geometry.location.lat(), lng:geometry.location.lng()};
         return (
             <div>
 
@@ -59,7 +58,7 @@ export class AttractionPost extends Component {
                     <p className= "place-type">Type: {types[0]}</p>
                     <a href = {this.handleMoreInfo(photos)} target="_blank">More Information</a>
                 </div>
-                <Button onClick={(e) => this.handleClick({location, name}, e)}>add</Button>
+                <Button onClick={(e) => this.handleClick({location, name, place_id}, e)}>add</Button>
             </div>
         );
     }

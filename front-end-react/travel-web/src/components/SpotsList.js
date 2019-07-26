@@ -18,12 +18,14 @@ export class SpotsList extends React.Component {
         className: 'list-sort-demo',
       };
 
-
     componentDidMount() {
-        this.pubsub_token = PubSub.subscribe('path', (path, data) => {
+        this.pubsub_token = PubSub.subscribe('path', (path, spot) => {
             this.setState({
-                path: this.state.path.concat(data)
-            })
+                path: this.state.path.concat(spot)
+            }, ()=>{
+                this.props.modifyPath(this.state.path);
+            }
+                );
         })
     }
 
@@ -31,6 +33,12 @@ export class SpotsList extends React.Component {
         PubSub.unsubscribe(this.pubsub_token);
     }
 
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     console.log("prev ", prevState.path);
+    //     console.log("cur ", this.state.path);
+    //     if(prevState.path!=this.state.path)
+    //         this.props.modifyPath(this.state.path);
+    // }
 
     getListSort=(ref)=>{
         this.sortListRef = ref;
@@ -40,13 +48,18 @@ export class SpotsList extends React.Component {
         return this.sortListRef.returnList();
     }
 
+    remove=(idx)=>{
+        this.setState(({path})=>({
+            path:[ ...path.slice(0,idx), ...path.slice(idx+1)]
+        }));
+    }
+
     render() {
         const childrenToRender = this.state.path.map((item, index) => {
             const {name} = item;
             return (
                 <div key={index} className={`${this.props.className}-list`}>
                     {name }
-                    {/*<Switch size="small" defaultunChecked/>*/}
                 </div>
             )
         });
@@ -56,7 +69,7 @@ export class SpotsList extends React.Component {
                 <Icon
                     className="dynamic-delete-button"
                     type="minus-circle-o"
-                    onClick={() => this.remove()}
+                    onClick={() => this.remove(idx)}
                 />
             </div>
         ))

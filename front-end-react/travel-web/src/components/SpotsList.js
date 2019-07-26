@@ -32,16 +32,16 @@ export class SpotsList extends React.Component {
         })
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        // console.log("receive ", this.props.path)
+        // console.log("props: ", nextProps.path)
+        this.setState({path:nextProps.path});
+    }
+
     componentWillUnmount() {
         PubSub.unsubscribe(this.pubsub_token);
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     console.log("prev ", prevState.path);
-    //     console.log("cur ", this.state.path);
-    //     if(prevState.path!=this.state.path)
-    //         this.props.modifyPath(this.state.path);
-    // }
 
     getListSort=(ref)=>{
         this.sortListRef = ref;

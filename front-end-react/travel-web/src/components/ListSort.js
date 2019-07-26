@@ -95,8 +95,6 @@ export default class ListSort extends React.Component {
   }
 
   componentDidMount() {
-
-
     this.dom = ReactDOM.findDOMNode(this);
     this.keyNamePair = [];
 
@@ -111,6 +109,9 @@ export default class ListSort extends React.Component {
       window.attachEvent('onmouseup', this.onMouseUp);
       window.attachEvent('ontouchend', this.onMouseUp);
     }
+
+    this.setState({orderSpots: this.state.children})
+    console.log(this.state.children.map((a)=>a.key))
   }
 
   componentWillReceiveProps(nextProps) {

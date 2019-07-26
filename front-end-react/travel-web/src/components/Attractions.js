@@ -123,8 +123,13 @@ export class Attractions extends Component {
 
 
     render() {
+<<<<<<< HEAD
        // console.log("serach ", this.state.placesInfos)
         //console.log("user", this.state.userPlaceInfo)
+=======
+        // console.log("serach ", this.state.placesInfos)
+        // console.log("user", this.state.userPlaceInfo)
+>>>>>>> 0b8b256034c1100ef4bd2c0227a73d0cd0c00c40
         return (
             <div>
 

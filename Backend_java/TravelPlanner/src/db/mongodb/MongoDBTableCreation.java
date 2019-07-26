@@ -97,6 +97,17 @@ public class MongoDBTableCreation {
 					.append("routes_array", list3).append("index_id", new ObjectId()));
 			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 5)
 					.append("routes_array", list3).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 6)
+					.append("routes_array", list1).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 7)
+					.append("routes_array", list2).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 8)
+					.append("routes_array", list3).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 9)
+					.append("routes_array", list3).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 10)
+					.append("routes_array", list3).append("index_id", new ObjectId()));
+
 
 			db.getCollection("places").createIndex(new Document("index_id", 3));
 

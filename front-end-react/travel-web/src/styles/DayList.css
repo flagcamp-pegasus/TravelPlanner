@@ -3,12 +3,20 @@
 }
 
 .sliders{
-    flex-grow: 1;
+    height:400px;
+    float: left;
+
+
+}
+.day{
+    height:100px;
+    padding: 0px 5px 0px 5px;
+}
+.div-days{
+    float: left;
+
 }
 
-.day{
-    margin: auto;
-}
 
 .station{
     padding: 0px;
@@ -17,10 +25,17 @@
 }
 
 .start{
-    margin: 1px;
+    margin: 0px;
 }
 
 div.list-sort-demo-list{
-    margin: 3px;
-    padding: 5px;
+    height:100px;
+    margin: 0px;
+    padding: 0px 5px 0px 5px;}
+
+.div-wrapper{
+    height:400px;
+    overflow: auto;
+    display:flex;
+
 }

@@ -21,24 +21,25 @@
 
 
 .dynamic-delete-button {
-    height: 80px;
+    height: 60px;
     padding: 10%;
     margin-top: 20%;
 }
 
 div.list-sort-demo-list{
     position: relative;
-    background-color: #F0D756;
-
     flex: 1 auto;
-    font-size: 20px;
-    /*background: #fff;*/
+    font-size: 14px;
+    /*background: #F0D756;*/
+    background: #fff;
     border-radius: 6px;
     margin: 5px auto;
     padding: 9px;
     width: 90%;
     transition:  box-shadow .5s, transform .5s;
     border: 2px dashed cornflowerblue; /* can be removed later */
+    height: 60px;
+    text-align: center;
 }
 
 @media screen and (max-width: 320px) {

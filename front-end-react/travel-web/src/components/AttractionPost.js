@@ -68,7 +68,9 @@ export class AttractionPost extends Component {
         // const description = `Rating ${rating}; Location: ${vicinity} `;
         const description =
             <ul className = 'description'>
-                <li> <span>Rating {rating},   </span><span>Type:{types[0]}</span></li>
+                {/*<li> <span>Rating: {rating},</span><span>Type: {types[0]}</span></li>*/}
+                <li> <span>Rating: {rating}</span> </li>
+                <li>Type: {types[0]}</li>
                 <li>Location: {vicinity}</li>
             </ul>
 
@@ -83,9 +85,10 @@ export class AttractionPost extends Component {
                          src = {this.handleURL(photos)}
                     />
                 }
-                actions={[<Button href = {this.handleMoreInfo(photos)} target="_blank"
-                className = 'more-info-button'>More Info</Button>,
-                    <Button onClick={(e) => this.handleClick({location, name, place_id}, e)}>add</Button>]}
+                actions={[
+                    <Button href = {this.handleMoreInfo(photos)} target="_blank" className = 'more-info-button'>More Info</Button>,
+                    <Button onClick={(e) => this.handleClick({location, name, place_id}, e)}>Add</Button>
+                ]}
             >
                 <Meta
                     title={name}

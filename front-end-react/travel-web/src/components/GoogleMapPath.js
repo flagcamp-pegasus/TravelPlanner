@@ -181,7 +181,7 @@ class MyMap extends React.Component{
                     directions={this.state.directions}
                     options={{
                         markerOptions:{visible:false},
-                        polylineOptions:{strokeColor: `#2F42F1`, strokeWeight:5}
+                        polylineOptions:{strokeColor: `#6495ed`, strokeWeight:5}
                     }}
                 /> : null}
                 {/*{centers.map((center, idx)=>{*/}

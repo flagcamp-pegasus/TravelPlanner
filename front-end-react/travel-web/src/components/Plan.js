@@ -6,9 +6,9 @@ import {OverviewButton} from './OverviewButton';
 import { message, Button} from "antd";
 import {SpotsList} from './SpotsList';
 import smartPost from 'react-smart-post';
+import {withRouter  } from 'react-router-dom'
 
-
-export class Plan extends React.Component {
+class MyPlan extends React.Component {
     state = {
         path: [],
         ithDay: 1,
@@ -332,3 +332,4 @@ export class Plan extends React.Component {
     }
 }
 
+export const Plan = withRouter(MyPlan)

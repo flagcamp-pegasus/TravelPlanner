@@ -241,7 +241,7 @@ export class Plan extends React.Component {
                 place_id: place.place_id,
                 name: place.name,
             }
-        ))
+        ));
         return (
             <div className="planContainer">
                 <div className="leftContent">
@@ -291,7 +291,6 @@ export class Plan extends React.Component {
                         loadingElement={<div style={{height: `100%`}}/>}
                         containerElement={<div style={{height: `750px`}}/>}
                         mapElement={<div style={{height: `100%`}}/>}
-
                     />
                 </div>
                 <div className = "rightContent">

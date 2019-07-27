@@ -57,7 +57,7 @@ class MyMap extends React.Component{
                 });
 
                 this.props.getplaceId(ids);
-                
+
                 const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
                 this.setState({
@@ -71,6 +71,9 @@ class MyMap extends React.Component{
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.path.length<=1){
+            return;
+        }
         //drive
         const path = nextProps.path.map((spot) => {
             return spot.latlng
@@ -102,6 +105,7 @@ class MyMap extends React.Component{
     render(){
         // console.log("today's plan: ", this.props.path)
         let {latlng, name}=this.props.city
+        // console.log(latlng)
         // console.log(this.props.path)
         let path = this.props.path.map(
             (spot) => (spot.latlng)
@@ -122,9 +126,8 @@ class MyMap extends React.Component{
                 ref={this.state.onMapMounted}
                 defaultZoom={this.props.zoom}
                 onBoundsChanged={this.state.onBoundsChanged}
-                center={path ? path[0] : latlng}
+                center={path.length ? path[0] : latlng}
             >
-
             {/*<GoogleMapPath*/}
             {/*    defaultZoom={this.props.zoom}*/}
             {/*    // defaultCenter={new window.google.maps.LatLng(-34.397, 150.644)}*/}
@@ -167,19 +170,19 @@ class MyMap extends React.Component{
                     if(idx===0){
                         label ='S'
                     }else{
-                        label=idx
+                        label=`${idx}`
                     }
                     return <MyMarker coor = {spot.latlng} key = {idx} name = {spot.name} label={label}/>;
                 }
             )}
-                <DirectionsRenderer
+                {this.props.path.length>1 ? <DirectionsRenderer
                     key={0}
                     directions={this.state.directions}
                     options={{
                         markerOptions:{visible:false},
-                        polylineOptions:{strokeColor: "red", strokeWeight:5}
+                        polylineOptions:{strokeColor: `#2F42F1`, strokeWeight:5}
                     }}
-                />
+                /> : null}
                 {/*{centers.map((center, idx)=>{*/}
                 {/*    const {lat, lng, distance} = center*/}
                 {/*    return (*/}

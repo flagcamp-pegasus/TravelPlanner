@@ -19,7 +19,7 @@ export class Plan extends React.Component {
     }
 
     chooseday = (ithday) => {
-        message.info(`Changed to Day ${ithday}`);
+        message.info(`ヾ(◍°∇°◍)ﾉﾞ   Changed to Day ${ithday}`);
         this.setState({
             ithDay: ithday,
             path : this.state.plans[ithday-1],

@@ -16,6 +16,7 @@
     align-items: baseline;
     align-content: space-between;
     /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
+    counter-reset: my-sec-counter;
 }
 
 
@@ -26,9 +27,12 @@
 }
 
 div.list-sort-demo-list{
+    position: relative;
+    background-color: #F0D756;
+
     flex: 1 auto;
     font-size: 20px;
-    background: #fff;
+    /*background: #fff;*/
     border-radius: 6px;
     margin: 5px auto;
     padding: 9px;
@@ -41,5 +45,51 @@ div.list-sort-demo-list{
     .list-sort-demo-text h1 {
         font-size: 14px;
         line-height: 28px;
+        font-family: 'Raleway', sans-serif;
     }
+}
+
+/* test more color*/
+
+
+/*.list-sort-demo-list {*/
+/*    list-style-type: none;*/
+/*    list-style-type: decimal !ie; !*IE 7- hack*!*/
+/*    padding: 0;*/
+/*    counter-reset: li-counter;*/
+/*}*/
+
+/*.list-sort-demo-list {*/
+/*    position: relative;*/
+/*    margin-bottom: 1.5em;*/
+/*    padding: 0.5em;*/
+/*    background-color: #F0D756;*/
+/*    padding-left: 58px;*/
+/*}*/
+
+.list-sort-demo-list:hover{
+    box-shadow:inset -1em 0 #6CD6CC;
+    -webkit-transition: box-shadow 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: box-shadow 0.5s;
+}
+
+.list-sort-demo-list:before {
+    position: absolute;
+    top: -0.3em;
+    left: -0.5em;
+    width: 1em;
+    height: 1em;
+    font-size: 2em;
+    line-height: 1.2;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: #6CD6CC;
+    transform: rotate(-20deg);
+    -ms-transform: rotate(-20deg);
+    -webkit-transform: rotate(-20deg);
+    z-index: 99;
+    overflow: hidden;
+    content: counter(my-sec-counter)". ";
+    counter-increment: my-sec-counter 1;
 }

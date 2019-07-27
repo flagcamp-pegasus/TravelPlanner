@@ -51,14 +51,13 @@ export class DayList extends React.Component {
     }
 
     render() {
-
         const childrenToRender = this.props.plans.map((item, index) => {
             item = item.map((content)=>(content.name))
             // ["place1","", ""]
             return (
-                <div key={index} className={`${this.props.className}-list`}>
+                <div key={index} className={`${this.props.className}-list`} id={"div-listsort"}>
                     {/*{path}*/}
-                    <h4 className={"start"}>{`start from: `+item[0] ? item[0] : ''}</h4>
+                    <h4 className={"start"}>{`start from: ${item[0]}`}</h4>
                     {item.slice(1).map((name, idx)=>(<p className="station" key={idx}>{`Station ${idx+1}: ${name}`}</p>))}
                 </div>
             )
@@ -73,10 +72,9 @@ export class DayList extends React.Component {
             </div>
         ))
         return (
-            <div className={`${this.props.className}-div ${this.props.className}-wrapper planOverView`}>
-            {/*<div className={`${this.props.className}-wrapper`}>*/}
-            {/*    <div className="div-days">*/}
-                <div>
+            <div className={`div-wrapper`}>
+                {/*<div className={`${this.props.className}-wrapper`}>*/}
+                <div className="div-days">
                     {days}
                 </div>
                 <div className="sliders" >

@@ -76,6 +76,9 @@ public class MongoDBTableCreation {
 			list1.add("ChIJP3Sa8ziYEmsRUKgyFmh9AQM");
 			list1.add("ChIJq6qq6jauEmsR46KYci7M5Jc");
 			list1.add("ChIJtwapWjeuEmsRcxV5JARHpSk");
+			list1.add("ChIJP3Sa8ziYEmsRUKgyFmh9AQM");
+			list1.add("ChIJq6qq6jauEmsR46KYci7M5Jc");
+			list1.add("ChIJtwapWjeuEmsRcxV5JARHpSk");
 
 			List<String> list2 = new ArrayList<>();
 			list2.add("ChIJ1-v38TauEmsRHbUt24abGq8");
@@ -94,6 +97,14 @@ public class MongoDBTableCreation {
 			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 3)
 					.append("routes_array", list3).append("index_id", new ObjectId()));
 			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 4)
+					.append("routes_array", list3).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 5)
+					.append("routes_array", list1).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 6)
+					.append("routes_array", list2).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 7)
+					.append("routes_array", list3).append("index_id", new ObjectId()));
+			db.getCollection("routes").insertOne(new Document().append("routeId", "2222").append("ithDay", 8)
 					.append("routes_array", list3).append("index_id", new ObjectId()));
 
 

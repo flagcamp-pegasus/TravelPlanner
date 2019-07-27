@@ -52,21 +52,6 @@ div.list-sort-demo-list{
 /* test more color*/
 
 
-/*.list-sort-demo-list {*/
-/*    list-style-type: none;*/
-/*    list-style-type: decimal !ie; !*IE 7- hack*!*/
-/*    padding: 0;*/
-/*    counter-reset: li-counter;*/
-/*}*/
-
-/*.list-sort-demo-list {*/
-/*    position: relative;*/
-/*    margin-bottom: 1.5em;*/
-/*    padding: 0.5em;*/
-/*    background-color: #F0D756;*/
-/*    padding-left: 58px;*/
-/*}*/
-
 .list-sort-demo-list:hover{
     box-shadow:inset -1em 0 #6CD6CC;
     -webkit-transition: box-shadow 0.5s; /* For Safari 3.1 to 6.0 */
@@ -77,9 +62,9 @@ div.list-sort-demo-list{
     position: absolute;
     top: -0.2em;
     left: -0.4em;
-    width: 1.5em;
+    width: 1.3em;
     height: 1.2em;
-    font-size: 1.3em;
+    font-size: 1.1em;
     line-height: 1.2;
     font-weight: bold;
     text-align: -moz-right;

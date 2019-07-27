@@ -35,8 +35,8 @@ export class CityList extends React.Component {
                     {/*<img src={cityList[0].imageUrl} alt="London"/>*/}
 
                     {cityList.map((city) =>
-                        <div>
-                            <img src={city.imageUrl} alt={city.name} key={city.imageUrl}/>
+                        <div key={city.imageUrl}>
+                            <img src={city.imageUrl} alt={city.name} />
                             <h1>{city.name}</h1>
                         </div>
                     )}

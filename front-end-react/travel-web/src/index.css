@@ -15,6 +15,7 @@
 @import 'styles/Attractions.css';
 @import 'styles/AttractionPost.css';
 @import 'styles/AttractionList.css';
+@import 'styles/PlanOverView.css';
 
 body {
  margin: 0;

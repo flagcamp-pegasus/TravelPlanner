@@ -73,9 +73,10 @@ export class DayList extends React.Component {
             </div>
         ))
         return (
-            <div className={`div-wrapper`}>
-                {/*<div className={`${this.props.className}-wrapper`}>*/}
-                <div className="div-days">
+            <div className={`${this.props.className}-div ${this.props.className}-wrapper planOverView`}>
+            {/*<div className={`${this.props.className}-wrapper`}>*/}
+            {/*    <div className="div-days">*/}
+                <div>
                     {days}
                 </div>
                 <div className="sliders" >

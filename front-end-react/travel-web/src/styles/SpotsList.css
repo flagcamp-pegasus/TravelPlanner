@@ -40,6 +40,7 @@ div.list-sort-demo-list{
     border: 2px dashed cornflowerblue; /* can be removed later */
     height: 60px;
     text-align: center;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 320px) {

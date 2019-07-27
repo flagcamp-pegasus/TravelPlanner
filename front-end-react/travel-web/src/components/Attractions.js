@@ -48,7 +48,7 @@ export class Attractions extends Component {
             this.handleSearchById();
         }else{
             this.setState({activeTab: type})
-            console.log(type)
+           // console.log(type)
             this.handleTypeSearch(type);
         }
     }
@@ -60,7 +60,6 @@ export class Attractions extends Component {
             return;
         }
         let searchIDs = this.props.userSearchId;
-        let counter = 0;
         let results = [];
 
 
@@ -75,6 +74,7 @@ export class Attractions extends Component {
                 console.log('1',result);
                 if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                     //console.log('2',result);
+                    console.log(result)
                     results.push(result);
                    // counter++;
                     this.setState({placesInfos:results});
@@ -91,7 +91,7 @@ export class Attractions extends Component {
 
 
     handleTypeSearch = (type) =>{
-        console.log("hi");
+       // console.log("hi");
 
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
 
@@ -114,8 +114,6 @@ export class Attractions extends Component {
                 console.log('error in nearby search');
             }
              })
-
-
     }
 
 
@@ -127,7 +125,7 @@ export class Attractions extends Component {
                 <h1 className = "attraction-title">Attractions</h1>
                 <p className = "attraction-note">Note: Select your spots from the search bar or select from the tab lists</p>
                 <div id="map"></div>
-                <Tabs defaultActiveKey="user-add" onChange={this.handleSearch}  className="attraction-tab" size = "small"
+                <Tabs defaultActiveKey={TYPE_FOOD} onChange={this.handleSearch}  className="attraction-tab" size = "small"
                       activeKey={this.state.activeTab}>
                     <TabPane
                         className = "tabPane"

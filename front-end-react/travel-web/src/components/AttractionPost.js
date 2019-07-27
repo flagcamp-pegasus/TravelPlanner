@@ -20,11 +20,11 @@ export class AttractionPost extends Component {
             let pic = photos[0];
             if(pic.getUrl){
                 //console.log(1, pic.getUrl())
+                //console.log(pic.getUrl({width: 100, height:100}))
                 return pic.getUrl({width: 100, height:100});
 
             }else{
-                console.log(2)
-                return `${DEFAULT_IMAGE}`
+                return `${DEFAULT_IMAGE}`;
             }
 
         }
@@ -53,7 +53,7 @@ export class AttractionPost extends Component {
         // debugger
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         const curloc = geometry.location;
-        const location = {lat: curloc.lat? curloc.lat : curloc.lat() , lng: curloc.lng? curloc.lng : curloc.lng()};
+        const location = {lat: curloc.lat , lng: curloc.lng};
         // const description = `Rating ${rating}; Location: ${vicinity} `;
         const description =
             <ul className = 'description'>
@@ -68,7 +68,9 @@ export class AttractionPost extends Component {
                 className='attraction-post'
                 style={{ width: 300 }}
                 cover={
-                    <img className = 'place-image' alt="place-image" src={this.handleURL(photos)}/>
+                    <img className = 'place-image' alt="No Image"
+                         src = {this.handleURL(photos)}
+                    />
                 }
                 actions={[<Button href = {this.handleMoreInfo(photos)} target="_blank"
                 className = 'more-info-button'>More Info</Button>,

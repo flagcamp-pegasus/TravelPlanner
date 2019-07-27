@@ -59,6 +59,7 @@ export class DayList extends React.Component {
                     {/*{path}*/}
                     <h4 className={"start"}>{`start from: ${item[0]}`}</h4>
                     {item.slice(1).map((name, idx)=>(<p className="station" key={idx}>{`Station ${idx+1}: ${name}`}</p>))}
+
                 </div>
             )
         });
@@ -68,7 +69,7 @@ export class DayList extends React.Component {
                 <h4 >{`Day ${idx+1}`}</h4>
                 <Button type="link" onClick={()=>this.gotoDay(idx+1)}>{`Go To Plan`}</Button>
                 {/*<br/>*/}
-                {/*<Button type="dashed" onClick={()=>this.deletePlan(idx)}>Delete</Button>*/}
+                <Button type="dashed" onClick={()=>this.deletePlan(idx)}>Delete</Button>
             </div>
         ))
         return (

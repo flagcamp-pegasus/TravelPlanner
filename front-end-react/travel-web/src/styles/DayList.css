@@ -30,6 +30,7 @@ div.list-sort-demo-list{
     height:30%;
     margin: 0px;
     padding: 0px 5px 0px 5px;
+    overflow: auto;
 }
 
 .div-wrapper{

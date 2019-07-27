@@ -53,7 +53,9 @@ export class AttractionPost extends Component {
         // debugger
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         const curloc = geometry.location;
+        console.log(curloc)
         const location = {lat: curloc.lat? curloc.lat : curloc.lat() , lng: curloc.lng? curloc.lng : curloc.lng()};
+        console.log(location)
         // const description = `Rating ${rating}; Location: ${vicinity} `;
         const description =
             <ul className = 'description'>

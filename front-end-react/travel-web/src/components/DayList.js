@@ -51,6 +51,7 @@ export class DayList extends React.Component {
     }
 
     render() {
+
         const childrenToRender = this.props.plans.map((item, index) => {
             item = item.map((content)=>(content.name))
             // ["place1","", ""]

@@ -23,14 +23,14 @@ class NormalLoginForm extends React.Component {
            throw new Error(response.statusText);
          })
          .then((data) => {
-           message.success('Login Success')
+           message.success('ヽ(✿ﾟ▽ﾟ)ノ  Login Success')
              // debugger;/**/
              console.log(data)
            this.props.handleLogin(data.Token[0], data.user_id);   //
          })
          .catch((e) => {
            console.log(e)
-           message.error('Login Failed.');
+           message.error('Σ( ° △ °|||)︴  Login Failed.');
          });
      }
    });

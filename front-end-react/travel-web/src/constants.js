@@ -10,7 +10,7 @@ export const POS_KEY = 'POS_KEY';
 export const AUTH_HEADER = 'Bearer';
 export const LOC_SHAKE = 0.02;
 
-export const API_KEY="AIzaSyC6H9bJcyRzUYM3rc1DVGUu80ASLnoUkCc";
+export const API_KEY="AIzaSyDwx2XxmBTOfupGVvHJv7CeSM_ZZTFRnTQ";
 export const HISTORY_ENDPOINT = '/history';
 export const RECOM_ENDPOINT = '/recommendroute';
 export const SAVE_ENDPOINT= '/saveroute';
@@ -23,7 +23,7 @@ export const TYPE_SHOPPING ='store';
 export const TYPE_MUSEUM = 'museum';
 export const SAMPLE_ID = 'ChIJN1t_tDeuEmsRUsoyG83frY4';
 export const MAX_DISPLAY = 6;
-export const DEFAULT_IMAGE= 'https://cdn1.vectorstock.com/i/1000x1000/10/20/cafe-or-cafeteria-interior-cartoon-vector-20881020.jpg'
+export const DEFAULT_IMAGE= 'https://image.flaticon.com/icons/png/512/854/854878.png'
 export const CITY_LIST = [
     {
      name: "London",

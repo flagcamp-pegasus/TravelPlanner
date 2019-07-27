@@ -14,6 +14,7 @@
 @import 'styles/OverviewButton.css';
 @import 'styles/Attractions.css';
 @import 'styles/AttractionPost.css';
+@import 'styles/AttractionList.css';
 
 body {
  margin: 0;

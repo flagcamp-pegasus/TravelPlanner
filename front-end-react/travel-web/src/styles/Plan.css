@@ -18,7 +18,10 @@
     margin:0 auto;
     width: 65%;
     height: 800px;
-    /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
+    position: relative;
+
+    /* children is right
+    border: 2px dashed cornflowerblue; !* can be removed later *!*/
 }
 
 .leftContent {

@@ -109,14 +109,14 @@ export class Plan extends React.Component {
         })
             .then((response) => {
                 if (response.ok) {
-                    message.success('Save route successfully!');
+                    message.success('(๑•̀ㅂ•́)و✧  Save route successfully!');
                     return;
                 }
                 throw new Error('Failed to connect to database.');
             })
             .catch((e) => {
                 console.error(e);
-                message.error('Failed to save route.');
+                message.error('w(ﾟДﾟ)w  Failed to save route.');
             });
     }
 
@@ -165,6 +165,7 @@ export class Plan extends React.Component {
         })
         .then((response)=>{
             if(response.ok){
+                message.success('n(*≧▽≦*)n   Get your route successfully!');
                 return response.json();
             }
             throw new Error('No history routes for this username.');
@@ -179,7 +180,7 @@ export class Plan extends React.Component {
             }
         ).catch((e) => {
             console.log(e)
-            message.error('failed to get history.');
+            message.error('w(ﾟДﾟ)w  Failed to get history.');
         });
 
     }
@@ -206,6 +207,7 @@ export class Plan extends React.Component {
         })
             .then((response)=>{
                 if(response.ok){
+                    message.success('n(*≧▽≦*)n   Get your recommend route successfully!');
                     return response.json();
                 }
                 throw new Error('Faile to get recommend route.');
@@ -216,7 +218,7 @@ export class Plan extends React.Component {
             }
         ).catch((e) => {
             console.log(e)
-            message.error('No recommend routes for this date.');
+            message.error('(⊙x⊙;)   No recommend routes for this date.');
         });
 
     }
@@ -269,18 +271,19 @@ export class Plan extends React.Component {
 
                 </div>
                 <div className="path">
+                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Insert My Spot</Button>
+
                     <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn-3d cyan" icon="edit">Generate
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="radar-chart">Recommend
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Find more
-                        info</Button>
                     <DrawPath
                         getMapRef={this.getMapRef}
                         path={path}
-                        //[{lat, lng}]
+                        getplaceId={this.getplaceId}
+
                         city={this.props.city ? this.props.city : this.state.path[0]}
                         zoom={PATH_ZOOM}
 
@@ -288,7 +291,7 @@ export class Plan extends React.Component {
                         loadingElement={<div style={{height: `100%`}}/>}
                         containerElement={<div style={{height: `750px`}}/>}
                         mapElement={<div style={{height: `100%`}}/>}
-                        getplaceId={this.getplaceId}
+
                     />
                 </div>
                 <div className = "rightContent">

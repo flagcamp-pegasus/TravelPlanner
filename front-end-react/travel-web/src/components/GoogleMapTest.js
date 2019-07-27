@@ -1,108 +1,55 @@
-import { Form, Input, Icon, Button } from 'antd';
 import React from 'react';
-let id = 0;
+import {API_FEE_KEY} from "../charge";
+const { compose, withProps, lifecycle } = require("recompose");
+const {
+    withScriptjs,
+    withGoogleMap,
+    GoogleMap,
+    DirectionsRenderer,
+} = require("react-google-maps");
 
-class DynamicFieldSet extends React.Component {
-    remove = k => {
-        const { form } = this.props;
-        // can use data-binding to get
-        const keys = form.getFieldValue('keys');
-        // We need at least one passenger
-        if (keys.length === 1) {
-            return;
-        }
+class Map extends React.Component{
+    state={
+        directions: null,
+    }
 
-        // can use data-binding to set
-        form.setFieldsValue({
-            keys: keys.filter(key => key !== k),
-        });
-    };
-
-    add = () => {
-        const { form } = this.props;
-        // can use data-binding to get
-        const keys = form.getFieldValue('keys');
-        const nextKeys = keys.concat(id++);
-        // can use data-binding to set
-        // important! notify form to detect changes
-        form.setFieldsValue({
-            keys: nextKeys,
-        });
-    };
-
-    handleSubmit = e => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                const { keys, names } = values;
-                console.log('Received values of form: ', values);
-                console.log('Merged values:', keys.map(key => names[key]));
+    componentDidMount() {
+        const DirectionsService = new window.google.maps.DirectionsService();
+        DirectionsService.route({
+            origin: new window.google.maps.LatLng(41.8507300, -87.6512600),
+            destination: new window.google.maps.LatLng(41.8525800, -87.6514100),
+            travelMode: window.google.maps.TravelMode.DRIVING,
+            waypoints:[
+                {location:{lat: 41.8517300, lng:-87.6513600}, stopover:true}
+                ]
+        }, (result, status) => {
+            if (status === window.google.maps.DirectionsStatus.OK) {
+                this.setState({
+                    directions: result,
+                });
+            } else {
+                console.error(`error fetching directions ${result}`);
             }
         });
-    };
+    }
 
-    render() {
-        const { getFieldDecorator, getFieldValue } = this.props.form;
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 4 },
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 20 },
-            },
-        };
-        const formItemLayoutWithOutLabel = {
-            wrapperCol: {
-                xs: { span: 24, offset: 0 },
-                sm: { span: 20, offset: 4 },
-            },
-        };
-        getFieldDecorator('keys', { initialValue: [] });
-        const keys = getFieldValue('keys');
-        const formItems = keys.map((k, index) => (
-            <Form.Item
-                {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                label={index === 0 ? 'Passengers' : ''}
-                required={false}
-                key={k}
+    render(){
+        return(
+            <GoogleMap
+                defaultZoom={7}
+                defaultCenter={new window.google.maps.LatLng(41.8507300, -87.6512600)}
             >
-                {getFieldDecorator(`names[${k}]`, {
-                    validateTrigger: ['onChange', 'onBlur'],
-                    rules: [
-                        {
-                            required: true,
-                            whitespace: true,
-                            message: "Please input passenger's name or delete this field.",
-                        },
-                    ],
-                })(<Input placeholder="passenger name" style={{ width: '60%', marginRight: 8 }} />)}
-                {keys.length > 1 ? (
-                    <Icon
-                        className="dynamic-delete-button"
-                        type="minus-circle-o"
-                        onClick={() => this.remove(k)}
-                    />
-                ) : null}
-            </Form.Item>
-        ));
-        return (
-            <Form onSubmit={this.handleSubmit}>
-                {formItems}
-                <Form.Item {...formItemLayoutWithOutLabel}>
-                    <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-                        <Icon type="plus" /> Add field
-                    </Button>
-                </Form.Item>
-                <Form.Item {...formItemLayoutWithOutLabel}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
-        );
+                {<DirectionsRenderer
+                    key={0}
+                    directions={this.state.directions}
+                    options={{
+                        markerOptions:{visible:false},
+                        // polylineOptions:{strokeColor: "red"}
+                    }}
+                />}
+            </GoogleMap>
+        )
     }
 }
 
-export const Test = Form.create({ name: 'dynamic_form_item' })(DynamicFieldSet);
+export const Test = withScriptjs(withGoogleMap(Map));

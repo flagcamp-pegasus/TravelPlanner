@@ -294,7 +294,7 @@ class MyPlan extends React.Component {
                         Add One More Day
                     </Button>
                     <Button type="dashed" onClick={()=>this.modifyPath([])} className="btn-3d red" icon="delete">Reset Today's Plan</Button>
-                    <Button type="primary" onClick={this.backToCity}>Back to Choose City</Button>
+                    <Button type="primary" onClick={this.backToCity} className="btn-3d blue" icon="rollback">Back to Choose City</Button>
                 </div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Insert My Spot</Button>

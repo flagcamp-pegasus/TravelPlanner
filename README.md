@@ -147,3 +147,6 @@ https://docs.google.com/presentation/d/1UDRo6CPn3_8RZ0SdCnYxCgmBj_74D6t-nGSucmTr
 
 presentation
 https://docs.google.com/document/d/1TIRMBvTfldXitIE0U7SlYmpszOWHqUAdOlzH02T12n8/edit
+
+slides:
+https://docs.google.com/presentation/d/10RJ72tMPfaCiN01IzoUXc9dPN9iQQC8N244Qp2eqi6I/edit#slide=id.p

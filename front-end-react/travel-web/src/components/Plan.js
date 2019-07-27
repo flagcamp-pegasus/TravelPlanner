@@ -65,9 +65,9 @@ export class Plan extends React.Component {
         this.SpotsListRef = ref;
     }
 
-    removeRoute = () => {
-        this.setState((state) => ({path: []}))
-    }
+    // removeRoute = () => {
+    //     this.setState((state) => ({path: []}))
+    // }
 
     componentWillMount() {
         // attention
@@ -257,6 +257,7 @@ export class Plan extends React.Component {
                 name: place.name,
             }
         ));
+        // debugger
         return (
             <div className="planContainer">
                 <div className="leftContent">
@@ -293,8 +294,8 @@ export class Plan extends React.Component {
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="radar-chart">Recommend
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove
-                        Route</Button>
+                    {/*<Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove*/}
+                    {/*    Route</Button>*/}
                     <DrawPath
                         getMapRef={this.getMapRef}
                         path={path}

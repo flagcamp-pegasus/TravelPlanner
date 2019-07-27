@@ -12,6 +12,7 @@ export class AttractionPost extends Component {
 
     handleClick = (spot) => {
         PubSub.publish('path', spot);
+        console.log(spot)
     }
 
     handleURL = (photos) =>{
@@ -53,7 +54,11 @@ export class AttractionPost extends Component {
         // debugger
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         const curloc = geometry.location;
+        console.log(curloc.lat);
+
         const location = {lat: curloc.lat , lng: curloc.lng};
+        console.log(location)
+        // debugger
         // const description = `Rating ${rating}; Location: ${vicinity} `;
         const description =
             <ul className = 'description'>

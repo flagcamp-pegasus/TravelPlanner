@@ -229,6 +229,7 @@ export class Plan extends React.Component {
 
     selectSpot = () => {
         this.attractionRef.handleSearchById();
+
     }
 
 

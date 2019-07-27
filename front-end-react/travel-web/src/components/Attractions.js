@@ -32,9 +32,10 @@ export class Attractions extends Component {
         placesInfos:placesData,
         userPlaceInfo:null,
         placeId: SAMPLE_ID,
-        ifUserAdd:false
-    }
+        ifUserAdd:false,
+        activeTab:"user-add"
 
+    }
 
 
 
@@ -43,9 +44,11 @@ export class Attractions extends Component {
             return;
         }
         if (type ==='user-add'){
-
+            this.setState({activeTab: type})
             this.handleSearchById();
         }else{
+            this.setState({activeTab: type})
+            //console.log(this.state.activeTab)
             this.handleTypeSearch(type);
         }
     }
@@ -76,7 +79,10 @@ export class Attractions extends Component {
             }else{
                 console.log('error in search by ID ')
             }
-        });
+        })
+
+        this.setState({activeTab:
+                "user-add"});
     }
 
 
@@ -127,16 +133,17 @@ export class Attractions extends Component {
         return (
             <div>
 
-                <span><p>Search a place and click "Insert My Spot"</p>
-                    <p> or Select a place from recommended categories</p></span>
+                <h1 className = "attraction-title">Attractions</h1>
+                <p className = "attraction-note">Note: Select your spots from the search bar or select from the tab lists</p>
                 <div id="map"></div>
-                <Tabs defaultActiveKey="user-add" onChange={this.handleSearch}  className="attraction-tab" size = "small" >
+                <Tabs defaultActiveKey="user-add" onChange={this.handleSearch}  className="attraction-tab" size = "small"
+                      Tabs activeKey={this.state.activeTab}>
                     <TabPane
                         className = "tabPane"
                         tab={
                             <span> <Icon type="smile" /></span>}
                         key='user-add' >
-                        {this.props.userSearchId ? <AttractionPost info = {this.state.userPlaceInfo}/> : `Please add a place from the search bar or tabs above `}
+                        {this.props.userSearchId ? <AttractionPost info = {this.state.userPlaceInfo}/> : `Add a place from the search bar`}
                     </TabPane>
 
                     <TabPane

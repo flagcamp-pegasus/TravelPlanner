@@ -1,32 +1,47 @@
+.attraction-post{
+    margin: auto;
+}
 .place-image {
     margin:auto;
     height: 75%;
     width: 75%;
     margin-top:10px;
 }
-.attraction-place {
-    border: dotted thin lightgrey;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    padding: 4px;
-}
-.place-info {
-    font-size: 12px;
-    margin: 0 auto;
 
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
-}
+/*.place-info {*/
+/*    font-size: 12px;*/
+/*    margin: 0 auto;*/
+
+/*    !*display: flex;*!*/
+/*    !*align-items: center;*!*/
+/*    !*justify-content: center;*!*/
+/*}*/
+
 .place-name {
     font-size: 16px;
     font-weight: bold;
     text-shadow: 1px 1px 2px darkgrey;
 }
-.place-rating {
+
+.description{
+    text-align:left;
+    list-style-type:none;
+     margin: 0 auto;
     font-size: 12px;
-    font-style: italic;
+    color: #595959;
+
 }
-.attraction-post{
-    margin: auto;
+.more-info-button{
+   ;
+}
+.attraction-title{
+    padding: 0;
+}
+.attraction-note{
+    font-size:8px;
+    color:#8c8c8c;
+    text-align: left;
+    padding: 0;
+
+
 }

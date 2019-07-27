@@ -32,11 +32,6 @@ export class SpotsList extends React.Component {
         })
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        // console.log("receive ", this.props.path)
-        // console.log("props: ", nextProps.path)
-        this.setState({path: nextProps.path});
-    }
 
     componentWillUnmount() {
         PubSub.unsubscribe(this.pubsub_token);
@@ -52,10 +47,18 @@ export class SpotsList extends React.Component {
     }
 
     remove = (idx) => {
-        this.setState(({path}) => ({
-            path: [...path.slice(0, idx), ...path.slice(idx + 1)]
-        }));
+        let {path} = this.state;
+        let newPath = [...path.slice(0, idx), ...path.slice(idx + 1)];
+        this.setState({
+            path: newPath
+        });
+        this.props.changePath(newPath);
     }
+
+    static getDerivedStateFromProps(props, state){
+        return { path: props.path };
+    }
+
 
     render() {
         const childrenToRender = this.state.path.map((item, index) => {

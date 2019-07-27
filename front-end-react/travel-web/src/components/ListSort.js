@@ -119,7 +119,9 @@ export default class ListSort extends React.Component {
     const nextChildren = nextProps.children;
     const newChildren = mergeChildren(currentChildren, nextChildren);
     this.setState({ children: newChildren }, this.addChild);
+    this.setState({children: nextProps.children})
   }
+
 
   componentWillUnmount() {
     if (window.addEventListener) {
@@ -358,6 +360,8 @@ export default class ListSort extends React.Component {
   returnList=()=>{
     return this.state.orderSpots;
   }
+
+
 
   render() {
     const childrenToRender = toArrayChildren(this.state.children).map(this.getChildren);

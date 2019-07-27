@@ -18,10 +18,22 @@ export class OverviewButton extends React.Component {
     handleSave = () => {
         const newOrder = this.dayListRef.returnSpotsList().map((a)=>(a.key));
         console.log(newOrder);
+        console.log(this.props.plans)
         newOrder.map((repDay, idx)=>{
-            console.log(`Day ${idx+1} is plans[${repDay}]`)
+            // console.log(`Day ${idx+1} is plans[${repDay}]`)
             this.props.saveToDB(this.props.plans[repDay], idx+1);
-        })
+        });
+        const newPlans = [];
+        for(let i = 0 ; i < newOrder.length; i++){
+            newPlans.push(1);
+        }
+        for(let i = 0 ; i < newOrder.length; i++){
+            // console.log(`newPlans ${i+1} is plans[${newOrder[i]}]`)
+            newPlans[i]=[...this.props.plans[newOrder[i]]];
+            // console.log(newPlans[i])
+        }
+        this.props.changePlans(newPlans);
+        this.props.changePath(newPlans[0],1);
     }
 
     handleCancel = () => {
@@ -39,7 +51,6 @@ export class OverviewButton extends React.Component {
     }
 
     render() {
-        // console.log(this.props.plans);
 
         const { visible, confirmLoading } = this.state;
         return (

@@ -85,6 +85,7 @@ class MyMap extends React.Component{
         }));
         // console.log(waypoints)
         const DirectionsService = new window.google.maps.DirectionsService();
+        console.log(path[0])
         DirectionsService.route({
             origin: path[0],
             destination: path[path.length-1],

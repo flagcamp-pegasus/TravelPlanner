@@ -18,6 +18,17 @@ export class Plan extends React.Component {
         spotNum: 0,
     }
 
+    changePlans = (newPlan) =>{
+        this.setState({plans:newPlan}, ()=>console.log(this.state.plans))
+    }
+
+    changePath = (path, ithDay)=>{
+        this.setState({
+            ithDay,
+            path
+        })
+    }
+
     chooseday = (ithday) => {
         message.info(`ヾ(◍°∇°◍)ﾉﾞ   Changed to Day ${ithday}`);
         this.setState({
@@ -63,7 +74,6 @@ export class Plan extends React.Component {
         smartPost.push(this);
     }
 
-
     getplaceId = (id) => {
         this.setState({placeId: id});
     }
@@ -100,7 +110,7 @@ export class Plan extends React.Component {
         }
         // console.log("path JSON ", body);
 
-        fetch(`${API_ROOT}/saveroutes`, {
+        return fetch(`${API_ROOT}/saveroutes`, {
             method: 'POST',
             headers: {
                 Authorization: `${AUTH_HEADER} ${token}`
@@ -109,7 +119,7 @@ export class Plan extends React.Component {
         })
             .then((response) => {
                 if (response.ok) {
-                    message.success('(๑•̀ㅂ•́)و✧  Save route successfully!');
+                    message.success(`(๑•̀ㅂ•́)و✧  Save route successfully for day ${ithDay}!`);
                     return;
                 }
                 throw new Error('Failed to connect to database.');
@@ -142,9 +152,12 @@ export class Plan extends React.Component {
     }
 
     planRemoveIdx = (idx)=>{
+        const {plans} = this.state;
+        const newplans = [ ...plans.slice(0,idx), ...plans.slice(idx+1)];
         this.setState(({plans})=>({
-            plans:[ ...plans.slice(0,idx), ...plans.slice(idx+1)]
-        }), ()=>console.log(this.state.plans.length));
+            plans:newplans
+        }));
+        this.setState({path:[]})
     }
 
     modifyPath = (newPath)=>{
@@ -198,6 +211,7 @@ export class Plan extends React.Component {
             }),
             ithDay: ithDay,
         }
+
         fetch(`${API_ROOT}/recommend?`, {
             method: 'POST',
             headers: {
@@ -250,7 +264,8 @@ export class Plan extends React.Component {
                         plans={this.state.plans}
                         setDay={this.chooseday}
                         planRemoveIdx={this.planRemoveIdx}
-                        modifyPath = {this.modifyPath}
+                        changePlans={this.changePlans}
+                        changePath={this.changePath}
                         saveToDB={this.saveToDB}
                     />
                     <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1])}}
@@ -268,7 +283,7 @@ export class Plan extends React.Component {
                     <Button onClick={this.addOneDay} className="btn-3d green" icon="plus"  >
                         Add One More Day
                     </Button>
-                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)} className="btn-3d red" icon="delete">Delete Today's Plan</Button>
+                    <Button type="dashed" onClick={()=>this.planRemoveIdx(this.state.ithDay-1)} className="btn-3d red" icon="delete">Reset Today's Plan</Button>
 
                 </div>
                 <div className="path">

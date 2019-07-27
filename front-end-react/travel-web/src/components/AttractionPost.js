@@ -55,7 +55,13 @@ export class AttractionPost extends Component {
         const curloc = geometry.location;
         const location = {lat: curloc.lat? curloc.lat : curloc.lat() , lng: curloc.lng? curloc.lng : curloc.lng()};
         // const description = `Rating ${rating}; Location: ${vicinity} `;
-        const description = <div><p>Rating {rating};</p><p>Type:{types[0]}</p><p>Location: {vicinity}</p></div>;
+        const description =
+            <ul className = 'description'>
+                <li> <span>Rating {rating},   </span><span>Type:{types[0]}</span></li>
+                <li>Location: {vicinity}</li>
+            </ul>
+
+            {/*<div><p>Rating {rating};</p><p>Type:{types[0]}</p><p>Location: {vicinity}</p></div>;*/}
         return (
 
             <Card
@@ -64,7 +70,8 @@ export class AttractionPost extends Component {
                 cover={
                     <img className = 'place-image' alt="place-image" src={this.handleURL(photos)}/>
                 }
-                actions={[<Button href = {this.handleMoreInfo(photos)} target="_blank">More Info</Button>,
+                actions={[<Button href = {this.handleMoreInfo(photos)} target="_blank"
+                className = 'more-info-button'>More Info</Button>,
                     <Button onClick={(e) => this.handleClick({location, name, place_id}, e)}>add</Button>]}
             >
                 <Meta

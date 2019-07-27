@@ -16,7 +16,7 @@ export class AttractionList extends Component {
     render() {
         return (
                 <Layout className = 'attraction-list'>
-                    <Sider style={{ display: 'none' }} />
+                    <Sider className = 'sider'/>
                     <Content>
                         <div>
                             {this.props.placesInfos.map((placeInfo) => <AttractionPost info={placeInfo} key={placeInfo.place_id} />)}

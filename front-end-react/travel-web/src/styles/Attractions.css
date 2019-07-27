@@ -1,8 +1,19 @@
-
 .tabPane{
     size: 9px
 }
 
 .attraction-layout{
     color: pink;
+}
+.attraction-title{
+    padding: 0;
+}
+.attraction-tab {
+    margin: 0 5px;
+}
+.attraction-note{
+    font-size:12px;
+    color:#8c8c8c;
+    text-align: left;
+    padding: 0;
 }

@@ -19,6 +19,7 @@ export class MyMarker extends React.Component{
                 position={this.props.coor}
                 onClick={this.onToggleOpen}
                 icon={this.props.icon}
+                label={this.props.label}
             >
             {this.state.isOpen
             && <InfoWindow onCloseClick={this.onToggleOpen}>

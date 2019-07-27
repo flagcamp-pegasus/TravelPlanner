@@ -34,9 +34,14 @@ export class CityList extends React.Component {
                     {/*<img src={require("../assets/images/city_london.jpg")} alt="London"/>*/}
                     {/*<img src={cityList[0].imageUrl} alt="London"/>*/}
 
-                    {cityList.map((city) => <img src={city.imageUrl} alt={city.name} key={city.imageUrl}/>)}
+                    {cityList.map((city) =>
+                        <div>
+                            <img src={city.imageUrl} alt={city.name} key={city.imageUrl}/>
+                            <h1>{city.name}</h1>
+                        </div>
+                    )}
                 </Carousel>
-                <h1>{this.props.city.name}</h1>
+                {/*<h1>{this.props.city.name}</h1>*/}
                 <CitySearchBar setSelectCity={this.props.setSelectCity}/>
             </div>
         );

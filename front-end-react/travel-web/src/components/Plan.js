@@ -152,6 +152,7 @@ class MyPlan extends React.Component {
         const ithDay = this.state.ithDay
         const newpath = this.refreshTodayPath();
         this.saveToDB(newpath, ithDay);
+        console.log(path);
     }
 
     planRemoveIdx = (idx)=>{
@@ -187,7 +188,7 @@ class MyPlan extends React.Component {
             throw new Error('No history routes for this username.');
         }).then(
             (history)=>{
-                // console.log("history in plan: ", history);
+                console.log("history in plan: ", history);
                 this.setState({ plans: history});
                 if(history.length){
                     this.setState({path: history[0]});
@@ -255,6 +256,33 @@ class MyPlan extends React.Component {
         })
     }
 
+    deletePlan = (idx) =>{
+        const ithDay = idx+1;
+        const user_id = localStorage.getItem(USER_ID);
+        const body = {ithDay, user_id};
+        const token = localStorage.getItem(TOKEN_KEY);
+        fetch(`${API_ROOT}/saveroutes`,{
+            method: 'DELETE',
+            headers: {
+                Authorization: `${AUTH_HEADER} ${token}`
+            },
+            body: JSON.stringify(body),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    message.success(`(๑•̀ㅂ•́)و✧  Delete route successfully for day ${ithDay}!`);
+                    return;
+                }
+                throw new Error('Failed to connect to database.');
+            })
+            .catch((e) => {
+                console.error(e);
+                message.error('w(ﾟДﾟ)w  Failed to delete route.');
+            });
+        this.planRemoveIdx(idx);
+    }
+
+
     render() {
         const ithday = this.state.ithDay;
         // console.log(this.state.path);
@@ -277,7 +305,7 @@ class MyPlan extends React.Component {
                         changePath={this.changePath}
                         saveToDB={this.saveToDB}
                     />
-                    <Button onClick={() => {this.clickSaveToday(this.state.plans[ithday - 1])}}
+                    <Button onClick={() => {this.clickSaveToday(this.state.path)}}
                             className="btn-3d yellow" icon="save">
                         Save Plan for this day
                     </Button>
@@ -293,7 +321,7 @@ class MyPlan extends React.Component {
                     <Button onClick={this.addOneDay} className="btn-3d green" icon="plus"  >
                         Add One More Day
                     </Button>
-                    <Button type="dashed" onClick={()=>this.modifyPath([])} className="btn-3d red" icon="delete">Reset Today's Plan</Button>
+                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)} className="btn-3d red" icon="delete">Delete Today's Plan</Button>
                     <Button type="primary" onClick={this.backToCity}>Back to Choose City</Button>
                 </div>
                 <div className="path">

@@ -28,11 +28,10 @@
 
 div.list-sort-demo-list{
     position: relative;
-    background-color: #F0D756;
     flex: 1 auto;
     font-size: 14px;
+    /*background: #F0D756;*/
     background: #fff;
-    /*background: #fff;*/
     border-radius: 6px;
     margin: 5px auto;
     padding: 9px;

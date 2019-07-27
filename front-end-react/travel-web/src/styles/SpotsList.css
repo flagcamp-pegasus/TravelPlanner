@@ -27,7 +27,7 @@
 
 div.list-sort-demo-list{
     flex: 1 auto;
-    font-size: 20px;
+    font-size: 14px;
     background: #fff;
     border-radius: 6px;
     margin: 5px auto;
@@ -35,6 +35,8 @@ div.list-sort-demo-list{
     width: 90%;
     transition:  box-shadow .5s, transform .5s;
     border: 2px dashed cornflowerblue; /* can be removed later */
+    height: 60px;
+    text-align: center;
 }
 
 @media screen and (max-width: 320px) {

@@ -58,7 +58,7 @@ export class DayList extends React.Component {
             return (
                 <div key={index} className={`${this.props.className}-list`}>
                     {/*{path}*/}
-                    <h4 className={"start"}>{`start from: ${item[0]}`}</h4>
+                    <h4 className={"start"}>{`start from: `+item[0] ? item[0] : ''}</h4>
                     {item.slice(1).map((name, idx)=>(<p className="station" key={idx}>{`Station ${idx+1}: ${name}`}</p>))}
                 </div>
             )

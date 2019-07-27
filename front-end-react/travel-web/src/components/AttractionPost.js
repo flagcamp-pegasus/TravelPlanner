@@ -54,10 +54,16 @@ export class AttractionPost extends Component {
         // debugger
         const { name, icon, photos, geometry, place_id, rating, vicinity,types} = this.props.info;
         const curloc = geometry.location;
-        console.log(curloc.lat);
+        let location =null;
+        if(typeof(curloc.lat)==='number'){
+            location = {lat: curloc.lat , lng: curloc.lng};
+        }else if(typeof(curloc.lat)==='function'){
+            location = {lat: curloc.lat() , lng: curloc.lng()};
+        }else{
+            console.error("unknown type")
+        }
 
-        const location = {lat: curloc.lat , lng: curloc.lng};
-        console.log(location)
+        // console.log(location)
         // debugger
         // const description = `Rating ${rating}; Location: ${vicinity} `;
         const description =

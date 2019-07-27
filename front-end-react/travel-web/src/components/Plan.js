@@ -6,9 +6,9 @@ import {OverviewButton} from './OverviewButton';
 import { message, Button} from "antd";
 import {SpotsList} from './SpotsList';
 import smartPost from 'react-smart-post';
+import {withRouter  } from 'react-router-dom'
 
-
-export class Plan extends React.Component {
+class MyPlan extends React.Component {
     state = {
         path: [],
         ithDay: 1,
@@ -23,6 +23,9 @@ export class Plan extends React.Component {
     }
 
     changePath = (path, ithDay)=>{
+        if(ithDay===undefined){
+            ithDay=this.state.ithDay
+        }
         this.setState({
             ithDay,
             path
@@ -246,10 +249,15 @@ export class Plan extends React.Component {
 
     }
 
+    backToCity = () =>{
+        this.props.history.push({
+            pathname: `/city`
+        })
+    }
 
     render() {
         const ithday = this.state.ithDay;
-        console.log(this.state.path);
+        // console.log(this.state.path);
         const path = this.state.path.map((place) => (
             {
                 latlng: place.location,
@@ -279,13 +287,14 @@ export class Plan extends React.Component {
                             ref={this.getSpotsListRef}
                             path={this.state.path}
                             modifyPath={this.modifyPath}
+                            changePath={this.changePath}
                         />
                     </div>
                     <Button onClick={this.addOneDay} className="btn-3d green" icon="plus"  >
                         Add One More Day
                     </Button>
-                    <Button type="dashed" onClick={()=>this.planRemoveIdx(this.state.ithDay-1)} className="btn-3d red" icon="delete">Reset Today's Plan</Button>
-
+                    <Button type="dashed" onClick={()=>this.modifyPath([])} className="btn-3d red" icon="delete">Reset Today's Plan</Button>
+                    <Button type="primary" onClick={this.backToCity} className="btn-3d blue" icon="rollback">Back to Choose City</Button>
                 </div>
                 <div className="path">
                     <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Insert My Spot</Button>
@@ -294,6 +303,7 @@ export class Plan extends React.Component {
                         Route</Button>
                     <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="radar-chart">Recommend
                         Route</Button>
+
                     {/*<Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove*/}
                     {/*    Route</Button>*/}
                     <DrawPath
@@ -322,3 +332,4 @@ export class Plan extends React.Component {
     }
 }
 
+export const Plan = withRouter(MyPlan)

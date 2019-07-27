@@ -21,8 +21,8 @@
 
 
 .dynamic-delete-button {
-    height: 60px;
-    padding-: 10%;
+    height: 80px;
+    padding: 10%;
     margin-top: 20%;
 }
 
@@ -75,14 +75,14 @@ div.list-sort-demo-list{
 
 .list-sort-demo-list:before {
     position: absolute;
-    top: -0.3em;
-    left: -0.5em;
-    width: 1em;
-    height: 1em;
-    font-size: 2em;
+    top: -0.2em;
+    left: -0.4em;
+    width: 1.5em;
+    height: 1.2em;
+    font-size: 1.3em;
     line-height: 1.2;
     font-weight: bold;
-    text-align: center;
+    text-align: -moz-right;
     color: white;
     background-color: #6CD6CC;
     transform: rotate(-20deg);
@@ -90,6 +90,6 @@ div.list-sort-demo-list{
     -webkit-transform: rotate(-20deg);
     z-index: 99;
     overflow: hidden;
-    content: counter(my-sec-counter)". ";
+    content: counter(my-sec-counter);
     counter-increment: my-sec-counter 1;
 }

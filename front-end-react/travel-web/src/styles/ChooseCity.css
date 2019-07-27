@@ -14,7 +14,7 @@
     margin: 0 35px;
 }
 
-.citylist > h1 {
+.citylist > h1, div > h1 {
     font-style: italic;
     font-weight: bold;
     font-family: Georgia, Sans-Serif;

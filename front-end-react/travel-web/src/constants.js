@@ -22,7 +22,7 @@ export const TYPE_SHOPPING ='store';
 export const TYPE_MUSEUM = 'museum';
 export const SAMPLE_ID = 'ChIJN1t_tDeuEmsRUsoyG83frY4';
 export const MAX_DISPLAY = 6;
-export const DEFAULT_IMAGE= 'https://image.flaticon.com/icons/png/512/854/854878.png'
+export const DEFAULT_IMAGE= "https://image.flaticon.com/icons/png/512/854/854878.png"
 export const CITY_LIST = [
     {
         name: "London",

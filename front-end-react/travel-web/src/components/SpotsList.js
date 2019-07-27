@@ -8,15 +8,15 @@ import {Icon} from "antd"
 
 export class SpotsList extends React.Component {
     state = {
-        path:[],
+        path: [],
     }
     static propTypes = {
         className: PropTypes.string,
-      };
+    };
 
     static defaultProps = {
         className: 'list-sort-demo',
-      };
+    };
 
     componentDidMount() {
         this.pubsub_token = PubSub.subscribe('path', (path, spot) => {
@@ -24,18 +24,18 @@ export class SpotsList extends React.Component {
             // debugger
             // const lat=location.lat, lng = location.lng;
             this.setState({
-                path: this.state.path.concat({name, place_id, location})
-            }, ()=>{
-                this.props.modifyPath(this.state.path);
-            }
-                );
+                    path: this.state.path.concat({name, place_id, location})
+                }, () => {
+                    this.props.modifyPath(this.state.path);
+                }
+            );
         })
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         // console.log("receive ", this.props.path)
         // console.log("props: ", nextProps.path)
-        this.setState({path:nextProps.path});
+        this.setState({path: nextProps.path});
     }
 
     componentWillUnmount() {
@@ -43,17 +43,17 @@ export class SpotsList extends React.Component {
     }
 
 
-    getListSort=(ref)=>{
+    getListSort = (ref) => {
         this.sortListRef = ref;
     }
-    
-    returnSpotsList=()=>{
+
+    returnSpotsList = () => {
         return this.sortListRef.returnList();
     }
 
-    remove=(idx)=>{
-        this.setState(({path})=>({
-            path:[ ...path.slice(0,idx), ...path.slice(idx+1)]
+    remove = (idx) => {
+        this.setState(({path}) => ({
+            path: [...path.slice(0, idx), ...path.slice(idx + 1)]
         }));
     }
 
@@ -62,14 +62,14 @@ export class SpotsList extends React.Component {
             const {name} = item;
             return (
                 <div key={index} className={`${this.props.className}-list`}>
-                    {name }
+                    {name}
                     {/*{item}*/}
                 </div>
             )
         });
 
-        const deletes = this.state.path.map((content, idx)=>(
-            <div key = {idx}>
+        const deletes = this.state.path.map((content, idx) => (
+            <div key={idx}>
                 <Icon
                     className="dynamic-delete-button"
                     type="minus-circle-o"
@@ -81,10 +81,10 @@ export class SpotsList extends React.Component {
         return (
             <div className={`${this.props.className}-div ${this.props.className}-wrapper planOverView`}>
                 <div>{deletes}</div>
-                <div className="spotPath" >
+                <div className="spotPath">
                     <ListSort ref={this.getListSort}
-                        dragClassName="list-drag-selected"
-                        appearAnim = {{ animConfig: { marginTop: [5, 30], opacity: [1, 0] } }}
+                              dragClassName="list-drag-selected"
+                              appearAnim={{animConfig: {marginTop: [5, 30], opacity: [1, 0]}}}
                     >
                         {childrenToRender}
                     </ListSort>

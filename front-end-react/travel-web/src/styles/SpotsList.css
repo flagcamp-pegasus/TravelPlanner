@@ -16,19 +16,23 @@
     align-items: baseline;
     align-content: space-between;
     /*border: 2px dashed cornflowerblue; !* can be removed later *!*/
+    counter-reset: my-sec-counter;
 }
 
 
 .dynamic-delete-button {
     height: 60px;
-    padding-: 10%;
+    padding: 10%;
     margin-top: 20%;
 }
 
 div.list-sort-demo-list{
+    position: relative;
+    background-color: #F0D756;
     flex: 1 auto;
     font-size: 14px;
     background: #fff;
+    /*background: #fff;*/
     border-radius: 6px;
     margin: 5px auto;
     padding: 9px;
@@ -43,5 +47,36 @@ div.list-sort-demo-list{
     .list-sort-demo-text h1 {
         font-size: 14px;
         line-height: 28px;
+        font-family: 'Raleway', sans-serif;
     }
+}
+
+/* test more color*/
+
+
+.list-sort-demo-list:hover{
+    box-shadow:inset -1em 0 #6CD6CC;
+    -webkit-transition: box-shadow 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: box-shadow 0.5s;
+}
+
+.list-sort-demo-list:before {
+    position: absolute;
+    top: -0.2em;
+    left: -0.4em;
+    width: 1.3em;
+    height: 1.2em;
+    font-size: 1.1em;
+    line-height: 1.2;
+    font-weight: bold;
+    text-align: -moz-right;
+    color: white;
+    background-color: #6CD6CC;
+    transform: rotate(-20deg);
+    -ms-transform: rotate(-20deg);
+    -webkit-transform: rotate(-20deg);
+    z-index: 99;
+    overflow: hidden;
+    content: counter(my-sec-counter);
+    counter-increment: my-sec-counter 1;
 }

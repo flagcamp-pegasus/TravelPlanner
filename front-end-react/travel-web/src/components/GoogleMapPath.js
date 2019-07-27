@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {MyMarker} from "./MyMarker"
-import distance_img from "../assets/images/distance_img.png"
+import MARKER from "../assets/images/select-interest.png"
 const {
     Polyline,
     withScriptjs,
@@ -85,9 +85,13 @@ class MyMap extends React.Component{
         }));
         // console.log(waypoints)
         const DirectionsService = new window.google.maps.DirectionsService();
+        const origin =path[0];
+        const destination = path[path.length-1];
+        console.log(origin)
+        console.log(destination)
         DirectionsService.route({
-            origin: path[0],
-            destination: path[path.length-1],
+            origin,
+            destination,
             waypoints ,
             travelMode: window.google.maps.TravelMode.DRIVING,
         }, (result, status) => {
@@ -172,7 +176,13 @@ class MyMap extends React.Component{
                     }else{
                         label=`${idx}`
                     }
-                    return <MyMarker coor = {spot.latlng} key = {idx} name = {spot.name} label={label}/>;
+                    return <MyMarker
+                        coor = {spot.latlng}
+                        key = {idx}
+                        name = {spot.name}
+                        label={label}
+                        // icon={{url: MARKER, scaledSize: new window.google.maps.Size(25, 25)}}
+                    />;
                 }
             )}
                 {this.props.path.length>1 ? <DirectionsRenderer
@@ -180,7 +190,7 @@ class MyMap extends React.Component{
                     directions={this.state.directions}
                     options={{
                         markerOptions:{visible:false},
-                        polylineOptions:{strokeColor: `#2F42F1`, strokeWeight:5}
+                        polylineOptions:{strokeColor: `#6495ed`, strokeWeight:5}
                     }}
                 /> : null}
                 {/*{centers.map((center, idx)=>{*/}

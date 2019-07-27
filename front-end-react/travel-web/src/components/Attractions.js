@@ -48,7 +48,7 @@ export class Attractions extends Component {
             this.handleSearchById();
         }else{
             this.setState({activeTab: type})
-            //console.log(this.state.activeTab)
+           // console.log(type)
             this.handleTypeSearch(type);
         }
     }
@@ -59,35 +59,39 @@ export class Attractions extends Component {
         if(!this.props.userSearchId){
             return;
         }
-
-        console.log('searchID',this.props.userSearchId);
-        let request = {
-            // this need to change to this.props.userSearchId
-            placeId: this.props.userSearchId,
-            fields: ['name', 'icon', 'photos', 'geometry', 'place_id', 'rating', 'formatted_address','types','vicinity']
-           // fields: ['name', 'formatted_address', 'place_id', 'geometry']
-        };
+        let searchIDs = this.props.userSearchId;
+        let results = [];
 
 
-        service.getDetails(request, (result, status) => {
-            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                console.log(result);
-                this.setState(
-                    {userPlaceInfo: result,
-                        ifUserAdd:true})
+        for (let j = 0;j < searchIDs.length;j++){
+            let request = {
+                placeId: searchIDs[j],
+                fields: ['name', 'icon', 'photos', 'geometry', 'place_id', 'rating', 'formatted_address','types','vicinity']
+            };
+           // console.log(searchIDs[0]);
+            service.getDetails(request, (result, status) => {
 
-            }else{
-                console.log('error in search by ID ')
-            }
-        })
+                console.log('1',result);
+                if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                    //console.log('2',result);
+                    console.log(result)
+                    results.push(result);
+                   // counter++;
+                    this.setState({placesInfos:results});
+                }else{
+                    console.log('error in search by ID ')
+                }
+            })
+        }
 
-        this.setState({activeTab:
-                "user-add"});
+
+
     }
 
 
 
     handleTypeSearch = (type) =>{
+       // console.log("hi");
 
         let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
 
@@ -99,31 +103,16 @@ export class Attractions extends Component {
             radius: '200',
             type: type,
         };
-        let counter = 0;
-        let placesInfos = [];
+
+
 
         service.nearbySearch(request, (results, status)=>{
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                   for (let i = 0; i < results.length; i++) {
-                         let place = results[i];
-                         // if there is no image do not add this search result
-
-                       let photos = place.photos;
-                       if (typeof photos !== 'undefined'){
-                           let pic = photos[0];
-                           if(pic.getUrl) {
-                               placesInfos.push(place);
-                               counter++;
-                           }
-                        }
-                     }
-                 }else{
-                //console.log('error in nearby search');
+                this.setState(
+                    {placesInfos:results})
+            }else{
+                console.log('error in nearby search');
             }
-                 if(counter > 1){
-                     this.setState(
-                         {placesInfos:placesInfos}) }
-                 //console.log('this is place infos', placesInfos);
              })
     }
 
@@ -136,21 +125,20 @@ export class Attractions extends Component {
                 <h1 className = "attraction-title">Attractions</h1>
                 <p className = "attraction-note">Note: Select your spots from the search bar or select from the tab lists</p>
                 <div id="map"></div>
-                <Tabs defaultActiveKey="user-add" onChange={this.handleSearch}  className="attraction-tab" size = "small"
-                      Tabs activeKey={this.state.activeTab}>
+                <Tabs defaultActiveKey={TYPE_FOOD} onChange={this.handleSearch}  className="attraction-tab" size = "small"
+                      activeKey={this.state.activeTab}>
                     <TabPane
                         className = "tabPane"
                         tab={
                             <span> <Icon type="smile" /></span>}
                         key='user-add' >
-                        {this.props.userSearchId ? <AttractionPost info = {this.state.userPlaceInfo}/> : `Add a place from the search bar`}
+                        {this.props.userSearchId ?  <AttractionList placesInfos={this.state.placesInfos}/> : `Add a place from the search bar`}
                     </TabPane>
 
                     <TabPane
                         tab={
                             <span> <Icon type="coffee"/></span>}
                         key={TYPE_FOOD}  >
-
                         <AttractionList placesInfos={this.state.placesInfos}/>
                     </TabPane>
 

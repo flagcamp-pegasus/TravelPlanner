@@ -23,12 +23,11 @@ export class SpotsList extends React.Component {
             const {name, place_id, location} = spot;
             // debugger
             // const lat=location.lat, lng = location.lng;
+            let newPath = this.state.path.concat({name, place_id, location});
             this.setState({
-                    path: this.state.path.concat({name, place_id, location})
-                }, () => {
-                    this.props.modifyPath(this.state.path);
-                }
-            );
+                    path: newPath
+                });
+            this.props.modifyPath(newPath);
         })
     }
 

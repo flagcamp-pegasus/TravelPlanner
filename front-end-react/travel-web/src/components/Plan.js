@@ -280,7 +280,8 @@ export class Plan extends React.Component {
                     <DrawPath
                         getMapRef={this.getMapRef}
                         path={path}
-                        //[{lat, lng}]
+                        getplaceId={this.getplaceId}
+
                         city={this.props.city ? this.props.city : this.state.path[0]}
                         zoom={PATH_ZOOM}
 
@@ -288,7 +289,7 @@ export class Plan extends React.Component {
                         loadingElement={<div style={{height: `100%`}}/>}
                         containerElement={<div style={{height: `750px`}}/>}
                         mapElement={<div style={{height: `100%`}}/>}
-                        getplaceId={this.getplaceId}
+
                     />
                 </div>
                 <div className = "rightContent">

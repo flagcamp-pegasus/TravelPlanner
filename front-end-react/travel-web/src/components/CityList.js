@@ -36,7 +36,7 @@ export class CityList extends React.Component {
 
                     {cityList.map((city) =>
                         <div key={city.imageUrl}>
-                            <img src={city.imageUrl} alt={city.name} />
+                            <img src={city.imageUrl} alt={city.name}/>
                             <h1>{city.name}</h1>
                         </div>
                     )}

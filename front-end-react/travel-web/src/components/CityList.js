@@ -12,12 +12,6 @@ export class CityList extends React.Component {
         this.props.setSelectCity(page, cityList[page].name, cityList[page].latlng);
     }
 
-    // findPlace = () => {
-    //     //https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters
-    //
-    //     var placeInfo = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=London&inputtype=textquery&fields=photos,formatted_address,name,geometry&key=${API_KEY}`;
-    //     console.log(placeInfo);
-    // }
 
     getPhoto = () => {
         //https://maps.googleapis.com/maps/api/place/photo?parameters

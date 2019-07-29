@@ -306,7 +306,7 @@ class MyPlan extends React.Component {
                         saveToDB={this.saveToDB}
                     />
                     <Button onClick={() => {this.clickSaveToday(this.state.path)}}
-                            className="btn-3d yellow" icon="save">
+                            className="btn-3d" icon="save">
                         Save Plan for this day
                     </Button>
                     <div className="show-plan">
@@ -318,19 +318,19 @@ class MyPlan extends React.Component {
                             changePath={this.changePath}
                         />
                     </div>
-                    <Button onClick={this.addOneDay} className="btn-3d green" icon="plus"  >
+                    <Button onClick={this.addOneDay} className="btn-3d" icon="plus"  >
                         Add One More Day
                     </Button>
 
-                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)} className="btn-3d red" icon="delete">Delete Today's Plan</Button>
-                    <Button type="primary" onClick={this.backToCity} className="btn-3d blue" icon="rollback">Back to Choose City</Button>
+                    <Button type="dashed" onClick={()=>this.deletePlan(this.state.ithDay-1)} className="btn-3d" icon="delete">Delete Today's Plan</Button>
+                    <Button type="primary" onClick={this.backToCity} className="btn-3d" icon="rollback">Back to Choose City</Button>
                 </div>
                 <div className="path">
-                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d green" icon="message">Insert My Spot</Button>
+                    <Button type="primary" htmlType="submit" onClick={this.selectSpot} className="btn-3d" icon="message">Insert My Spot</Button>
 
-                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn-3d cyan" icon="edit">Generate
+                    <Button type="primary" htmlType="submit" onClick={this.generateRoute} className="btn-3d" icon="edit">Generate
                         Route</Button>
-                    <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d purple" icon="radar-chart">Recommend
+                    <Button type="primary" htmlType="submit" onClick={() => {this.recommendRoute(this.state.path, this.state.ithDay)}} className="btn-3d" icon="radar-chart">Recommend
                         Route</Button>
 
                     {/*<Button type="primary" htmlType="submit" onClick={this.removeRoute} className="btn-3d red" icon="delete">Remove*/}
